@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-gold: rgba(242, 193, 86);
+    --light-gold: rgba(242, 193, 86);
+    --dark-gold: rgba(242, 193, 86);
+    --accent-blue: #1e40af;
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #1a1a1a;
+    --bg-card: #111111;
+    --text-primary: #ffffff;
+    --text-secondary: #d4af37;
+    --border-color: rgba(212, 175, 55, 0.3);
+    --shadow-primary: rgba(212, 175, 55, 0.15);
+    --shadow-hover: rgba(212, 175, 55, 0.25);
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: url("./bg.avif") no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Animated background elements */
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.03) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    margin-top: 70px;
+}
+
+.header h1 {
+    font-size: 64px;
+    font-family: "Space Grotesk", serif;
+    color: rgba(242, 193, 86);
+    text-align: center;
+    background: linear-gradient(90deg, #ffd700, #ffed4e, #ffa500, #ff8c00, #ffb347, #ffd966, #ff7f00, #ffcc02);
+    background-size: 400% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-transform: uppercase;
+    font-weight: 700;
+    /* animation: flowLeftToRight 6s ease-in-out infinite; */
+    margin: 1rem auto;
+    /* margin-top: 100px; */
+}
+
+.header p {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 300;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.section {
+    margin-bottom: 4rem;
+    background-color: #1a1a1a;
+    padding: 1.5rem;
+    border-radius: 18px;
+}
+
+.section h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--light-gold);
+    position: relative;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-gold), var(--dark-gold));
+    margin: 0.5rem 0 1rem;
+}
+
+.file-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    padding: 1rem 0;
+}
+
+.file-card {
+    background: var(--bg-card);
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    padding: 1.5rem;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.file-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(255, 215, 0, 0.02) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.file-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--primary-gold);
+    box-shadow: 0 20px 40px var(--shadow-hover);
+}
+
+.file-card:hover::before {
+    opacity: 1;
+}
+
+.card-icon {
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+    font-family: "Space Grotesk", sans-serif;
+}
+
+.file-card a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.portfolio .card-icon,
+.conference .card-icon {
+    width: 300px;
+    height: 300px;
+}
+
+.portfolio .card-title,
+.conference .card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Responsive design */
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    .file-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+    .file-card {
+        padding: 1.5rem;
+        min-height: 250px;
+    }
+    .header h1 {
+        font-size: 2.5rem;
+    }
+    .section h2 {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .file-grid {
+        grid-template-columns: 1fr;
+    }
+    .card-icon {
+        width: calc(30dvh);
+        height: 30dvh;
+    }
+}

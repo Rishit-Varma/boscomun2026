@@ -1,0 +1,288 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background: url("./bg.avif") no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    color: #f2c156;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+    margin-top: 100px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(242, 193, 86, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.main-title {
+    font-size: 64px;
+    font-family: "Space Grotesk", serif;
+    color: rgba(242, 193, 86);
+    text-align: center;
+    background: linear-gradient(90deg, #ffd700, #ffed4e, #ffa500, #ff8c00, #ffb347, #ffd966, #ff7f00, #ffcc02);
+    background-size: 400% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-transform: uppercase;
+    font-weight: 700;
+    /* animation: flowLeftToRight 6s ease-in-out infinite; */
+    /* margin: 1rem auto; */
+}
+
+@keyframes goldShimmer {
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.teams-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.team-card {
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid rgba(242, 193, 86, 0.3);
+    border-radius: 15px;
+    padding: 2rem;
+    position: relative;
+    backdrop-filter: blur(10px);
+}
+
+.team-header {
+    margin-bottom: 1.5rem;
+    padding: 0 0 0.5rem;
+    border-bottom: 1.5px solid rgba(242, 193, 86, 0.8);
+}
+
+.team-title {
+    font-family: "Space Grotesk", serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: rgba(242, 193, 86);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.team-members {
+    position: relative;
+    z-index: 1;
+}
+
+.member-list {
+    list-style: none;
+}
+
+.member-item {
+    padding: 0.5rem 0;
+}
+
+.member-name {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    font-weight: 700;
+    text-align: center;
+    font-family: 'Space Grotesk', sans-serif;
+    padding: 4px 0;
+    transition: color .3s;
+    color: white;
+}
+
+.member-name a {
+    color: white;
+    text-decoration: none;
+}
+
+.member-name a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    .main-title {
+        font-size: 2.5rem;
+        letter-spacing: 4px;
+    }
+    .team-card {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 2rem;
+        letter-spacing: 2px;
+    }
+    .team-header {
+        text-align: center;
+    }
+}
+
+footer {
+    background: rgba(0, 0, 0, .5);
+    backdrop-filter: blur(10px);
+    --webkit-backdrop-filter: blur(10px);
+    font-size: 16px;
+    color: white;
+    padding: 15px 75px;
+}
+
+.row {
+    padding: 1em;
+}
+
+.row.primary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-bottom: 0;
+    align-items: center;
+    justify-items: center;
+}
+
+.column {
+    flex-direction: column;
+    padding: 0 2rem;
+    min-height: 15rem;
+}
+
+.column h3 {
+    border-bottom: var(--text-c-highlight) 5px solid;
+    max-width: fit-content;
+    margin-bottom: 20px;
+    padding-top: 15px;
+}
+
+.column.subscribe {
+    justify-self: center;
+    padding-bottom: 0;
+}
+
+.h3element {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.5rem;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+
+.ulelement {
+    list-style: none;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+}
+
+.lielement:not(:first-child) {
+    margin-top: 1.2rem;
+}
+
+.ulelement .lielement .aelement {
+    color: #fff;
+    transition: color .5s;
+    text-decoration: none;
+}
+
+.lielement:hover,
+.ulelement .lielement .aelement:hover {
+    color: rgba(242, 193, 86, 0.8);
+}
+
+.footer-detail {
+    font-size: 1rem;
+    text-align: left;
+    font-family: "Space Grotesk", sans-serif;
+    padding-left: 3%;
+    margin-top: 10px;
+}
+
+.youtube {
+    padding-left: 2%;
+}
+
+.map iframe {
+    border-radius: 12px;
+}
+
+@media screen and (max-width:930px) {
+    .map iframe {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:785px) {
+    .row.primary {
+        grid-template-columns: 1fr;
+        justify-items: stretch;
+        gap: 2rem;
+    }
+    .column {
+        width: 100%;
+    }
+    footer {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+@media screen and (max-width:575px) {
+    .map iframe {
+        width: 100%;
+        height: 300px;
+    }
+    .hyphen {
+        display: none;
+    }
+    .footer-detail {
+        font-size: .88rem;
+    }
+    .writeup-container .writeup {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width:310px) {
+    .column {
+        padding: 0;
+    }
+    .map iframe {
+        height: 180px;
+    }
+}

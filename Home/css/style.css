@@ -1,0 +1,409 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: url("/images/image.avif") no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.main-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20rem;
+    height: 20rem;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background: transparent;
+    z-index: 1;
+    object-fit: cover;
+    border: none;
+    border-image: none;
+}
+
+.orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 32rem;
+    height: 32rem;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.comm-logo {
+    position: absolute;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    background-color: transparent;
+    border: none;
+    object-fit: cover;
+    animation: rotate-in-place 30s linear infinite;
+    margin: calc(-4.5rem) 0 0 calc(-4.5rem);
+}
+
+.unsc {
+    top: calc(50% - 13.5rem);
+    left: 51%;
+}
+
+.lon {
+    top: calc(50% - 6.5rem);
+    left: calc(50% + 12.5rem);
+}
+
+.disec {
+    top: calc(50% + 7.5rem);
+    left: calc(50% + 12.5rem);
+}
+
+.oic {
+    top: calc(50% + 7.5rem);
+    left: calc(50% - 11.5rem);
+}
+
+.wwc {
+    top: calc(50% - 6.5rem);
+    left: calc(50% - 11.5rem);
+}
+
+@keyframes rotate-in-place {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.header-banner {
+    background-color: black;
+    border: 2px solid rgba(242, 193, 86);
+    padding: 12px 40px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+}
+
+.header-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 217, 0, 0.15) 50%, transparent 100%);
+    animation: shimmer 4s ease-in-out infinite;
+}
+
+.header-text {
+    color: rgba(242, 193, 86);
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-align: center;
+    font-family: "Space Grotesk", sans-serif;
+    text-transform: uppercase;
+    text-shadow: 0 0 30px rgba(0, 0, 0, 1);
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.header-banner::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    pointer-events: none;
+}
+
+/* ===== MEDIA QUERIES ===== */
+
+/* Large desktops and 4K displays */
+
+@media (min-width: 1920px) {
+    .main-logo {
+        width: 24rem;
+        height: 24rem;
+    }
+    .orbit {
+        width: 40rem;
+        height: 40rem;
+    }
+    .comm-logo {
+        width: 11rem;
+        height: 11rem;
+        margin: calc(-5.5rem) 0 0 calc(-5.5rem);
+    }
+    .unsc {
+        top: calc(50% - 20rem);
+    }
+    .lon {
+        top: calc(50% - 10rem);
+        left: calc(50% + 17.32rem);
+        /* 20rem * cos(30°) */
+    }
+    .disec {
+        top: calc(50% + 10rem);
+        left: calc(50% + 17.32rem);
+    }
+    .oic {
+        top: calc(50% + 10rem);
+        left: calc(50% - 17.32rem);
+    }
+    .wwc {
+        top: calc(50% - 10rem);
+        left: calc(50% - 17.32rem);
+    }
+    .header-text {
+        font-size: 1.8rem;
+        letter-spacing: 5px;
+    }
+    .header-banner {
+        padding: 16px 50px;
+    }
+}
+
+/* Large tablets and small desktops */
+
+@media (max-width: 1200px) {
+    .main-logo {
+        width: 16rem;
+        height: 16rem;
+    }
+    .orbit {
+        width: 28rem;
+        height: 28rem;
+    }
+    .comm-logo {
+        width: 7rem;
+        height: 7rem;
+        margin: calc(-3.5rem) 0 0 calc(-3.5rem);
+    }
+    .unsc {
+        top: calc(50% - 11.5rem);
+    }
+    .lon {
+        top: calc(50% - 6rem);
+        left: calc(50% + 11rem);
+        /* 11.5rem * cos(30°) */
+    }
+    .disec {
+        top: calc(50% + 6rem);
+        left: calc(50% + 11rem);
+    }
+    .oic {
+        top: calc(50% + 6rem);
+        left: calc(50% - 11rem);
+    }
+    .wwc {
+        top: calc(50% - 6rem);
+        left: calc(50% - 11rem);
+    }
+}
+
+/* Tablets */
+
+@media (max-width: 768px) {
+    .main-logo {
+        width: 12rem;
+        height: 12rem;
+    }
+    .orbit {
+        width: 24rem;
+        height: 24rem;
+    }
+    .comm-logo {
+        width: 6rem;
+        height: 6rem;
+        margin: calc(-3rem) 0 0 calc(-3rem);
+    }
+    .unsc {
+        top: calc(50% - 12rem);
+    }
+    .lon {
+        top: calc(50% - 6rem);
+        left: calc(50% + 10.39rem);
+        /* 12rem * cos(30°) */
+    }
+    .disec {
+        top: calc(50% + 6rem);
+        left: calc(50% + 10.39rem);
+    }
+    .oic {
+        top: calc(50% + 6rem);
+        left: calc(50% - 10.39rem);
+    }
+    .wwc {
+        top: calc(50% - 6rem);
+        left: calc(50% - 10.39rem);
+    }
+    .header-text {
+        font-size: 1.1rem;
+        letter-spacing: 2px;
+    }
+    .header-banner {
+        padding: 10px 20px;
+    }
+}
+
+/* Mobile phones */
+
+@media (max-width: 480px) {
+    .main-logo {
+        width: 10rem;
+        height: 10rem;
+    }
+    .orbit {
+        width: 20rem;
+        height: 20rem;
+    }
+    .comm-logo {
+        width: 4.5rem;
+        height: 4.5rem;
+        margin: calc(-2.25rem) 0 0 calc(-2.25rem);
+    }
+    .unsc {
+        top: calc(50% - 10rem);
+    }
+    .lon {
+        top: calc(50% - 5rem);
+        left: calc(50% + 8.66rem);
+        /* 10rem * cos(30°) */
+    }
+    .disec {
+        top: calc(50% + 5rem);
+        left: calc(50% + 8.66rem);
+    }
+    .oic {
+        top: calc(50% + 5rem);
+        left: calc(50% - 8.66rem);
+    }
+    .wwc {
+        top: calc(50% - 5rem);
+        left: calc(50% - 8.66rem);
+    }
+    .header-text {
+        font-size: 0.7rem;
+        letter-spacing: 1px;
+    }
+    .header-banner {
+        padding: 8px 15px;
+    }
+}
+
+/* Small mobile phones */
+
+@media (max-width: 360px) {
+    .main-logo {
+        width: 8rem;
+        height: 8rem;
+    }
+    .orbit {
+        width: 16rem;
+        height: 16rem;
+    }
+    .comm-logo {
+        width: 3.5rem;
+        height: 3.5rem;
+        margin: calc(-1.75rem) 0 0 calc(-1.75rem);
+    }
+    .unsc {
+        top: calc(50% - 8rem);
+    }
+    .lon {
+        top: calc(50% - 4rem);
+        left: calc(50% + 6.93rem);
+        /* 8rem * cos(30°) */
+    }
+    .disec {
+        top: calc(50% + 4rem);
+        left: calc(50% + 6.93rem);
+    }
+    .oic {
+        top: calc(50% + 4rem);
+        left: calc(50% - 6.93rem);
+    }
+    .wwc {
+        top: calc(50% - 4rem);
+        left: calc(50% - 6.93rem);
+    }
+    .header-text {
+        font-size: 0.65rem;
+        letter-spacing: 0.5px;
+    }
+    .header-banner {
+        padding: 6px 10px;
+        border-width: 1px;
+    }
+}
+
+/* Landscape orientation adjustments for mobile */
+
+@media (max-height: 500px) and (orientation: landscape) {
+    .main-logo {
+        width: 8rem;
+        height: 8rem;
+    }
+    .orbit {
+        width: 18rem;
+        height: 18rem;
+    }
+    .comm-logo {
+        width: 3.5rem;
+        height: 3.5rem;
+        margin: calc(-1.75rem) 0 0 calc(-1.75rem);
+    }
+    .unsc {
+        top: calc(50% - 9rem);
+    }
+    .lon {
+        top: calc(50% - 4.5rem);
+        left: calc(50% + 7.79rem);
+        /* 9rem * cos(30°) */
+    }
+    .disec {
+        top: calc(50% + 4.5rem);
+        left: calc(50% + 7.79rem);
+    }
+    .oic {
+        top: calc(50% + 4.5rem);
+        left: calc(50% - 7.79rem);
+    }
+    .wwc {
+        top: calc(50% - 4.5rem);
+        left: calc(50% - 7.79rem);
+    }
+    .header-text {
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+    }
+    .header-banner {
+        padding: 6px 15px;
+    }
+}
