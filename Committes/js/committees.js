@@ -7,27 +7,27 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (cardUnsc) {
         cardUnsc.addEventListener("click", function() {
-            window.location.href = "/pdfs/unsc-study-guide.pdf";
+            window.location.href = "./unsc.html";
         });
     }
     if (cardLn) {
         cardLn.addEventListener("click", function() {
-            window.location.href = "/pdfs/ln-study-guide.pdf";
+            window.location.href = "./lon.html";
         });
     }
     if (cardWilhelm) {
         cardWilhelm.addEventListener("click", function() {
-            window.location.href = "/pdfs/wilhelm-study-guide.pdf";
+            window.location.href = "./wwc.html";
         });
     }
     if (cardDisec) {
         cardDisec.addEventListener("click", function() {
-            window.location.href = "/pdfs/disec-study-guide.pdf";
+            window.location.href = "./disec.html";
         });
     }
     if (cardOic) {
         cardOic.addEventListener("click", function() {
-            window.location.href = "/pdfs/oic-study-guide.pdf";
+            window.location.href = "./oic.html";
         });
     }
 });

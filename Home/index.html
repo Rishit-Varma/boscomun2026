@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bosco MUN 2026</title>
-    <link rel="stylesheet" href="/Home/css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
@@ -22,29 +22,48 @@
     <meta name="twitter:title" content="Bosco MUN 2026 | 11th chapter" />
     <meta name="twitter:description" content="Join Bosco MUN 2026, the 11th chapter at Don Bosco Park Circus, Kolkata." />
     <meta name="twitter:image" content="https://www.boscomun.donboscoparkcircus.org/images/logo.png" />
-    <link rel="icon" href="/icon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="/icon.ico" type="image/x-icon" />
+    <link rel="icon" href="./images/logo.avif" type="image/avif" />
 </head>
 
 <body>
     <header>
         <div id="navigation-container"></div>
     </header>
-    <img class="main-logo" src="./images/logo.avif" alt="Bosco MUN 2026 Logo">
-    <div class="orbit">
-        <a href="/Committes/committees.html#card-unsc"><img class="comm-logo unsc" src="./images/committee-logos/unsc.avif" alt="UNSC Logo"></a>
-        <a href="/Committes/committees.html#card-ln"><img class="comm-logo lon" src="./images/committee-logos/lon.avif" alt="League of Nations Logo"></a>
-        <a href="/Committes/committees.html#card-disec"><img class="comm-logo disec" src="./images/committee-logos/disec.avif" alt="DISEC Logo"></a>
-        <a href="/Committes/committees.html#card-oic"><img class="comm-logo oic" src="./images/committee-logos/oic.avif" alt="OIC Logo"></a>
-        <a href="/Committes/committees.html#card-wilhelm"><img class="comm-logo wwc" src="./images/committee-logos/wwc.avif" alt="Wilhelm's War Cabinet Logo"></a>
-    </div>
-    <div class="header-banner">
-        <div class="header-text">
-            BEYOND THE CONFLICT : THE ELEVENTH CHAPTER
+    <main class="main-content-layout">
+        <div class="map-wrapper">
+            <img class="world-map-image" src="./images/world_map.jpg" alt="Diplomatic World Map">
+            
+            <!-- Centered branding placed between South America and Africa (Southern Ocean area) -->
+            <div class="map-branding-block">
+                <img class="map-branding-logo" src="./images/logo.avif" alt="Bosco MUN Logo">
+                <h1 class="map-branding-title">BEYOND THE CONFLICT</h1>
+                <h2 class="map-branding-subtitle">THE ELEVENTH CHAPTER</h2>
+            </div>
+
+            <a class="map-marker-logo unsc-marker" href="../Committes/unsc.html">
+                <img class="comm-logo" src="./images/committee-logos/unsc.avif" alt="UNSC">
+                <span class="comm-label">UNSC</span>
+            </a>
+            <a class="map-marker-logo lon-marker" href="../Committes/lon.html">
+                <img class="comm-logo" src="./images/committee-logos/lon.avif" alt="LON">
+                <span class="comm-label">LON</span>
+            </a>
+            <a class="map-marker-logo wwc-marker" href="../Committes/wwc.html">
+                <img class="comm-logo" src="./images/committee-logos/wwc.avif" alt="WWC">
+                <span class="comm-label">WWC</span>
+            </a>
+            <a class="map-marker-logo disec-marker" href="../Committes/disec.html">
+                <img class="comm-logo" src="./images/committee-logos/disec.avif" alt="DISEC">
+                <span class="comm-label">DISEC</span>
+            </a>
+            <a class="map-marker-logo oic-marker" href="../Committes/oic.html">
+                <img class="comm-logo" src="./images/committee-logos/oic.avif" alt="OIC">
+                <span class="comm-label">OIC</span>
+            </a>
         </div>
-    </div>
+    </main>
     <script src="./js/main.js"></script>
-    <script src="/js/loadnavbar.js"></script>
+    <script src="../js/loadnavbar.js"></script>
 </body>
 
 </html>

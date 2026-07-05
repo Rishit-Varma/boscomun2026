@@ -1,35 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Copy protection
-    document.addEventListener("copy", (e) => {
-        const target = e.target;
-        if (target.tagName === "INPUT" || target.tagName === "TEXTAREA") {
-            return true;
-        }
-        e.preventDefault();
-        return false;
-    });
-
-    // Cut protection
-    document.addEventListener("cut", (e) => {
-        const target = e.target;
-        if (target.tagName === "INPUT" || target.tagName === "TEXTAREA") {
-            return true;
-        }
-        e.preventDefault();
-        return false;
-    });
-
-    // Paste protection
-    document.addEventListener("paste", (e) => {
-        const target = e.target;
-        if (target.tagName === "INPUT" || target.tagName === "TEXTAREA") {
-            return true;
-        }
-        e.preventDefault();
-        return false;
-    });
-
-    // Right-click protection
+    // Prevent context menu (right click) on text/images
     document.addEventListener("contextmenu", (e) => {
         const target = e.target;
         if (target.tagName === "INPUT" || target.tagName === "TEXTAREA") {
@@ -39,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
         return false;
     });
 
-    // Text selection protection
+    // Prevent text selection
     document.addEventListener("selectstart", (e) => {
         const target = e.target;
         if (target.tagName === "INPUT" || target.tagName === "TEXTAREA") {
@@ -49,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
         return false;
     });
 
-    // Image protection
+    // Disable image dragging, right click, and copying
     document.querySelectorAll("img").forEach((img) => {
         img.setAttribute("draggable", false);
         img.setAttribute("loading", "eager");
@@ -60,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         img.addEventListener("mousedown", (e) => {
-            if (e.button === 2) { // Right click
+            if (e.button === 2) {
                 e.preventDefault();
                 return false;
             }
@@ -72,38 +42,28 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // Keyboard shortcuts protection
+    // Prevent inspector and save keyboard shortcuts
     document.addEventListener("keydown", (e) => {
-        // Disable Ctrl+S (Save)
         if (e.ctrlKey && (e.key === "s" || e.key === "S")) {
             e.preventDefault();
             return false;
         }
-        // Disable F12
         if (e.keyCode === 123) {
             e.preventDefault();
             return false;
         }
-
-        // Disable Cmd+Option+I (Mac) / Ctrl+Shift+I (Windows)
         if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.keyCode === 73) {
             e.preventDefault();
             return false;
         }
-
-        // Disable Cmd+Option+J (Mac) / Ctrl+Shift+J (Windows) - Console
         if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.keyCode === 74) {
             e.preventDefault();
             return false;
         }
-
-        // Disable Cmd+Option+C (Mac) / Ctrl+Shift+C (Windows) - Element inspector
         if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.keyCode === 67) {
             e.preventDefault();
             return false;
         }
-
-        // Disable Cmd+U / Ctrl+U - View source
         if ((e.metaKey || e.ctrlKey) && e.keyCode === 85) {
             e.preventDefault();
             return false;

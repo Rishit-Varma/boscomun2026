@@ -8,83 +8,168 @@
 body {
     margin: 0;
     padding: 0;
-    height: 100vh;
-    background: url("/images/image.avif") no-repeat center center fixed;
+    min-height: 100vh;
+    background: url("./bg.jpg") no-repeat center center fixed;
     background-size: cover;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.main-content-layout {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    overflow: hidden;
+    justify-content: flex-start;
+    width: 100%;
+    min-height: 100vh;
+    padding: 7.5rem 1rem 3.5rem 1rem; /* Clear fixed navbar and add bottom spacing */
+    box-sizing: border-box;
+    z-index: 2;
+    position: relative;
 }
 
-.main-logo {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 20rem;
-    height: 20rem;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    background: transparent;
-    z-index: 1;
+.map-wrapper {
+    position: relative;
+    width: 90%; /* Takes at least 90% of the page width */
+    max-width: 1350px;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    z-index: 2;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.world-map-image {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    border: none;
-    border-image: none;
+    border-radius: 12px;
+    border: 2px solid rgba(242, 193, 86, 0.35);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.85);
+    filter: brightness(0.9);
 }
 
-.orbit {
+/* Centered map branding block (located in the Southern Ocean / Antarctica space) */
+.map-branding-block {
     position: absolute;
-    top: 50%;
     left: 50%;
-    width: 32rem;
-    height: 32rem;
-    border-radius: 50%;
+    top: 79%;
     transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    z-index: 10;
+    pointer-events: auto;
+}
+
+.map-branding-logo {
+    width: 9.0rem; /* Enlarged branding logo */
+    height: 9.0rem;
+    border-radius: 50%;
+    border: 2px solid rgba(242, 193, 86, 0.8);
+    box-shadow: 0 0 20px rgba(242, 193, 86, 0.25);
+    margin-bottom: 0.4rem;
+    background-color: rgba(0, 0, 0, 0.65);
+    transition: transform 0.3s ease;
+}
+
+.map-branding-logo:hover {
+    transform: scale(1.06);
+}
+
+.map-branding-title {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 2.2rem; /* Enlarged title */
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin: 0;
+    color: #ffffff;
+    background: linear-gradient(90deg, #ffd700, #ffed4e, #ffa500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+}
+
+.map-branding-subtitle {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.25rem; /* Enlarged subtitle */
+    font-weight: 600;
+    letter-spacing: 3px;
+    margin: 2px 0 0 0;
+    color: #f2c156;
+    text-shadow: 0 2px 3px rgba(0, 0, 0, 0.9);
+}
+
+/* Base styles for logos floating on the map */
+.map-marker-logo {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translate(-50%, -50%);
+    text-decoration: none;
+    z-index: 10;
+    transition: transform 0.3s ease;
+}
+
+.map-marker-logo:hover {
+    transform: translate(-50%, -50%) scale(1.12);
 }
 
 .comm-logo {
-    position: absolute;
-    width: 8rem;
-    height: 8rem;
+    width: 4.8rem; /* Enlarged committee logo size */
+    height: 4.8rem;
     border-radius: 50%;
-    background-color: transparent;
-    border: none;
+    background-color: rgba(0, 0, 0, 0.85);
+    border: 2px solid rgba(242, 193, 86, 0.8);
+    box-shadow: 0 0 12px rgba(242, 193, 86, 0.4);
     object-fit: cover;
-    animation: rotate-in-place 30s linear infinite;
-    margin: calc(-4.5rem) 0 0 calc(-4.5rem);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.unsc {
-    top: calc(50% - 13.5rem);
-    left: 51%;
+.map-marker-logo:hover .comm-logo {
+    border-color: #ffd700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.85);
 }
 
-.lon {
-    top: calc(50% - 6.5rem);
-    left: calc(50% + 12.5rem);
+.comm-label {
+    color: #ffd700;
+    font-size: 0.55rem;
+    font-weight: 700;
+    margin-top: 3px;
+    font-family: "Space Grotesk", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 1px 5px;
+    border-radius: 4px;
+    border: 1px solid rgba(242, 193, 86, 0.25);
+    white-space: nowrap;
+    pointer-events: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.disec {
-    top: calc(50% + 7.5rem);
-    left: calc(50% + 12.5rem);
+.map-marker-logo:hover .comm-label {
+    color: #000000;
+    background-color: rgba(242, 193, 86, 0.95);
+    border-color: #ffd700;
 }
 
-.oic {
-    top: calc(50% + 7.5rem);
-    left: calc(50% - 11.5rem);
-}
+/* Precise Coordinates (Geneva, Berlin, Vienna, New York, Jeddah) spaced to prevent overlapping of 4.8rem logos */
+.unsc-marker { left: 24.5%; top: 38%; }
+.lon-marker { left: 43.5%; top: 35%; }
+.wwc-marker { left: 50%; top: 20%; }
+.disec-marker { left: 56.5%; top: 29%; }
+.oic-marker { left: 58.5%; top: 51%; }
 
-.wwc {
-    top: calc(50% - 6.5rem);
-    left: calc(50% - 11.5rem);
-}
-
-@keyframes rotate-in-place {
-    0% {
-        transform: rotate(0deg);
+@keyframes mapFloat {
+    0%, 100% {
+        transform: translateY(0);
     }
-    100% {
-        transform: rotate(360deg);
+    50% {
+        transform: translateY(-12px);
     }
 }
 
@@ -145,41 +230,7 @@ body {
 /* ===== MEDIA QUERIES ===== */
 
 /* Large desktops and 4K displays */
-
 @media (min-width: 1920px) {
-    .main-logo {
-        width: 24rem;
-        height: 24rem;
-    }
-    .orbit {
-        width: 40rem;
-        height: 40rem;
-    }
-    .comm-logo {
-        width: 11rem;
-        height: 11rem;
-        margin: calc(-5.5rem) 0 0 calc(-5.5rem);
-    }
-    .unsc {
-        top: calc(50% - 20rem);
-    }
-    .lon {
-        top: calc(50% - 10rem);
-        left: calc(50% + 17.32rem);
-        /* 20rem * cos(30°) */
-    }
-    .disec {
-        top: calc(50% + 10rem);
-        left: calc(50% + 17.32rem);
-    }
-    .oic {
-        top: calc(50% + 10rem);
-        left: calc(50% - 17.32rem);
-    }
-    .wwc {
-        top: calc(50% - 10rem);
-        left: calc(50% - 17.32rem);
-    }
     .header-text {
         font-size: 1.8rem;
         letter-spacing: 5px;
@@ -189,221 +240,93 @@ body {
     }
 }
 
-/* Large tablets and small desktops */
-
+/* Responsive adjustments for different screen sizes */
 @media (max-width: 1200px) {
-    .main-logo {
-        width: 16rem;
-        height: 16rem;
-    }
-    .orbit {
-        width: 28rem;
-        height: 28rem;
-    }
-    .comm-logo {
-        width: 7rem;
-        height: 7rem;
-        margin: calc(-3.5rem) 0 0 calc(-3.5rem);
-    }
-    .unsc {
-        top: calc(50% - 11.5rem);
-    }
-    .lon {
-        top: calc(50% - 6rem);
-        left: calc(50% + 11rem);
-        /* 11.5rem * cos(30°) */
-    }
-    .disec {
-        top: calc(50% + 6rem);
-        left: calc(50% + 11rem);
-    }
-    .oic {
-        top: calc(50% + 6rem);
-        left: calc(50% - 11rem);
-    }
-    .wwc {
-        top: calc(50% - 6rem);
-        left: calc(50% - 11rem);
+    .map-wrapper {
+        width: 85%;
     }
 }
 
-/* Tablets */
+@media (max-width: 1024px) {
+    .map-wrapper {
+        width: 90%;
+    }
+}
 
 @media (max-width: 768px) {
-    .main-logo {
-        width: 12rem;
-        height: 12rem;
+    .main-content-layout {
+        padding: 5.5rem 0.5rem 2rem 0.5rem; /* Shorter padding on tablet */
     }
-    .orbit {
-        width: 24rem;
-        height: 24rem;
+    .map-wrapper {
+        width: 95%;
+    }
+    .map-branding-logo {
+        width: 4.8rem;
+        height: 4.8rem;
+        margin-bottom: 0.2rem;
+    }
+    .map-branding-title {
+        font-size: 1.15rem;
+    }
+    .map-branding-subtitle {
+        font-size: 0.65rem;
     }
     .comm-logo {
-        width: 6rem;
-        height: 6rem;
-        margin: calc(-3rem) 0 0 calc(-3rem);
+        width: 3.8rem; /* Enlarged on tablet */
+        height: 3.8rem;
     }
-    .unsc {
-        top: calc(50% - 12rem);
-    }
-    .lon {
-        top: calc(50% - 6rem);
-        left: calc(50% + 10.39rem);
-        /* 12rem * cos(30°) */
-    }
-    .disec {
-        top: calc(50% + 6rem);
-        left: calc(50% + 10.39rem);
-    }
-    .oic {
-        top: calc(50% + 6rem);
-        left: calc(50% - 10.39rem);
-    }
-    .wwc {
-        top: calc(50% - 6rem);
-        left: calc(50% - 10.39rem);
-    }
-    .header-text {
-        font-size: 1.1rem;
-        letter-spacing: 2px;
-    }
-    .header-banner {
-        padding: 10px 20px;
+    .comm-label {
+        font-size: 0.55rem;
+        padding: 1px 4px;
+        margin-top: 3px;
     }
 }
-
-/* Mobile phones */
 
 @media (max-width: 480px) {
-    .main-logo {
-        width: 10rem;
-        height: 10rem;
+    .main-content-layout {
+        padding: 5rem 0.2rem 1.5rem 0.2rem;
     }
-    .orbit {
-        width: 20rem;
-        height: 20rem;
+    .map-branding-logo {
+        width: 3.8rem;
+        height: 3.8rem;
     }
-    .comm-logo {
-        width: 4.5rem;
-        height: 4.5rem;
-        margin: calc(-2.25rem) 0 0 calc(-2.25rem);
-    }
-    .unsc {
-        top: calc(50% - 10rem);
-    }
-    .lon {
-        top: calc(50% - 5rem);
-        left: calc(50% + 8.66rem);
-        /* 10rem * cos(30°) */
-    }
-    .disec {
-        top: calc(50% + 5rem);
-        left: calc(50% + 8.66rem);
-    }
-    .oic {
-        top: calc(50% + 5rem);
-        left: calc(50% - 8.66rem);
-    }
-    .wwc {
-        top: calc(50% - 5rem);
-        left: calc(50% - 8.66rem);
-    }
-    .header-text {
-        font-size: 0.7rem;
-        letter-spacing: 1px;
-    }
-    .header-banner {
-        padding: 8px 15px;
-    }
-}
-
-/* Small mobile phones */
-
-@media (max-width: 360px) {
-    .main-logo {
-        width: 8rem;
-        height: 8rem;
-    }
-    .orbit {
-        width: 16rem;
-        height: 16rem;
-    }
-    .comm-logo {
-        width: 3.5rem;
-        height: 3.5rem;
-        margin: calc(-1.75rem) 0 0 calc(-1.75rem);
-    }
-    .unsc {
-        top: calc(50% - 8rem);
-    }
-    .lon {
-        top: calc(50% - 4rem);
-        left: calc(50% + 6.93rem);
-        /* 8rem * cos(30°) */
-    }
-    .disec {
-        top: calc(50% + 4rem);
-        left: calc(50% + 6.93rem);
-    }
-    .oic {
-        top: calc(50% + 4rem);
-        left: calc(50% - 6.93rem);
-    }
-    .wwc {
-        top: calc(50% - 4rem);
-        left: calc(50% - 6.93rem);
-    }
-    .header-text {
-        font-size: 0.65rem;
+    .map-branding-title {
+        font-size: 0.9rem;
         letter-spacing: 0.5px;
     }
-    .header-banner {
-        padding: 6px 10px;
-        border-width: 1px;
+    .map-branding-subtitle {
+        font-size: 0.55rem;
+        letter-spacing: 1px;
+    }
+    .comm-logo {
+        width: 3.2rem; /* Enlarged on mobile */
+        height: 3.2rem;
+        border-width: 1.5px;
+    }
+    .comm-label {
+        font-size: 0.45rem;
+        padding: 1px 3px;
+        margin-top: 2px;
     }
 }
 
-/* Landscape orientation adjustments for mobile */
-
-@media (max-height: 500px) and (orientation: landscape) {
-    .main-logo {
-        width: 8rem;
-        height: 8rem;
+@media (max-width: 360px) {
+    .map-branding-logo {
+        width: 2.8rem;
+        height: 2.8rem;
     }
-    .orbit {
-        width: 18rem;
-        height: 18rem;
+    .map-branding-title {
+        font-size: 0.75rem;
+    }
+    .map-branding-subtitle {
+        display: none;
     }
     .comm-logo {
-        width: 3.5rem;
-        height: 3.5rem;
-        margin: calc(-1.75rem) 0 0 calc(-1.75rem);
+        width: 2.4rem; /* Enlarged on tiny mobile */
+        height: 2.4rem;
+        border-width: 1px;
     }
-    .unsc {
-        top: calc(50% - 9rem);
-    }
-    .lon {
-        top: calc(50% - 4.5rem);
-        left: calc(50% + 7.79rem);
-        /* 9rem * cos(30°) */
-    }
-    .disec {
-        top: calc(50% + 4.5rem);
-        left: calc(50% + 7.79rem);
-    }
-    .oic {
-        top: calc(50% + 4.5rem);
-        left: calc(50% - 7.79rem);
-    }
-    .wwc {
-        top: calc(50% - 4.5rem);
-        left: calc(50% - 7.79rem);
-    }
-    .header-text {
-        font-size: 0.8rem;
-        letter-spacing: 1px;
-    }
-    .header-banner {
-        padding: 6px 15px;
+    .comm-label {
+        display: none; /* Hide labels to prevent overlap on tiny screens */
     }
 }

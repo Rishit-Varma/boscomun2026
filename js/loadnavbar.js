@@ -1,8 +1,8 @@
 // Configuration object for easy path updates
 const config = {
-    htmlPath: "/partials/navbar.html",
-    cssPath: "/css/navbar.css",
-    jsPath: "/js/navbar.js",
+    htmlPath: "../partials/navbar.html",
+    cssPath: "../css/navbar.css",
+    jsPath: "../js/navbar.js",
     containerId: "navigation-container",
 };
 
