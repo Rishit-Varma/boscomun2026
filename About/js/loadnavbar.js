@@ -1,8 +1,19 @@
-// Configuration object for easy path updates
+// Determine resource path prefix based on whether page is in a subdirectory
+const path = window.location.pathname.toLowerCase();
+const isInSubdir = path.includes('/about/') || 
+                   path.includes('/committes/') || 
+                   path.includes('/our team/') || 
+                   path.includes('/our%20team/') || 
+                   path.includes('/resources/') ||
+                   path.includes('/live updates/') ||
+                   path.includes('/live%20updates/') ||
+                   path.includes('/home/');
+const prefix = isInSubdir ? "../" : "./";
+
 const config = {
-    htmlPath: "partials/navbar.html", 
-    cssPath: "css/navbar.css",        
-    jsPath: "js/navbar.js",           
+    htmlPath: prefix + "partials/navbar.html",
+    cssPath: prefix + "css/navbar.css",
+    jsPath: prefix + "js/navbar.js",
     containerId: "navigation-container",
 };
 
@@ -49,7 +60,10 @@ async function loadHTML() {
             );
         }
 
-        const htmlContent = await fetchResource(config.htmlPath, "HTML");
+        let htmlContent = await fetchResource(config.htmlPath, "HTML");
+        if (!isInSubdir) {
+            htmlContent = htmlContent.replace(/(src|href)="\.\.\//g, '$1="./');
+        }
         container.innerHTML = htmlContent;
 
         // Process any inline scripts that came with the HTML

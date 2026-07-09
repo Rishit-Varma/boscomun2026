@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Updates - BoscoMUN 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/live-updates.css">
+    <meta name="description" content="Get live updates, crisis announcements, and schedule changes for Bosco MUN 2026 in real-time." />
+    <meta name="keywords" content="Bosco MUN 2026, live updates, crisis, school model united nations, Don Bosco Park Circus" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="Bosco MUN 2026 | Live Updates" />
+    <meta property="og:description" content="Stay updated with live crisis announcements and schedule changes for Bosco MUN 2026." />
+    <meta property="og:image" content="https://boscomun.donboscoparkcircus.org/images/logo.png" />
+    <meta property="og:url" content="https://boscomun.donboscoparkcircus.org/Live%20Updates/live-updates.html" />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="../images/logo.avif" type="image/avif" />
+</head>
+
+<body>
+    <header>
+        <div id="navigation-container"></div>
+    </header>
+
+    <div class="header-wrapper">
+        <div class="header-title">Live Updates</div>
+        <div class="live-status-container">
+            <span class="pulse-dot" id="status-dot"></span>
+            <span id="connection-status">Initializing...</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Crisis / Critical Ticker -->
+        <div class="ticker-wrap" id="critical-ticker-container" style="display: none;">
+            <div class="ticker-label">CRISIS ALERT</div>
+            <div class="ticker">
+                <div class="ticker__item" id="critical-ticker-text">Loading latest crisis alerts...</div>
+            </div>
+        </div>
+
+        <div class="layout-grid">
+            <!-- Left Side: Live Feed -->
+            <main class="feed-section">
+                <!-- Filter Controls -->
+                <div class="filter-bar">
+                    <button class="filter-btn active" data-filter="all">All Updates</button>
+                    <button class="filter-btn" data-filter="announcement">Announcements</button>
+                    <button class="filter-btn" data-filter="crisis">Crisis Alerts</button>
+                    <button class="filter-btn" data-filter="schedule">Schedule</button>
+                </div>
+
+                <!-- Feed Container -->
+                <div class="timeline" id="updates-timeline">
+                    <!-- Loading state -->
+                    <div class="loading-state" id="loading-spinner">
+                        <div class="spinner"></div>
+                        <p>Connecting to feed...</p>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Right Side: Sidebar -->
+            <aside class="sidebar-section">
+                <!-- Firebase Connection Box -->
+                <div class="glass-card info-card">
+                    <h3 class="card-subtitle">Firebase Connection</h3>
+                    <div class="firebase-status-details">
+                        <p id="firebase-info-text">This page is currently running in <strong>Demo Mode</strong> with mock updates.</p>
+                        <div class="setup-instructions" id="setup-instructions-box">
+                            <p>To connect to your own Firebase:</p>
+                            <ol>
+                                <li>Open <code>Live Updates/js/live-updates.js</code>.</li>
+                                <li>Locate the <code>firebaseConfig</code> object.</li>
+                                <li>Paste your Firebase web configuration (or database URL).</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Ticker Settings / Admin Info -->
+                <div class="glass-card stats-card">
+                    <h3 class="card-subtitle">Conference Quick Info</h3>
+                    <ul class="quick-info-list">
+                        <li>
+                            <span class="info-label">Current Edition:</span>
+                            <span class="info-val">11th Edition</span>
+                        </li>
+                        <li>
+                            <span class="info-label">Venue:</span>
+                            <span class="info-val">Don Bosco Park Circus</span>
+                        </li>
+                        <li>
+                            <span class="info-label">Total Committees:</span>
+                            <span class="info-val">5 Committees</span>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <!-- Firebase Database & Firestore -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    
+    <!-- Load navbar script -->
+    <script src="../js/loadnavbar.js"></script>
+    <!-- Custom Live Updates Logic -->
+    <script src="js/live-updates.js"></script>
+</body>
+
+</html>

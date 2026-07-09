@@ -160,13 +160,14 @@ body {
     background: rgba(0, 0, 0, 0.9);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    max-width: 1020px;
-    width: 100%;
+    max-width: 1200px;
+    width: fit-content;
     margin: 0 auto;
     border: 1px solid rgba(255, 255, 255, 0.15);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
     border-radius: 16px;
     display: flex;
+    flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
     padding: 10px 20px;
@@ -186,16 +187,18 @@ body {
     border-radius: 12px;
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .main-navbar-links {
-    padding: 14px 24px;
+    padding: 10px 16px;
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1rem;
     letter-spacing: 0.025em;
     position: relative;
     z-index: 2;
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    white-space: nowrap;
 }
 
 /* Animated background effect */
@@ -307,6 +310,22 @@ body {
 }
 
 /* Responsive adjustments */
+
+@media (min-width: 769px) and (max-width: 1100px) {
+    .main-navbar {
+        max-width: 95%;
+        padding: 8px 12px;
+        gap: 4px;
+    }
+    .main-navbar-links {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+    }
+    .navbar-main-logo {
+        width: 35px;
+        margin-right: 5px;
+    }
+}
 
 @media (min-width: 769px) {
     .mob-navbar-container {

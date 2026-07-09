@@ -1,288 +1,466 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
-* {
-    box-sizing: border-box;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+/* ──────────────────────── RESET & BASE ──────────────────────── */
+*, *::before, *::after {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --gold:        #f2c156;
+    --gold-light:  #ffd966;
+    --gold-dark:   #c9952a;
+    --black:       #090a0b;
+    --panel-bg:    #121315;
+    --card-bg:     #1b1c1e;
+    --text:        #f5f4f0;
+    --text-muted:  #a6a5a0;
+    --border:      rgba(255, 255, 255, 0.08);
+    --border-gold: rgba(242, 193, 86, 0.2);
+    --navbar-h:    70px;
 }
 
 body {
     font-family: "Inter", sans-serif;
-    background: url("./bg.jpg") no-repeat center center fixed;
+    background: url("./bg.avif") no-repeat center center fixed;
     background-size: cover;
+    color: var(--text);
     min-height: 100vh;
-    color: #f2c156;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
 }
 
-.container {
-    max-width: 1000px;
+/* ──────────────────────── HEADER NAVBAR BLUR ──────────────────────── */
+body > header {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: var(--navbar-h);
+    background-color: rgba(9, 10, 11, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    z-index: 999;
+}
+
+/* ──────────────────────── VIEWPORT CORNER DECORATIONS ──────────────────────── */
+.decor-corner {
+    position: fixed;
+    font-family: monospace;
+    font-size: 14px;
+    color: rgba(242, 193, 86, 0.35);
+    pointer-events: none;
+    z-index: 10;
+    user-select: none;
+}
+.decor-tl { top: calc(var(--navbar-h) + 15px); left: 20px; }
+.decor-tr { top: calc(var(--navbar-h) + 15px); right: 20px; }
+.decor-bl { bottom: 20px; left: 20px; }
+.decor-br { bottom: 20px; right: 20px; }
+
+/* ──────────────────────── TEAM VIEWPORT ──────────────────────── */
+.team-viewport {
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 2rem;
-    margin-top: 100px;
-}
-
-.header {
-    text-align: center;
-    margin-bottom: 3rem;
+    padding: calc(var(--navbar-h) + 3rem) 2rem 4rem 2rem;
     position: relative;
+    z-index: 2;
 }
 
-.header::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(circle, rgba(242, 193, 86, 0.1) 0%, transparent 70%);
-    border-radius: 50%;
-    z-index: -1;
+/* Page Header */
+.page-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.header-subtitle {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
 }
 
 .main-title {
-    font-size: 64px;
-    font-family: "Space Grotesk", serif;
-    color: rgba(242, 193, 86);
-    text-align: center;
-    background: linear-gradient(90deg, #ffd700, #ffed4e, #ffa500, #ff8c00, #ffb347, #ffd966, #ff7f00, #ffcc02);
-    background-size: 400% 100%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-transform: uppercase;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 700;
-    /* animation: flowLeftToRight 6s ease-in-out infinite; */
-    /* margin: 1rem auto; */
-}
-
-@keyframes goldShimmer {
-    0%,
-    100% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-}
-
-.teams-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.team-card {
-    background: rgba(0, 0, 0, 0.6);
-    border: 2px solid rgba(242, 193, 86, 0.3);
-    border-radius: 15px;
-    padding: 2rem;
-    position: relative;
-    backdrop-filter: blur(10px);
-}
-
-.team-header {
-    margin-bottom: 1.5rem;
-    padding: 0 0 0.5rem;
-    border-bottom: 1.5px solid rgba(242, 193, 86, 0.8);
-}
-
-.team-title {
-    font-family: "Space Grotesk", serif;
-    font-size: 2rem;
-    font-weight: 600;
-    color: rgba(242, 193, 86);
+    letter-spacing: 0.02em;
+    color: var(--text);
     text-transform: uppercase;
-    letter-spacing: 1px;
-    text-align: center;
+    line-height: 1.1;
+    margin-top: 0.2rem;
 }
 
-.team-members {
+.header-desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    max-width: 480px;
+    line-height: 1.5;
+    margin-top: 0.5rem;
+}
+
+.header-rule {
+    width: 80px;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin-top: 1.2rem;
+}
+
+/* ──────────────────────── TEAM DOSSIER GRID ──────────────────────── */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.8rem;
+}
+
+/* Symmetrical layouts for wide cards */
+.card-wide {
+    grid-column: span 2;
+}
+
+/* ──────────────────────── DOSSIER CARD BASE ──────────────────────── */
+.team-card {
     position: relative;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-gold);
+    border-radius: 8px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    transition: border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Inner certificate dashed border */
+.team-card::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px dashed rgba(242, 193, 86, 0.12);
+    border-radius: 6px;
+    pointer-events: none;
     z-index: 1;
 }
 
+/* Overlapping circle graphic pattern background */
+.card-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='none' stroke='%23f2c156' stroke-width='0.5' stroke-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='28'/%3E%3Ccircle cx='0' cy='0' r='28'/%3E%3Ccircle cx='60' cy='0' r='28'/%3E%3Ccircle cx='0' cy='60' r='28'/%3E%3Ccircle cx='60' cy='60' r='28'/%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.9;
+    z-index: 0;
+    pointer-events: none;
+}
+
+
+
+.team-card:hover {
+    border-color: var(--gold-dark);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), 0 0 15px rgba(242, 193, 86, 0.05);
+}
+
+/* Department Background Watermark */
+.card-watermark {
+    position: absolute;
+    bottom: -15px;
+    right: 15px;
+    font-family: "Playfair Display", serif;
+    font-size: 6.5rem;
+    font-weight: 700;
+    font-style: italic;
+    color: rgba(242, 193, 86, 0.015);
+    pointer-events: none;
+    z-index: 0;
+    line-height: 0.8;
+    user-select: none;
+    transition: color 0.4s ease;
+}
+
+.team-card:hover .card-watermark {
+    color: rgba(242, 193, 86, 0.03);
+}
+
+/* Card content padding & positioning */
+.card-inner {
+    position: relative;
+    z-index: 2;
+    padding: 2.2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.team-heading {
+    font-family: "Playfair Display", serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.02em;
+}
+
+.team-subheading {
+    font-size: 0.72rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+    margin-top: -0.8rem;
+}
+
+/* ──────────────────────── MEMBER ENTRIES ──────────────────────── */
 .member-list {
-    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.grid-cols-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem 1.8rem;
+}
+
+.grid-cols-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
 }
 
 .member-item {
-    padding: 0.5rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.member-role {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-transform: uppercase;
 }
 
 .member-name {
-    font-size: 1.2rem;
-    letter-spacing: 1px;
-    font-weight: 700;
-    text-align: center;
-    font-family: 'Space Grotesk', sans-serif;
-    padding: 4px 0;
-    transition: color .3s;
-    color: white;
+    font-family: "Inter", sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
 }
 
-.member-name a {
-    color: white;
+/* Highlighted executive roles with contact links */
+.member-item.highlighted {
+    gap: 0.5rem;
+}
+
+.contact-btn {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
     text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.02);
+    transition: all 0.3s ease;
 }
 
-.member-name a:hover {
-    text-decoration: underline;
+.contact-btn i {
+    font-size: 0.68rem;
+    color: var(--gold);
 }
 
-/* Responsive Design */
-
-@media (max-width: 768px) {
-    .container {
-        padding: 1rem;
-    }
-    .main-title {
-        font-size: 2.5rem;
-        letter-spacing: 4px;
-    }
-    .team-card {
-        padding: 1.5rem;
-    }
+.contact-btn:hover {
+    color: var(--gold-light);
+    border-color: var(--gold);
+    background: rgba(242, 193, 86, 0.05);
+    box-shadow: 0 4px 12px rgba(242, 193, 86, 0.08);
 }
 
-@media (max-width: 480px) {
-    .main-title {
-        font-size: 2rem;
-        letter-spacing: 2px;
-    }
-    .team-header {
-        text-align: center;
-    }
+/* Open/Vacant Positions styled as structured placeholders */
+.member-item.vacant {
+    border: 1px dashed rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.01);
+    border-radius: 4px;
+    padding: 0.6rem 0.8rem;
+    position: relative;
 }
 
-footer {
-    background: rgba(0, 0, 0, .5);
-    backdrop-filter: blur(10px);
-    --webkit-backdrop-filter: blur(10px);
-    font-size: 16px;
-    color: white;
-    padding: 15px 75px;
+.member-item.vacant .member-name {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
 }
 
-.row {
-    padding: 1em;
+.vacant-tag {
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(242, 193, 86, 0.5);
+    margin-top: 0.1rem;
+    font-weight: 500;
+}
+
+/* ──────────────────────── EXECUTIVE BOARDS GRID ──────────────────────── */
+.section-break {
+    margin-top: 5.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.eb-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1.8rem;
+}
+
+/* Symmetrical alignment for 5 cards: 3 on top, 2 centered below */
+.eb-grid > :nth-child(1),
+.eb-grid > :nth-child(2),
+.eb-grid > :nth-child(3) {
+    grid-column: span 2;
+}
+
+.eb-grid > :nth-child(4) {
+    grid-column: 2 / 4;
+}
+
+.eb-grid > :nth-child(5) {
+    grid-column: 4 / 6;
+}
+
+/* ──────────────────────── FOOTER STYLING ──────────────────────── */
+.footerislast {
+    background: rgba(9, 10, 11, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid var(--border);
+    color: var(--text);
+    padding: 3rem 2rem;
+    z-index: 3;
+    position: relative;
 }
 
 .row.primary {
+    max-width: 1100px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding-bottom: 0;
-    align-items: center;
-    justify-items: center;
+    gap: 3rem;
+    align-items: flex-start;
 }
 
 .column {
+    display: flex;
     flex-direction: column;
-    padding: 0 2rem;
-    min-height: 15rem;
-}
-
-.column h3 {
-    border-bottom: var(--text-c-highlight) 5px solid;
-    max-width: fit-content;
-    margin-bottom: 20px;
-    padding-top: 15px;
-}
-
-.column.subscribe {
-    justify-self: center;
-    padding-bottom: 0;
+    gap: 1.5rem;
 }
 
 .h3element {
-    font-family: "Space Grotesk", sans-serif;
+    font-family: "Playfair Display", serif;
     font-size: 1.5rem;
-    white-space: nowrap;
+    font-weight: 700;
+    color: var(--gold);
+    border-bottom: 2px solid var(--border-gold);
+    padding-bottom: 0.4rem;
     text-transform: uppercase;
+    letter-spacing: 0.04em;
+    max-width: fit-content;
 }
 
 .ulelement {
     list-style: none;
+    display: flex;
     flex-direction: column;
-    padding: 0;
-    margin: 0;
+    gap: 1rem;
 }
 
-.lielement:not(:first-child) {
-    margin-top: 1.2rem;
+.lielement {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
 }
 
-.ulelement .lielement .aelement {
-    color: #fff;
-    transition: color .5s;
+.lielement i {
+    width: 16px;
+    text-align: center;
+    color: var(--gold);
+    font-size: 0.9rem;
+}
+
+.lielement .aelement {
+    color: var(--text);
     text-decoration: none;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
 }
 
-.lielement:hover,
-.ulelement .lielement .aelement:hover {
-    color: rgba(242, 193, 86, 0.8);
+.lielement .aelement:hover {
+    color: var(--gold-light);
 }
 
 .footer-detail {
-    font-size: 1rem;
-    text-align: left;
-    font-family: "Space Grotesk", sans-serif;
-    padding-left: 3%;
-    margin-top: 10px;
+    font-size: 0.88rem;
+    color: var(--text-muted);
 }
 
-.youtube {
-    padding-left: 2%;
+.lielement .aelement:hover .footer-detail {
+    color: var(--text);
 }
 
 .map iframe {
-    border-radius: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border-gold) !important;
+    width: 100%;
+    height: 240px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
-@media screen and (max-width:930px) {
-    .map iframe {
-        width: 100%;
-    }
-}
-
-@media screen and (max-width:785px) {
-    .row.primary {
-        grid-template-columns: 1fr;
-        justify-items: stretch;
-        gap: 2rem;
-    }
-    .column {
-        width: 100%;
-    }
-    footer {
-        padding-left: 0;
-        padding-right: 0;
-    }
-}
-
-@media screen and (max-width:575px) {
-    .map iframe {
-        width: 100%;
-        height: 300px;
-    }
-    .hyphen {
+/* ──────────────────────── RESPONSIVE DESIGN ──────────────────────── */
+@media (max-width: 900px) {
+    .decor-corner {
         display: none;
     }
-    .footer-detail {
-        font-size: .88rem;
-    }
-    .writeup-container .writeup {
-        font-size: 1rem;
-    }
-}
 
-@media screen and (max-width:310px) {
-    .column {
-        padding: 0;
+    .team-viewport {
+        padding-top: calc(var(--navbar-h) + 2rem);
     }
+
+    .team-grid,
+    .eb-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .eb-grid > * {
+        grid-column: span 1 !important;
+    }
+
+    .card-wide {
+        grid-column: span 1;
+    }
+
+    .grid-cols-2, .grid-cols-3 {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .row.primary {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
     .map iframe {
-        height: 180px;
+        height: 200px;
     }
 }
