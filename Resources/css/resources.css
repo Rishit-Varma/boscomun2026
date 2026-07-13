@@ -320,6 +320,7 @@ body::before {
     border-radius: 12px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     width: 100%;
+    max-width: 680px;
     height: auto;
     overflow: hidden;
     backdrop-filter: blur(15px);
@@ -329,7 +330,8 @@ body::before {
     transition: border-radius 0.45s cubic-bezier(0.25, 0.46, 0.45, 1),
                 border-color 0.45s cubic-bezier(0.25, 0.46, 0.45, 1),
                 margin-top 0.45s cubic-bezier(0.25, 0.46, 0.45, 1),
-                height 0.45s cubic-bezier(0.25, 0.46, 0.45, 1);
+                height 0.45s cubic-bezier(0.25, 0.46, 0.45, 1),
+                max-width 0.45s cubic-bezier(0.25, 0.46, 0.45, 1);
 }
 
 .ledger-grid.reader-active .dossier-card {
@@ -337,6 +339,7 @@ body::before {
     border-radius: 8px;
     height: calc(100% - 40px);
     margin-top: 40px;
+    max-width: 100%;
 }
 .ledger-grid.reader-active .card-inner {
     height: 100%;

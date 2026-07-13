@@ -124,8 +124,10 @@ body {
 
 .theme-title {
     font-family: "Space Grotesk", sans-serif;
-    font-size: clamp(140%, 4.5vw, 230%);
+    font-size: clamp(2.4vh, 4.5vw, 5.1vh);
     font-weight: 800;
+    line-height: 0.95;
+    text-align: left;
     letter-spacing: 0.1vw;
     margin: 0;
     background: linear-gradient(90deg, #ffd700, #ffed4e, #ffa500);
@@ -137,7 +139,7 @@ body {
 
 .theme-subtitle {
     font-family: 'Freshman', 'Alumni Sans Collegiate One', 'Graduate', 'Collegiate', sans-serif;
-    font-size: clamp(75%, 2vw, 110%);
+    font-size: clamp(100%, 2.6vw, 150%);
     font-weight: normal;
     letter-spacing: 0.2vw;
     margin: 0.2vh 0 0 0;
@@ -269,6 +271,7 @@ body {
 
 .countdown-container {
     display: flex;
+    flex-wrap: nowrap;
     gap: 3%;
     justify-content: center;
     align-items: center;
@@ -281,6 +284,8 @@ body {
     padding: 1vh;
     width: 10vw;
     height: 10vw; max-width: 12vh; max-height: 13vh;
+    min-width: 70px;
+    min-height: 70px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -298,7 +303,7 @@ body {
 
 .countdown-num {
     font-family: "Space Grotesk", sans-serif;
-    font-size: 180%;
+    font-size: 140%;
     font-weight: 800;
     color: #ffffff;
     line-height: 1;
@@ -512,21 +517,31 @@ body {
         letter-spacing: 0.5vw;
     }
     .countdown-container {
-        gap: 1.2vw;
+        display: flex;
+        flex-wrap: nowrap !important;
+        justify-content: center;
+        gap: 1.5vw !important;
+        width: 100%;
+        max-width: 320px;
     }
     .countdown-box {
-        width: min(15vw, 9vh);
-        height: min(17vw, 10vh);
-        padding: 1.2vh 0.8vw;
-        border-width: 0.2vh;
-        border-radius: 1vh;
+        width: 22vw !important;
+        height: 22vw !important;
+        min-width: 55px !important;
+        min-height: 55px !important;
+        max-width: 80px !important;
+        max-height: 80px !important;
+        padding: 0.8vh 0.5vw !important;
+        border-width: 0.15vh;
+        border-radius: 0.8vh;
     }
     .countdown-num {
-        font-size: clamp(110%, 2.8vh, 140%);
+        font-size: clamp(1rem, 2.5vh, 1.3rem) !important;
     }
     .countdown-label {
-        font-size: clamp(50%, 1vh, 60%);
-        margin-top: 0.3vh;
+        font-size: clamp(0.55rem, 1vh, 0.65rem) !important;
+        margin-top: 0.2vh !important;
+        letter-spacing: normal !important;
     }
 }
 
