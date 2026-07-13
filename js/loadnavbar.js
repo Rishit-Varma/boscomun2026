@@ -1,7 +1,11 @@
 // Clean .html extension from address bar
-if (window.location.pathname.toLowerCase().endsWith('.html')) {
-    const cleanPath = window.location.pathname.substring(0, window.location.pathname.length - 5);
-    window.history.replaceState(null, document.title, cleanPath + window.location.search + window.location.hash);
+try {
+    if (window.location.pathname.toLowerCase().endsWith('.html')) {
+        const cleanPath = window.location.pathname.substring(0, window.location.pathname.length - 5);
+        window.history.replaceState(null, document.title, cleanPath + window.location.search + window.location.hash);
+    }
+} catch (e) {
+    console.warn("Failed to clean URL extension:", e);
 }
 
 // Determine resource path prefix based on whether page is in a subdirectory
@@ -16,12 +20,18 @@ const isInSubdir = path.includes('/about/') ||
                    path.includes('/home/');
 const prefix = isInSubdir ? "../" : "./";
 
-// Register service worker for clean URL fallback handling
+// Unregister any active service worker to prevent redirect loops or routing conflicts
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register(prefix + 'sw.js').then(function(reg) {
-        // Registered successfully
+    navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for (let registration of registrations) {
+            registration.unregister().then(function(success) {
+                if (success) {
+                    console.log('Service Worker unregistered successfully');
+                }
+            });
+        }
     }).catch(function(err) {
-        console.warn('Service Worker registration failed:', err);
+        console.warn('Failed to unregister Service Worker:', err);
     });
 }
 
