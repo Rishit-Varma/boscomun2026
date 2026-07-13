@@ -1,314 +1,364 @@
-// ==========================================
-// FIREBASE CONFIGURATION
-// ==========================================
-// When you get your Firebase configuration from the Firebase Console:
-// 1. Go to https://console.firebase.google.com/
-// 2. Create a new Firebase project (e.g. "Bosco MUN Live").
-// 3. Add a "Web App" to obtain your API credentials.
-// 4. Paste the configuration object below.
-// 5. Enable "Realtime Database" or "Cloud Firestore" in your Firebase console.
-//
-// Firebase will run in Demo Mode until you fill in the keys below.
-//
-// Example structure:
-// const firebaseConfig = {
-//   apiKey: "AIzaSyA1-XXXX-YYYY-ZZZZ",
-//   authDomain: "boscomun-live.firebaseapp.com",
-//   databaseURL: "https://boscomun-live-default-rtdb.firebaseio.com",
-//   projectId: "boscomun-live",
-//   storageBucket: "boscomun-live.appspot.com",
-//   messagingSenderId: "123456789012",
-//   appId: "1:123456789012:web:abcdef1234567890"
-// };
+// Firebase Configuration
 const firebaseConfig = {
-    apiKey: "",
-    authDomain: "",
-    databaseURL: "",
-    projectId: "",
-    storageBucket: "",
-    messagingSenderId: "",
-    appId: ""
+  apiKey: "AIzaSyBZiW2H7ahlibCAMG9kO3n3CXZWkqhk3EQ",
+  authDomain: "bosco-mun-bm26.firebaseapp.com",
+  projectId: "bosco-mun-bm26",
+  databaseURL: "https://bosco-mun-bm26-default-rtdb.asia-southeast1.firebasedatabase.app", // <-- Check your Firebase console to verify if this matches your URL
+  storageBucket: "bosco-mun-bm26.firebasestorage.app",
+  messagingSenderId: "574173758616",
+  appId: "1:574173758616:web:2322cbcea99e33ad6dbced",
+  measurementId: "G-CGC0TL8HB2"
 };
 
-// ==========================================
-// MOCK DATA (For Demo Mode fallback)
-// ==========================================
-const mockUpdates = [
-    {
-        id: "mock-1",
-        title: "Cyber-Attacks Cripple Eastern European Power Grid",
-        type: "crisis",
-        body: "UNSC Crisis Update: A series of coordinated cyber-attacks have knocked out power grids across Eastern Europe. UNSC delegates are summoned for emergency consultation. Press conference at 12:30 PM.",
-        timestamp: Date.now() - 5 * 60 * 1000 // 5 mins ago
-    },
-    {
-        id: "mock-2",
-        title: "Committee Session II Schedule Adjustment",
-        type: "schedule",
-        body: "Please note that Committee Session II will begin at 11:15 AM instead of 11:00 AM. Delegates are requested to be in their respective rooms 5 minutes prior.",
-        timestamp: Date.now() - 35 * 60 * 1000 // 35 mins ago
-    },
-    {
-        id: "mock-3",
-        title: "Registration & Delegation Kit Collection",
-        type: "announcement",
-        body: "The registration desk is open in the main lobby. Schools can collect their respective delegation kits and identification badges. Desk closes at 10:00 AM.",
-        timestamp: Date.now() - 2 * 60 * 60 * 1000 // 2 hours ago
-    }
-];
+let db = null;
+let allUpdates = []; // Cache to hold fetched updates for filtering
+let dbRef = null;
+let schedulers = []; // Keep track of active timeouts for scheduled updates
 
-// Application state
-let activeFilter = "all";
-let updatesList = [];
-let isFirebaseConnected = false;
+document.addEventListener('DOMContentLoaded', () => {
+  setupFilters();
+  initFirebase();
 
-document.addEventListener("DOMContentLoaded", () => {
-    initApp();
+  // Refresh relative times and check for newly active scheduled updates every 30 seconds
+  setInterval(() => {
+    renderUpdates();
+    updateCrisisTicker();
+  }, 30000);
 });
 
-function initApp() {
-    setupFilters();
-    checkFirebaseConnection();
-}
+// Initialize Firebase and Realtime Database connection
+function initFirebase() {
+  const connectionStatus = document.getElementById('connection-status');
+  if (connectionStatus) connectionStatus.textContent = "Connecting...";
 
-function checkFirebaseConnection() {
-    const statusDot = document.getElementById("status-dot");
-    const statusText = document.getElementById("connection-status");
-    const infoText = document.getElementById("firebase-info-text");
-    const setupBox = document.getElementById("setup-instructions-box");
-
-    // Consider configured if at least apiKey is present
-    const isConfigured = firebaseConfig.apiKey && (firebaseConfig.projectId || firebaseConfig.databaseURL);
-
-    if (isConfigured) {
-        try {
-            // Initialize Firebase App
-            firebase.initializeApp(firebaseConfig);
-            isFirebaseConnected = true;
-            
-            // Set styles for connected live status
-            statusDot.className = "pulse-dot live";
-            statusText.innerText = "LIVE (Firebase)";
-            infoText.innerHTML = `Connected to Firebase project: <strong>${firebaseConfig.projectId || "Realtime DB"}</strong>. Listening for updates in real-time.`;
-            setupBox.style.display = "none";
-            
-            // Route connection based on provided services in config
-            if (firebaseConfig.databaseURL) {
-                console.log("Connecting to Firebase Realtime Database...");
-                connectRealtimeDB();
-            } else {
-                console.log("Connecting to Firebase Firestore...");
-                connectFirestore();
-            }
-        } catch (e) {
-            console.error("Firebase initialization failed:", e);
-            statusDot.className = "pulse-dot offline";
-            statusText.innerText = "Connection Error";
-            infoText.innerHTML = `Firebase connection failed: <code>${e.message}</code>. Defaulting to Demo Mode.`;
-            loadDemoMode();
-        }
+  try {
+    // Check if firebase is available globally (from script tags in live-updates.html)
+    if (typeof firebase !== 'undefined') {
+      if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+      }
+      db = firebase.database();
+      
+      // Start listening to live updates
+      listenToRealtimeDatabase();
     } else {
-        // Run in Demo Mode with a distinct marker
-        isFirebaseConnected = false;
-        statusDot.className = "pulse-dot live";
-        statusDot.style.backgroundColor = "#ffc107"; // Yellow warning color for demo
-        statusDot.style.boxShadow = "0 0 8px #ffc107";
-        statusText.innerText = "DEMO MODE";
-        loadDemoMode();
+      console.warn("Firebase SDK not found globally. Starting in Demo Mode.");
+      loadDemoMode("Firebase SDK not loaded");
     }
+  } catch (error) {
+    console.error("Firebase initialization failed:", error);
+    loadDemoMode("Config/Initialization failed");
+  }
 }
 
-// Connect to Firebase Realtime Database
-function connectRealtimeDB() {
-    const dbRef = firebase.database().ref("updates");
-    dbRef.orderByChild("timestamp").on("value", (snapshot) => {
-        const rawData = snapshot.val();
-        const loadedUpdates = [];
-        
-        if (rawData) {
-            Object.keys(rawData).forEach(key => {
-                loadedUpdates.push({
-                    id: key,
-                    ...rawData[key]
-                });
-            });
-            // Sort descending by timestamp
-            loadedUpdates.sort((a, b) => b.timestamp - a.timestamp);
-        }
-        
-        updatesList = loadedUpdates;
-        renderUpdates();
-        updateCriticalTicker();
-    }, (error) => {
-        console.error("Firebase Database read failed: ", error);
-        alertFirebaseError(error.message);
-        loadDemoMode();
-    });
-}
+// Subscribe to real-time changes in the Realtime Database 'updates' node
+function listenToRealtimeDatabase() {
+  if (!db) return;
 
-// Connect to Firebase Cloud Firestore
-function connectFirestore() {
-    const db = firebase.firestore();
-    db.collection("updates").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
-        const loadedUpdates = [];
-        snapshot.forEach((doc) => {
-            loadedUpdates.push({
-                id: doc.id,
-                ...doc.data()
-            });
-        });
-        updatesList = loadedUpdates;
-        renderUpdates();
-        updateCriticalTicker();
-    }, (error) => {
-        console.error("Firestore read failed: ", error);
-        alertFirebaseError(error.message);
-        loadDemoMode();
-    });
-}
+  const connectionStatus = document.getElementById('connection-status');
+  const statusDot = document.getElementById('status-dot');
+  const firebaseInfoText = document.getElementById('firebase-info-text');
+  const setupInstructionsBox = document.getElementById('setup-instructions-box');
+  const updatesTimeline = document.getElementById('updates-timeline');
 
-function alertFirebaseError(message) {
-    const infoText = document.getElementById("firebase-info-text");
-    const statusDot = document.getElementById("status-dot");
-    const statusText = document.getElementById("connection-status");
+  // Query updates ordered by timestamp
+  dbRef = db.ref('updates').orderByChild('timestamp');
+
+  dbRef.on('value', (snapshot) => {
+    allUpdates = [];
     
-    statusDot.className = "pulse-dot offline";
-    statusText.innerText = "Database Error";
-    infoText.innerHTML = `Database permission error: <code>${message}</code>. Check database rules. Running in Demo Mode.`;
-}
+    snapshot.forEach((childSnapshot) => {
+      const data = childSnapshot.val();
+      allUpdates.push({
+        id: childSnapshot.key,
+        title: data.title || '',
+        body: data.body || data.content || '',
+        type: data.type || 'announcement', // announcement, crisis, schedule
+        timestamp: parseTimestamp(data.timestamp),
+        mediaUrl: data.mediaUrl || data.image || ''
+      });
+    });
 
-// Load Demo Mode with simulated live updates
-function loadDemoMode() {
-    updatesList = [...mockUpdates];
-    renderUpdates();
-    updateCriticalTicker();
+    // Realtime Database returns ordered items in ASCENDING order.
+    // We reverse the array so that the latest updates appear at the top of the timeline.
+    allUpdates.reverse();
 
-    // Simulate a live update arriving after 10 seconds to demonstrate feed responsiveness
-    setTimeout(() => {
-        // Prevent double insertion if user has toggled filters or page refreshed
-        if (updatesList.some(item => item.id === "simulated-live-1")) return;
-
-        const simulatedUpdate = {
-            id: "simulated-live-1",
-            title: "OIC Emergency Session Summoned",
-            type: "crisis",
-            body: "CRISIS FLASH: In response to escalating regional tensions, the Organization of Islamic Cooperation has called an emergency summit in Committee Room 4. All OIC delegates must report immediately.",
-            timestamp: Date.now()
-        };
-        
-        // Push to top of list
-        updatesList.unshift(simulatedUpdate);
-        renderUpdates();
-        updateCriticalTicker();
-        
-        // Highlight the new incoming card
-        const firstCard = document.querySelector(".timeline-item");
-        if (firstCard) {
-            firstCard.style.outline = "2px solid #ff3b30";
-            firstCard.style.boxShadow = "0 0 20px rgba(255, 59, 48, 0.45)";
-            setTimeout(() => {
-                firstCard.style.transition = "outline 2.5s ease, box-shadow 2.5s ease";
-                firstCard.style.outline = "2px solid transparent";
-                firstCard.style.boxShadow = "0 8px 32px rgba(0, 0, 0, 0.2)";
-            }, 3000);
-        }
-    }, 10000);
-}
-
-// Configure button filters
-function setupFilters() {
-    const filterBtns = document.querySelectorAll(".filter-btn");
-    filterBtns.forEach(btn => {
-        btn.addEventListener("click", (e) => {
-            filterBtns.forEach(b => b.classList.remove("active"));
-            e.target.classList.add("active");
-            activeFilter = e.target.getAttribute("data-filter");
+    // Set up schedulers to automatically reveal future updates when their time arrives
+    clearSchedulers();
+    const nowMs = Date.now();
+    allUpdates.forEach(item => {
+      const timeMs = item.timestamp.getTime();
+      if (timeMs > nowMs) {
+        const delay = timeMs - nowMs;
+        // Limit delay to 24 hours to avoid setTimeout 32-bit integer overflow
+        if (delay < 86400000) {
+          const timeoutId = setTimeout(() => {
             renderUpdates();
-        });
+            updateCrisisTicker();
+          }, delay);
+          schedulers.push(timeoutId);
+        }
+      }
     });
+
+    // Update Connection Status in UI
+    if (connectionStatus) connectionStatus.textContent = "LIVE";
+    if (statusDot) {
+      statusDot.className = "pulse-dot live";
+    }
+    if (firebaseInfoText) {
+      firebaseInfoText.innerHTML = "Successfully connected to Firebase Realtime Database! Receiving live updates.";
+    }
+    if (setupInstructionsBox) {
+      setupInstructionsBox.style.display = "none";
+    }
+
+    // If database is empty, show a guidance card
+    if (allUpdates.length === 0) {
+      if (updatesTimeline) {
+        updatesTimeline.innerHTML = `
+          <div class="empty-state">
+            <p>Connected to Realtime Database, but no updates found under the <code>updates</code> node.</p>
+            <p style="margin-top: 15px; font-size: 0.9rem; color: rgba(245, 240, 225, 0.6); line-height: 1.6;">
+              <strong>Next Steps:</strong> Create a node named <strong>updates</strong> in your Realtime Database console, then add a child with these keys:<br>
+              <code>title</code> (String), <code>body</code> (String), <code>type</code> (String: 'announcement', 'crisis', or 'schedule'), <code>timestamp</code> (Number - epoch milliseconds, or ISO Date string), and optional <code>mediaUrl</code> (String).
+            </p>
+          </div>
+        `;
+      }
+    } else {
+      renderUpdates();
+    }
+    updateCrisisTicker();
+  }, (error) => {
+    console.warn("Realtime Database subscription failed, falling back to Demo Mode:", error);
+    loadDemoMode("Database access denied (check rules): " + error.message);
+  });
 }
 
-// Filter and render updates timeline
+// Helper to clear existing timeouts
+function clearSchedulers() {
+  schedulers.forEach(id => clearTimeout(id));
+  schedulers = [];
+}
+
+// Fallback to demo mode with local mock data
+function loadDemoMode(reason) {
+  const connectionStatus = document.getElementById('connection-status');
+  const statusDot = document.getElementById('status-dot');
+  const firebaseInfoText = document.getElementById('firebase-info-text');
+  const setupInstructionsBox = document.getElementById('setup-instructions-box');
+
+  if (connectionStatus) connectionStatus.textContent = "Demo Mode";
+  if (statusDot) {
+    statusDot.className = "pulse-dot offline";
+  }
+  if (firebaseInfoText) {
+    firebaseInfoText.innerHTML = `This page is currently running in <strong>Demo Mode</strong> with mock updates. (${reason})`;
+  }
+  if (setupInstructionsBox) {
+    setupInstructionsBox.style.display = "block";
+  }
+
+  // Populate mock data
+  allUpdates = [
+    {
+      id: "mock-1",
+      title: "Security Council Crisis Escalates",
+      body: "The UN Security Council has been called to an emergency closed-door meeting to address the sudden geopolitical developments in the Mediterranean. All delegates must report to the Council Room immediately.",
+      type: "crisis",
+      timestamp: new Date(Date.now() - 5 * 60 * 1000), // 5 mins ago
+      mediaUrl: ""
+    },
+    {
+      id: "mock-2",
+      title: "Lunch Arrangements & Venue Details",
+      body: "Lunch will be served from 1:00 PM to 2:15 PM in the Main Assembly Hall. Please show your delegate badges at the counter. Committee Session III will resume promptly at 2:30 PM.",
+      type: "announcement",
+      timestamp: new Date(Date.now() - 45 * 60 * 1000), // 45 mins ago
+      mediaUrl: ""
+    },
+    {
+      id: "mock-3",
+      title: "Updated Day 1 Schedule Released",
+      body: "Please note the slight adjustment in session timings. Committee Session II has been extended by 15 minutes to allow for draft resolution discussions. Check the revised timetable in the Resources section.",
+      type: "schedule",
+      timestamp: new Date(Date.now() - 120 * 60 * 1000), // 2 hours ago
+      mediaUrl: ""
+    }
+  ];
+
+  renderUpdates();
+  updateCrisisTicker();
+}
+
+// Custom parser to handle Indian Standard Time (IST) directly from simple strings
+function parseTimestamp(val) {
+  if (!val) return new Date();
+  
+  if (typeof val === 'number') {
+    return new Date(val);
+  }
+
+  if (typeof val === 'string') {
+    let str = val.trim();
+
+    // Case 1: Just time (e.g., "09:54" or "09:54:00") -> Assume today's date in IST
+    const timeOnlyRegex = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])(:([0-5][0-9]))?$/;
+    if (timeOnlyRegex.test(str)) {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      str = `${year}-${month}-${day}T${str}+05:30`;
+      return new Date(str);
+    }
+
+    // Case 2: Full date and time (e.g., "2026-07-13 09:54" or "2026-07-13 09:54:00") -> Assume IST
+    if (str.includes(' ') && !str.includes('+') && !str.includes('Z')) {
+      str = str.replace(' ', 'T') + '+05:30';
+      return new Date(str);
+    }
+
+    // Case 3: YYYY-MM-DD format (no time, e.g., "2026-07-13") -> Start of day in IST
+    const dateOnlyRegex = /^\d{4}-\d{2}-\d{2}$/;
+    if (dateOnlyRegex.test(str)) {
+      str = str + 'T00:00:00+05:30';
+      return new Date(str);
+    }
+
+    // Fallback: standard date parsing
+    const parsed = new Date(str);
+    if (!isNaN(parsed.getTime())) {
+      return parsed;
+    }
+  }
+
+  return new Date();
+}
+
+// Format the date/time string relative to current time
+function formatTime(date) {
+  const diffMs = Date.now() - date.getTime();
+  const diffMins = Math.floor(diffMs / (1000 * 60));
+  const diffHours = Math.floor(diffMins / 60);
+
+  if (diffMins < 1) {
+    return "Just now";
+  } else if (diffMins < 60) {
+    return `${diffMins} min${diffMins > 1 ? 's' : ''} ago`;
+  } else if (diffHours < 24) {
+    return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+  } else {
+    return date.toLocaleDateString([], { month: 'short', day: 'numeric' }) + ' ' + date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  }
+}
+
+// Render the timeline UI based on cached data and current filter
 function renderUpdates() {
-    const timeline = document.getElementById("updates-timeline");
-    const loadingSpinner = document.getElementById("loading-spinner");
+  const updatesTimeline = document.getElementById('updates-timeline');
+  if (!updatesTimeline) return;
+
+  const activeBtn = document.querySelector('.filter-btn.active');
+  const filterType = activeBtn ? activeBtn.getAttribute('data-filter') : 'all';
+
+  // Filter updates (only show updates that are not in the future)
+  const now = new Date();
+  const filtered = allUpdates.filter(item => {
+    if (item.timestamp > now) return false; // Hide future/scheduled updates
+    if (filterType === 'all') return true;
+    return item.type === filterType;
+  });
+
+  updatesTimeline.innerHTML = '';
+
+  if (filtered.length === 0) {
+    updatesTimeline.innerHTML = `
+      <div class="empty-state">
+        <p>No updates found for this category.</p>
+      </div>
+    `;
+    return;
+  }
+
+  filtered.forEach(item => {
+    const itemEl = document.createElement('div');
+    itemEl.className = 'timeline-item';
     
-    if (loadingSpinner) {
-        loadingSpinner.style.display = "none";
+    // Determine the dot class
+    let dotClass = 'timeline-dot';
+    if (item.type === 'crisis') dotClass += ' crisis';
+    else if (item.type === 'announcement') dotClass += ' announcement';
+    else if (item.type === 'schedule') dotClass += ' schedule';
+
+    // Tag classes and labels
+    let tagClass = 'tag';
+    let tagLabel = 'Announcement';
+    if (item.type === 'crisis') {
+      tagClass += ' crisis';
+      tagLabel = 'Crisis Alert';
+    } else if (item.type === 'announcement') {
+      tagClass += ' announcement';
+      tagLabel = 'Announcement';
+    } else if (item.type === 'schedule') {
+      tagClass += ' schedule';
+      tagLabel = 'Schedule';
     }
 
-    const filtered = updatesList.filter(item => {
-        if (activeFilter === "all") return true;
-        return item.type === activeFilter;
-    });
+    // Media HTML if present
+    const mediaHtml = item.mediaUrl ? `
+      <div class="update-media">
+        <img src="${item.mediaUrl}" alt="${item.title}" loading="lazy">
+      </div>
+    ` : '';
 
-    if (filtered.length === 0) {
-        timeline.innerHTML = `
-            <div class="empty-state">
-                <p>No updates found for category "${activeFilter}".</p>
-            </div>
-        `;
-        return;
-    }
-
-    timeline.innerHTML = "";
-    filtered.forEach((item, index) => {
-        const timeString = formatTime(item.timestamp);
-        
-        const itemHtml = `
-            <div class="timeline-item" data-id="${item.id}" style="animation-delay: ${index * 0.1}s">
-                <div class="timeline-dot ${item.type}"></div>
-                <div class="timeline-card">
-                    <div class="timeline-header">
-                        <span class="tag ${item.type}">${item.type}</span>
-                        <span class="update-time">${timeString}</span>
-                    </div>
-                    <h2 class="update-title">${item.title}</h2>
-                    <p class="update-body">${item.body}</p>
-                    ${item.imageUrl ? `<div class="update-media"><img src="${item.imageUrl}" alt="${item.title}"></div>` : ""}
-                </div>
-            </div>
-        `;
-        
-        timeline.insertAdjacentHTML("beforeend", itemHtml);
-    });
+    itemEl.innerHTML = `
+      <div class="${dotClass}"></div>
+      <div class="timeline-card">
+        <div class="timeline-header">
+          <span class="update-title">${item.title}</span>
+          <span class="update-time">${formatTime(item.timestamp)}</span>
+          <span class="${tagClass}">${tagLabel}</span>
+        </div>
+        <div class="update-body">
+          <p>${item.body}</p>
+        </div>
+        ${mediaHtml}
+      </div>
+    `;
+    
+    updatesTimeline.appendChild(itemEl);
+  });
 }
 
-// Manage scrolling ticker content based on the latest crisis item
-function updateCriticalTicker() {
-    const tickerContainer = document.getElementById("critical-ticker-container");
-    const tickerText = document.getElementById("critical-ticker-text");
-    
-    // Select the latest crisis
-    const latestCrisis = updatesList.find(item => item.type === "crisis");
-    
-    if (latestCrisis) {
-        tickerText.innerText = `${latestCrisis.title.toUpperCase()}: ${latestCrisis.body} • reporting live updates`;
-        tickerContainer.style.display = "flex";
-    } else {
-        tickerContainer.style.display = "none";
-    }
+// Update the horizontal scrolling marquee for active crises
+function updateCrisisTicker() {
+  const criticalTickerContainer = document.getElementById('critical-ticker-container');
+  const criticalTickerText = document.getElementById('critical-ticker-text');
+  
+  if (!criticalTickerContainer || !criticalTickerText) return;
+
+  const now = new Date();
+  const crisisUpdates = allUpdates.filter(item => item.type === 'crisis' && item.timestamp <= now);
+
+  if (crisisUpdates.length > 0) {
+    criticalTickerContainer.style.display = 'flex';
+    // Join multiple crisis updates with a spacer
+    const tickerText = crisisUpdates.map(c => `ALERT: ${c.title} - ${c.body}`).join("  |  ");
+    criticalTickerText.textContent = tickerText;
+  } else {
+    criticalTickerContainer.style.display = 'none';
+  }
 }
 
-// Format Unix Timestamp into clean readable text
-function formatTime(timestamp) {
-    const date = new Date(timestamp);
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // 0 hour should be 12
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    
-    const today = new Date();
-    const isToday = date.getDate() === today.getDate() &&
-                    date.getMonth() === today.getMonth() &&
-                    date.getFullYear() === today.getFullYear();
-                    
-    if (isToday) {
-        return `Today at ${hours}:${minutes} ${ampm}`;
-    } else {
-        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        return `${monthNames[date.getMonth()]} ${date.getDate()}, ${hours}:${minutes} ${ampm}`;
-    }
+// Attach event listeners to filter buttons
+function setupFilters() {
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      filterButtons.forEach(b => b.classList.remove('active'));
+      e.target.classList.add('active');
+      renderUpdates();
+    });
+  });
 }

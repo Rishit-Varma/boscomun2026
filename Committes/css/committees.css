@@ -171,8 +171,8 @@ header {
 }
 
 .collapsed-logo {
-    width: 65px;
-    height: 65px;
+    width: 80px;
+    height: 80px;
     object-fit: contain;
     border-radius: 50%;
     border: 1px solid var(--border-gold);
@@ -184,12 +184,11 @@ header {
 
 .collapsed-title {
     font-family: "Playfair Display", serif;
-    font-size: 1.6rem;
+    font-size: 1.1rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
     color: var(--text-muted);
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
+    text-align: center;
     text-transform: uppercase;
     transition: color 0.3s ease;
 }

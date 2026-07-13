@@ -8,12 +8,13 @@
 body {
     min-height: 100vh;
     overflow-x: hidden;
+    width: 100%;
 }
 
 /* Mobile Navbar */
 
 .mob-navbar-container {
-    padding-top: 20px;
+    padding-top: 1.25rem;
     display: flex;
     justify-content: center;
     position: fixed;
@@ -26,11 +27,11 @@ body {
 
 .mob-navbar {
     background-color: black;
-    max-width: 350px;
+    max-width: min(21.875rem, 90vw);
     width: 100%;
-    border: 1px solid rgba(255, 255, 255, 0.205);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 3px;
+    border: 0.0625rem solid rgba(255, 255, 255, 0.205);
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.1875rem;
     display: flex;
     flex-direction: column;
     color: white;
@@ -40,15 +41,15 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    min-height: 50px;
+    padding: 0.625rem;
+    min-height: 3.125rem;
     background-color: black;
     color: white;
-    border-radius: 3px 3px 0 0;
+    border-radius: 0.1875rem 0.1875rem 0 0;
 }
 
 .mob-navbar-logo {
-    height: 40px;
+    height: 2.5rem;
     width: auto;
 }
 
@@ -57,8 +58,8 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 30px;
-    height: 30px;
+    width: 1.875rem;
+    height: 1.875rem;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
@@ -66,7 +67,7 @@ body {
 .mob-navbar-text {
     font-family: "Space Grotesk", sans-serif;
     font-weight: 900;
-    font-size: 20px;
+    font-size: 1.25rem;
     color: white;
     flex-grow: 1;
     text-align: center;
@@ -76,9 +77,9 @@ body {
     background-color: black;
     color: white;
     border-top: none;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 0 0 3px 3px;
-    padding: 0 10px;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 0.1875rem 0.1875rem;
+    padding: 0 0.625rem;
     overflow: hidden;
     max-height: 0;
     opacity: 0;
@@ -86,16 +87,16 @@ body {
 }
 
 .mob-navbar-down.active {
-    max-height: 400px;
+    max-height: 25rem;
     opacity: 1;
-    padding: 20px 10px;
+    padding: 1.25rem 0.625rem;
     transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s, padding 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .mob-navbar-down.closing {
     max-height: 0;
     opacity: 0;
-    padding: 0 10px;
+    padding: 0 0.625rem;
     transition: opacity 0.2s cubic-bezier(0.4, 0.0, 1, 1), max-height 0.35s cubic-bezier(0.4, 0.0, 1, 1) 0.1s, padding 0.35s cubic-bezier(0.4, 0.0, 1, 1) 0.1s;
 }
 
@@ -106,8 +107,8 @@ body {
 
 .navbar-link-anchor {
     display: block;
-    border-top: 1px solid #e0e0e0;
-    padding: 15px 10px;
+    border-top: 0.0625rem solid #e0e0e0;
+    padding: 0.9375rem 0.625rem;
     transition: all 0.3s ease-in-out;
     color: white;
     text-decoration: none;
@@ -131,7 +132,7 @@ body {
 }
 
 .navbar-hamburger.active .line1 {
-    transform: translateY(6px) rotate(45deg);
+    transform: translateY(0.375rem) rotate(45deg);
 }
 
 .navbar-hamburger.active .line2 {
@@ -140,7 +141,7 @@ body {
 }
 
 .navbar-hamburger.active .line3 {
-    transform: translateY(-6px) rotate(-45deg);
+    transform: translateY(-0.375rem) rotate(-45deg);
 }
 
 /* Main Navbar */
@@ -153,30 +154,32 @@ body {
     font-family: "Space Grotesk", sans-serif;
     width: 100%;
     z-index: 1000;
-    padding-top: 10px;
+    padding-top: 0.625rem;
+    justify-content: center;
+    align-items: center;
 }
 
 .main-navbar {
     background: rgba(0, 0, 0, 0.9);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    max-width: 1200px;
+    backdrop-filter: blur(1.25rem);
+    -webkit-backdrop-filter: blur(1.25rem);
+    max-width: 75rem;
     width: fit-content;
     margin: 0 auto;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
+    border: 0.0625rem solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.4), 0 0 0 0.0625rem rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
-    padding: 10px 20px;
-    gap: 8px;
+    padding: 0.625rem 1.25rem;
+    gap: 0.5rem;
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .main-navbar:hover {
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5), 0 0 0 0.0625rem rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.2);
 }
 
@@ -184,14 +187,14 @@ body {
     color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
     position: relative;
-    border-radius: 12px;
+    border-radius: 0.75rem;
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     overflow: hidden;
     white-space: nowrap;
 }
 
 .main-navbar-links {
-    padding: 10px 16px;
+    padding: 0.625rem 1rem;
     font-weight: 700;
     font-size: 1rem;
     letter-spacing: 0.025em;
@@ -211,7 +214,7 @@ body {
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, rgba(255, 217, 0, 0.1) 0%, rgba(255, 193, 7, 0.15) 100%);
-    border-radius: 12px;
+    border-radius: 0.75rem;
     transform: scale(0);
     transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     z-index: 1;
@@ -222,13 +225,13 @@ body {
 .main-navbar-link-wrapper::after {
     content: '';
     position: absolute;
-    top: -2px;
-    left: -2px;
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
+    top: -0.125rem;
+    left: -0.125rem;
+    width: calc(100% + 0.25rem);
+    height: calc(100% + 0.25rem);
     background: rgba(242, 193, 86, 0.8);
     background-size: 200% 200%;
-    border-radius: 14px;
+    border-radius: 0.875rem;
     opacity: 0;
     z-index: 0;
     animation: borderMove 3s ease-in-out infinite;
@@ -249,7 +252,7 @@ body {
 
 .main-navbar-link-wrapper:hover {
     color: black;
-    transform: translateY(-3px);
+    transform: translateY(-0.1875rem);
 }
 
 .main-navbar-link-wrapper:hover::before {
@@ -267,7 +270,7 @@ body {
 /* Active state */
 
 .main-navbar-link-wrapper:active {
-    transform: translateY(-1px);
+    transform: translateY(-0.0625rem);
 }
 
 /* Stagger animation for navbar items */
@@ -301,7 +304,7 @@ body {
 @keyframes slideDown {
     0% {
         opacity: 0;
-        transform: translateY(-30px);
+        transform: translateY(-1.875rem);
     }
     100% {
         opacity: 1;
@@ -311,23 +314,23 @@ body {
 
 /* Responsive adjustments */
 
-@media (min-width: 769px) and (max-width: 1100px) {
+@media (min-width: 48.0625em) and (max-width: 68.75em) {
     .main-navbar {
         max-width: 95%;
-        padding: 8px 12px;
-        gap: 4px;
+        padding: 0.5rem 0.75rem;
+        gap: 0.25rem;
     }
     .main-navbar-links {
-        padding: 8px 10px;
+        padding: 0.5rem 0.625rem;
         font-size: 0.85rem;
     }
     .navbar-main-logo {
-        width: 35px;
-        margin-right: 5px;
+        width: 2.1875rem;
+        margin-right: 0.3125rem;
     }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 48.0625em) {
     .mob-navbar-container {
         display: none;
     }
@@ -336,7 +339,7 @@ body {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 48em) {
     .main-navbar-container {
         display: none;
     }
@@ -345,20 +348,20 @@ body {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 30em) {
     .mob-navbar {
         border-radius: 0;
     }
     .mob-navbar-text {
-        font-size: 18px;
+        font-size: 1.125rem;
     }
     .mob-navbar-logo {
-        height: 35px;
+        height: 2.1875rem;
     }
 }
 
 .navbar-main-logo {
     height: auto;
-    width: 45px;
-    margin: 5px 10px 0 0;
+    width: 2.8125rem;
+    margin: 0.3125rem 0.625rem 0 0;
 }

@@ -1,6 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
+/* Fluid typography for identical scaling across laptop screens */
+@media (min-width: 1024px) {
+    html {
+        font-size: clamp(10.6px, 1.0416vw, 16px) !important;
+    }
+}
+
+/* Scale down globally for mobile to prevent oversized elements */
+@media (max-width: 768px) {
+    html {
+        font-size: 13.5px !important;
+    }
+}
+
 /* ───────────────────────── RESET & BASE ───────────────────────── */
 *,
 *::before,
@@ -118,7 +132,7 @@ header {
 }
 
 .brand-logo:hover {
-    transform: rotate(5deg) scale(1.05);
+    transform: scale(1.05);
     box-shadow: 0 0 35px rgba(242, 193, 86, 0.3);
     border-color: var(--gold);
 }
@@ -302,7 +316,7 @@ header {
 
 .lead-quote {
     font-family: "Playfair Display", serif;
-    font-size: clamp(1.6rem, 3.2vw, 2.6rem);
+    font-size: clamp(0.6rem, 2vw, 2.6rem);
     font-style: italic;
     line-height: 1.45;
     border-left: 3px solid var(--gold);

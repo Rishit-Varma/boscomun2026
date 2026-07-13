@@ -1,3 +1,4 @@
+
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Alumni+Sans+Collegiate+One:ital@0;1&family=Graduate&display=swap");
 
 @font-face {
@@ -29,7 +30,7 @@ body {
     justify-content: center;
     width: 100%;
     height: 100vh;
-    padding: 5.5rem 1rem 1rem 1rem; /* Compact padding to leave space for fixed navbar */
+    padding: 10% 2% 2% 2%; /* Compact padding to leave space for fixed navbar */
     box-sizing: border-box;
     z-index: 2;
     position: relative;
@@ -37,29 +38,29 @@ body {
 }
 
 :root {
-    --orbit-size: min(480px, 52vh);
-    --logo-size: min(150px, 17vh);
+    --orbit-size: min(25vw, 52vh);
+    --logo-size: min(8vw, 17vh);
 }
 
 @media (max-width: 768px) {
     :root {
-        --orbit-size: min(380px, 48vh);
-        --logo-size: min(115px, 15vh);
+        --orbit-size: min(50vw, 48vh);
+        --logo-size: min(15vw, 15vh);
     }
 }
 
 @media (max-width: 480px) {
     :root {
-        --orbit-size: min(330px, 50vh);
-        --logo-size: min(105px, 14vh);
+        --orbit-size: min(70vw, 50vh);
+        --logo-size: min(22vw, 14vh);
     }
 }
 
 .orbit-wrapper {
     position: relative;
-    width: var(--orbit-size, 520px);
-    height: var(--orbit-size, 520px);
-    margin: 1.5rem auto;
+    width: var(--orbit-size, 50%);
+    height: var(--orbit-size, 50%);
+    margin: 3% auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -87,8 +88,8 @@ body {
 
 .logo-glow-ring {
     position: absolute;
-    width: calc(var(--logo-size, 145px) + 24px);
-    height: calc(var(--logo-size, 145px) + 24px);
+    width: calc(var(--logo-size, 15%) + 4%);
+    height: calc(var(--logo-size, 15%) + 4%);
     border-radius: 50%;
     background: radial-gradient(circle, rgba(242, 193, 86, 0.2) 0%, transparent 70%);
     animation: pulseGlow 3s ease-in-out infinite;
@@ -107,12 +108,12 @@ body {
 }
 
 .center-logo {
-    width: var(--logo-size, 145px);
-    height: var(--logo-size, 145px);
+    width: var(--logo-size, 15%);
+    height: var(--logo-size, 15%);
     border-radius: 50%;
-    border: 3px solid rgba(242, 193, 86, 0.9);
-    box-shadow: 0 0 25px rgba(242, 193, 86, 0.45);
-    margin-bottom: 0.6rem;
+    border: 0.3vh solid rgba(242, 193, 86, 0.9);
+    box-shadow: 0 0 2vh rgba(242, 193, 86, 0.45);
+    margin-bottom: 2%;
     background-color: rgba(0, 0, 0, 0.85);
     transition: transform 0.3s ease;
 }
@@ -123,29 +124,29 @@ body {
 
 .theme-title {
     font-family: "Space Grotesk", sans-serif;
-    font-size: clamp(1.4rem, 4.5vw, 2.3rem);
+    font-size: clamp(140%, 4.5vw, 230%);
     font-weight: 800;
-    letter-spacing: 1.5px;
+    letter-spacing: 0.1vw;
     margin: 0;
     background: linear-gradient(90deg, #ffd700, #ffed4e, #ffa500);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+    text-shadow: 0 0.2vh 0.4vh rgba(0, 0, 0, 0.9);
 }
 
 .theme-subtitle {
     font-family: 'Freshman', 'Alumni Sans Collegiate One', 'Graduate', 'Collegiate', sans-serif;
-    font-size: clamp(0.75rem, 2vw, 1.1rem);
+    font-size: clamp(75%, 2vw, 110%);
     font-weight: normal;
-    letter-spacing: 3px;
-    margin: 2px 0 0 0;
+    letter-spacing: 0.2vw;
+    margin: 0.2vh 0 0 0;
     background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     color: transparent;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.9));
+    filter: drop-shadow(0 0.2vh 0.4vh rgba(0, 0, 0, 0.9));
     display: inline-block;
     white-space: nowrap;
 }
@@ -154,7 +155,7 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    border: 1.5px dashed rgba(242, 193, 86, 0.25);
+    border: 0.15vh dashed rgba(242, 193, 86, 0.25);
     border-radius: 50%;
     animation: orbit 45s linear infinite 1.6s;
 }
@@ -202,12 +203,12 @@ body {
 
 /* Committee Logo inside Orbit */
 .comm-logo {
-    width: clamp(3.2rem, 11vw, 5.2rem);
-    height: clamp(3.2rem, 11vw, 5.2rem);
+    width: clamp(10%, 11vw, 15%);
+    height: clamp(10%, 11vw, 15%);
     border-radius: 50%;
     background-color: rgba(0, 0, 0, 0.9);
-    border: 2px solid rgba(242, 193, 86, 0.8);
-    box-shadow: 0 0 12px rgba(242, 193, 86, 0.35);
+    border: 0.2vh solid rgba(242, 193, 86, 0.8);
+    box-shadow: 0 0 1vh rgba(242, 193, 86, 0.35);
     object-fit: cover;
     transform: scale(1) rotate(0deg);
     transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
@@ -221,17 +222,17 @@ body {
 
 .comm-label {
     color: #ffd700;
-    font-size: clamp(0.48rem, 1.5vw, 0.62rem);
+    font-size: clamp(50%, 1.5vw, 65%);
     font-weight: 700;
-    margin-top: 4px;
+    margin-top: 0.5vh;
     font-family: "Space Grotesk", sans-serif;
     text-transform: uppercase;
-    letter-spacing: 0.8px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+    letter-spacing: 0.05vw;
+    text-shadow: 0 0.2vh 0.4vh rgba(0, 0, 0, 0.9);
     background-color: rgba(0, 0, 0, 0.85);
-    padding: 2px 6px;
-    border-radius: 4px;
-    border: 1px solid rgba(242, 193, 86, 0.25);
+    padding: 0.2vh 0.5vw;
+    border-radius: 0.4vh;
+    border: 0.1vh solid rgba(242, 193, 86, 0.25);
     white-space: nowrap;
     pointer-events: none;
     transform: scale(1);
@@ -247,20 +248,20 @@ body {
 
 /* Countdown Section Styling */
 .countdown-section {
-    margin: 1.2rem auto 0;
+    margin: 3% auto 0;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.6rem;
+    gap: 2%;
     z-index: 5;
     position: relative;
 }
 
 .countdown-heading {
     font-family: "Space Grotesk", sans-serif;
-    font-size: 0.95rem;
-    letter-spacing: 3px;
+    font-size: 95%;
+    letter-spacing: 0.2vw;
     color: rgba(242, 193, 86, 0.85);
     text-transform: uppercase;
     font-weight: 700;
@@ -268,54 +269,54 @@ body {
 
 .countdown-container {
     display: flex;
-    gap: 1rem;
+    gap: 3%;
     justify-content: center;
     align-items: center;
 }
 
 .countdown-box {
     background: rgba(18, 18, 18, 0.8);
-    border: 2px solid rgba(242, 193, 86, 0.35);
-    border-radius: 10px;
-    padding: 0.5rem;
-    width: 80px;
-    height: 85px;
+    border: 0.2vh solid rgba(242, 193, 86, 0.35);
+    border-radius: 1vh;
+    padding: 1vh;
+    width: 10vw;
+    height: 10vw; max-width: 12vh; max-height: 13vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(1vh);
+    box-shadow: 0 1vh 3vh rgba(0, 0, 0, 0.6);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .countdown-box:hover {
-    transform: translateY(-3px);
+    transform: translateY(-0.5vh);
     border-color: rgba(242, 193, 86, 1);
-    box-shadow: 0 10px 25px rgba(242, 193, 86, 0.15);
+    box-shadow: 0 1.2vh 3vh rgba(242, 193, 86, 0.15);
 }
 
 .countdown-num {
     font-family: "Space Grotesk", sans-serif;
-    font-size: 1.8rem;
+    font-size: 180%;
     font-weight: 800;
     color: #ffffff;
     line-height: 1;
 }
 
 .countdown-label {
-    font-size: 0.62rem;
+    font-size: 65%;
     color: rgba(242, 193, 86, 0.9);
     text-transform: uppercase;
-    margin-top: 4px;
+    margin-top: 0.5vh;
     font-weight: 600;
-    letter-spacing: 1px;
+    letter-spacing: 0.1vw;
 }
 
 .target-date-notice {
-    font-size: 0.78rem;
+    font-size: 80%;
     color: rgba(245, 240, 225, 0.45);
-    letter-spacing: 1px;
+    letter-spacing: 0.1vw;
 }
 
 @keyframes orbit {
@@ -341,7 +342,7 @@ body {
         transform: translateY(0);
     }
     50% {
-        transform: translateY(-12px);
+        transform: translateY(-1.5vh);
     }
 }
 
@@ -358,13 +359,13 @@ body {
 
 @keyframes logoPulseGlow {
     0% {
-        box-shadow: 0 0 15px rgba(255, 215, 0, 0.6), 0 0 0 0px rgba(255, 215, 0, 0.4);
+        box-shadow: 0 0 1.5vh rgba(255, 215, 0, 0.6), 0 0 0 0 rgba(255, 215, 0, 0.4);
     }
     50% {
-        box-shadow: 0 0 32px rgba(255, 215, 0, 0.95), 0 0 0 12px rgba(255, 215, 0, 0);
+        box-shadow: 0 0 3.2vh rgba(255, 215, 0, 0.95), 0 0 0 1.2vh rgba(255, 215, 0, 0);
     }
     100% {
-        box-shadow: 0 0 15px rgba(255, 215, 0, 0.6), 0 0 0 0px rgba(255, 215, 0, 0);
+        box-shadow: 0 0 1.5vh rgba(255, 215, 0, 0.6), 0 0 0 0 rgba(255, 215, 0, 0);
     }
 }
 
@@ -391,13 +392,13 @@ body {
 
 .header-banner {
     background-color: black;
-    border: 2px solid rgba(242, 193, 86);
-    padding: 12px 40px;
+    border: 0.2vh solid rgba(242, 193, 86);
+    padding: 1.5vh 5vw;
     position: absolute;
     bottom: 0;
     width: 100%;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0.5vh 2vh rgba(0, 0, 0, 0.7);
 }
 
 .header-banner::before {
@@ -413,13 +414,13 @@ body {
 
 .header-text {
     color: rgba(242, 193, 86);
-    font-size: 1.4rem;
+    font-size: 140%;
     font-weight: 700;
-    letter-spacing: 4px;
+    letter-spacing: 0.3vw;
     text-align: center;
     font-family: "Space Grotesk", sans-serif;
     text-transform: uppercase;
-    text-shadow: 0 0 30px rgba(0, 0, 0, 1);
+    text-shadow: 0 0 3vh rgba(0, 0, 0, 1);
     position: relative;
     z-index: 1;
 }
@@ -436,10 +437,10 @@ body {
 .header-banner::after {
     content: '';
     position: absolute;
-    top: 2px;
-    left: 2px;
-    right: 2px;
-    bottom: 2px;
+    top: 0.2vh;
+    left: 0.2vw;
+    right: 0.2vw;
+    bottom: 0.2vh;
     pointer-events: none;
 }
 
@@ -448,11 +449,11 @@ body {
 /* Large desktops and 4K displays */
 @media (min-width: 1920px) {
     .header-text {
-        font-size: 1.8rem;
-        letter-spacing: 5px;
+        font-size: 180%;
+        letter-spacing: 0.4vw;
     }
     .header-banner {
-        padding: 16px 50px;
+        padding: 2vh 4vw;
     }
 }
 
@@ -471,81 +472,127 @@ body {
 
 @media (max-width: 768px) {
     .main-content-layout {
-        padding: 5.5rem 0.5rem 2rem 0.5rem; /* Shorter padding on tablet */
+        padding: 10% 2% 4% 2%; /* Shorter padding on tablet */
     }
     .map-wrapper {
         width: 95%;
     }
     .map-branding-logo {
-        width: 4.8rem;
-        height: 4.8rem;
-        margin-bottom: 0.2rem;
+        width: 15%;
+        height: 15%;
+        margin-bottom: 1%;
     }
     .map-branding-title {
-        font-size: 1.15rem;
+        font-size: 115%;
     }
     .map-branding-subtitle {
-        font-size: 0.65rem;
+        font-size: 65%;
     }
     .comm-logo {
-        width: 3.8rem; /* Enlarged on tablet */
-        height: 3.8rem;
+        width: 14%; /* Enlarged on tablet */
+        height: 14%;
     }
     .comm-label {
-        font-size: 0.55rem;
-        padding: 1px 4px;
-        margin-top: 3px;
+        font-size: 55%;
+        padding: 0.1vh 0.5vw;
+        margin-top: 0.5vh;
     }
 }
 
 @media (max-width: 480px) {
     .main-content-layout {
-        padding: 5rem 0.2rem 1rem 0.2rem;
+        padding: 12% 1% 2% 1%;
     }
     .countdown-section {
-        gap: 0.4rem;
-        margin: 1rem auto 0;
+        gap: 1vh;
+        margin: 3% auto 0;
     }
     .countdown-heading {
-        font-size: 0.8rem;
-        letter-spacing: 2px;
+        font-size: clamp(70%, 1.4vh, 80%);
+        letter-spacing: 0.5vw;
     }
     .countdown-container {
-        gap: 0.5rem;
+        gap: 1.2vw;
     }
     .countdown-box {
-        width: 62px;
-        height: 72px;
-        padding: 0.35rem;
-        border-width: 1.5px;
-        border-radius: 8px;
+        width: min(15vw, 9vh);
+        height: min(17vw, 10vh);
+        padding: 1.2vh 0.8vw;
+        border-width: 0.2vh;
+        border-radius: 1vh;
     }
     .countdown-num {
-        font-size: 1.25rem;
+        font-size: clamp(110%, 2.8vh, 140%);
     }
     .countdown-label {
-        font-size: 0.52rem;
-        margin-top: 2px;
+        font-size: clamp(50%, 1vh, 60%);
+        margin-top: 0.3vh;
     }
 }
 
 @media (max-width: 360px) {
     .map-branding-logo {
-        width: 2.8rem;
-        height: 2.8rem;
+        width: 12%;
+        height: 12%;
     }
     .map-branding-title {
-        font-size: 0.75rem;
+        font-size: 75%;
     }
     .map-branding-subtitle {
         display: none;
     }
     .comm-logo {
-        width: 2.4rem; /* Enlarged on tiny mobile */
-        height: 2.4rem;
-        border-width: 1px;
+        width: 12%; /* Enlarged on tiny mobile */
+        height: 12%;
+        border-width: 0.1vh;
     }
     .comm-label {
         display: none; /* Hide labels to prevent overlap on tiny screens */
+    }
+}
+
+
+/* ===== RESPONSIVENESS AND ORBIT BOUNDARY SAFEGUARDS ===== */
+
+/* Allow body scroll on small screens */
+body {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+.main-content-layout {
+    min-height: 100vh !important;
+    height: auto !important;
+}
+
+/* Shrink orbit ring slightly within wrapper to prevent outer boundary overflow */
+.orbit-ring {
+    width: 78% !important;
+    height: 78% !important;
+    top: 11% !important;
+    left: 11% !important;
+}
+
+/* Keep orbit markers within bounds and scale size based on viewport */
+:root {
+    --orbit-size: min(82vw, 52vh) !important;
+    --logo-size: min(25vw, 17vh) !important;
+}
+
+@media (max-width: 768px) {
+    :root {
+        --orbit-size: min(80vw, 48vh) !important;
+        --logo-size: min(24vw, 15vh) !important;
+    }
+    .main-content-layout {
+        padding: 12% 1% 4% 1% !important;
+        justify-content: flex-start !important;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --orbit-size: min(78vw, 45vh) !important;
+        --logo-size: min(24vw, 14vh) !important;
     }
 }

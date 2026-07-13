@@ -153,7 +153,9 @@ body {
     font-family: "Space Grotesk", sans-serif;
     width: 100%;
     z-index: 1000;
-    padding-top: 10px;
+    padding-top: 0.625rem;
+    justify-content: center;
+    align-items: center;
 }
 
 .main-navbar {

@@ -1,6 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
 
+/* Fluid typography for identical scaling across laptop screens */
+@media (min-width: 1024px) {
+    html {
+        font-size: clamp(10.6px, 1.0416vw, 16px) !important;
+    }
+}
+
+/* Scale down globally for mobile to prevent oversized elements */
+@media (max-width: 768px) {
+    html {
+        font-size: 13.5px !important;
+    }
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -210,13 +224,13 @@ body {
 /* Timeline Feed */
 .timeline {
     position: relative;
-    padding-left: 24px;
+    padding-left: 36px;
 }
 
 .timeline::before {
     content: '';
     position: absolute;
-    left: 4px;
+    left: 12px;
     top: 8px;
     bottom: 8px;
     width: 2px;
@@ -240,7 +254,7 @@ body {
 
 .timeline-dot {
     position: absolute;
-    left: -24px;
+    left: -30px;
     top: 8px;
     width: 10px;
     height: 10px;
@@ -248,7 +262,6 @@ body {
     background: rgba(242, 193, 86, 1);
     border: 2px solid #000;
     z-index: 2;
-    transform: translateX(-50%);
     box-shadow: 0 0 8px rgba(242, 193, 86, 0.8);
 }
 

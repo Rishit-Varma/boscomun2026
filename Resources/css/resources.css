@@ -2,6 +2,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
 
+/* Fluid typography for identical scaling across laptop screens */
+@media (min-width: 1024px) {
+    html {
+        font-size: clamp(10.6px, 1.0416vw, 16px) !important;
+    }
+}
+
+/* Scale down globally for mobile to prevent oversized elements */
+@media (max-width: 768px) {
+    html {
+        font-size: 13.5px !important;
+    }
+}
+
 /* ──────────────────────── RESET & SYSTEM TOKENS ──────────────────────── */
 *, *::before, *::after {
     margin: 0;
@@ -136,7 +150,7 @@ body::before {
 }
 
 .catalog-subtitle {
-    font-size: 0.65rem;
+    font-size: clamp(0.4rem, 1vw, 0.65rem);
     font-weight: 700;
     letter-spacing: 0.25em;
     color: var(--gold);
@@ -145,7 +159,7 @@ body::before {
 
 .catalog-title {
     font-family: "Playfair Display", serif;
-    font-size: 2.8rem;
+    font-size: clamp(1rem, 3vw, 2.8rem);
     font-weight: 700;
     line-height: 1;
     color: var(--text);
@@ -713,7 +727,7 @@ body::before {
 }
 
 #grid-view-container .header h1 {
-    font-size: 3.2rem;
+    font-size: clamp(1.2rem, 3.5vw, 3.2rem);
     color: white;
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
@@ -726,7 +740,7 @@ body::before {
 }
 
 #grid-view-container .section h2 {
-    font-size: 1.8rem;
+    font-size: clamp(0.8rem, 2.5vw, 1.8rem);
     color: #ffd700;
     margin-bottom: 1rem;
     font-family: 'Space Grotesk', sans-serif;
@@ -903,15 +917,39 @@ body::before {
     }
     
     .file-grid {
-        gap: 0.8rem;
+        flex-direction: column;
+        gap: 1.2rem;
     }
     
     .file-card {
-        min-height: 300px;
-        padding: 1.5rem 0.8rem;
+        min-height: 400px;
+        padding: 3rem 2rem;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .card-icon {
+        width: clamp(130px, 35vw, 180px);
+        height: clamp(130px, 35vw, 180px);
+        margin-bottom: 2rem;
     }
     
     .card-title {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .card-action-hint {
+        font-size: 0;
+    }
+    
+    .card-action-hint::after {
+        content: "Download";
         font-size: 0.95rem;
+        padding: 0.8rem 1.5rem;
+        border: 1px solid rgba(242, 193, 86, 0.4);
+        border-radius: 6px;
+        display: inline-block;
+        background: rgba(242, 193, 86, 0.05);
     }
 }

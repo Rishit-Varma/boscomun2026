@@ -302,6 +302,23 @@
                     
                     // Set active item in document-register and load its details
                     const targetRegisterItem = document.querySelector(`.register-item[data-id="${id}"]`);
+                    
+                    // On mobile, just download directly
+                    if (window.innerWidth <= 900) {
+                        if (targetRegisterItem) {
+                            const pdf = targetRegisterItem.getAttribute("data-pdf");
+                            const title = targetRegisterItem.getAttribute("data-title");
+                            
+                            const link = document.createElement("a");
+                            link.href = pdf;
+                            link.download = `${title.replace(/ /g, "_")}.pdf`;
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                        }
+                        return; // Prevent opening ledger view
+                    }
+
                     if (targetRegisterItem) {
                         targetRegisterItem.click();
                     }
@@ -314,9 +331,7 @@
                     window.scrollTo(0, 0);
 
                     // Disable body scroll on desktop for the detailed view
-                    if (window.innerWidth > 900) {
-                        document.body.style.overflow = "hidden";
-                    }
+                    document.body.style.overflow = "hidden";
                 });
             });
 
