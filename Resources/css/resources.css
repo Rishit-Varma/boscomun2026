@@ -320,7 +320,7 @@ body::before {
     border-radius: 12px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     width: 100%;
-    max-width: 680px;
+    max-width: 850px;
     height: auto;
     overflow: hidden;
     backdrop-filter: blur(15px);
@@ -719,7 +719,7 @@ body::before {
 }
 
 #grid-view-container .container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 2rem 0;
 }

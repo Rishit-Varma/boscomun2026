@@ -39,20 +39,20 @@ body {
 
 :root {
     --orbit-size: min(25vw, 52vh);
-    --logo-size: min(8vw, 17vh);
+    --logo-size: min(10vw, 21vh);
 }
 
 @media (max-width: 768px) {
     :root {
         --orbit-size: min(50vw, 48vh);
-        --logo-size: min(15vw, 15vh);
+        --logo-size: min(18vw, 18vh);
     }
 }
 
 @media (max-width: 480px) {
     :root {
         --orbit-size: min(70vw, 50vh);
-        --logo-size: min(22vw, 14vh);
+        --logo-size: min(25vw, 17vh);
     }
 }
 
@@ -591,13 +591,13 @@ body {
 /* Keep orbit markers within bounds and scale size based on viewport */
 :root {
     --orbit-size: min(82vw, 52vh) !important;
-    --logo-size: min(25vw, 17vh) !important;
+    --logo-size: min(29vw, 21vh) !important;
 }
 
 @media (max-width: 768px) {
     :root {
         --orbit-size: min(80vw, 48vh) !important;
-        --logo-size: min(24vw, 15vh) !important;
+        --logo-size: min(28vw, 19vh) !important;
     }
     .main-content-layout {
         padding: 12% 1% 4% 1% !important;
@@ -608,6 +608,6 @@ body {
 @media (max-width: 480px) {
     :root {
         --orbit-size: min(78vw, 45vh) !important;
-        --logo-size: min(24vw, 14vh) !important;
+        --logo-size: min(28vw, 18vh) !important;
     }
 }

@@ -1,3 +1,9 @@
+// Clean .html extension from address bar
+if (window.location.pathname.toLowerCase().endsWith('.html')) {
+    const cleanPath = window.location.pathname.substring(0, window.location.pathname.length - 5);
+    window.history.replaceState(null, document.title, cleanPath + window.location.search + window.location.hash);
+}
+
 // Determine resource path prefix based on whether page is in a subdirectory
 const path = window.location.pathname.toLowerCase();
 const isInSubdir = path.includes('/about/') || 
@@ -9,6 +15,15 @@ const isInSubdir = path.includes('/about/') ||
                    path.includes('/live%20updates/') ||
                    path.includes('/home/');
 const prefix = isInSubdir ? "../" : "./";
+
+// Register service worker for clean URL fallback handling
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register(prefix + 'sw.js').then(function(reg) {
+        // Registered successfully
+    }).catch(function(err) {
+        console.warn('Service Worker registration failed:', err);
+    });
+}
 
 const config = {
     htmlPath: prefix + "partials/navbar.html",

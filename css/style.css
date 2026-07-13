@@ -30,7 +30,7 @@
     --gold-dark: #aa7c11;
     --gold-gradient: linear-gradient(135deg, #aa7c11 0%, #d4af37 50%, #f3e5ab 100%);
     --gold-glow: rgba(212, 175, 55, 0.3);
-    --logo-size: clamp(12rem, min(35vw, 55vh), 40.3125rem);
+    --logo-size: clamp(15rem, min(42vw, 62vh), 46rem);
 }
 
 * {
@@ -365,7 +365,7 @@ body {
         gap: 1rem;
     }
     :root {
-        --logo-size: min(26.875rem, 53vh);
+        --logo-size: min(32rem, 58vh);
     }
     .text-column {
         min-width: 11.25rem;
@@ -406,7 +406,7 @@ body {
 
 @media (max-width: 48em) {
     :root {
-        --logo-size: min(27.5rem, 50vh);
+        --logo-size: min(32.5rem, 55vh);
     }
     
     .main-content-layout {
@@ -424,7 +424,7 @@ body {
 
 @media (max-width: 30em) {
     :root {
-        --logo-size: min(22.5rem, 45vh);
+        --logo-size: min(26rem, 50vh);
     }
 
     .timer-column {

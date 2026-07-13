@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Committees · BoscoMUN 2026</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/committees.css" />
     <meta name="description" content="Explore the five chambers of Bosco MUN 2026 at Don Bosco Park Circus, Kolkata." />
     <link rel="icon" href="../images/logo.avif" type="image/avif" />
@@ -14,290 +14,94 @@
         <div id="navigation-container"></div>
     </header>
 
-    <main class="accordion-viewport">
-        <div class="accordion-container">
+    <main class="chambers-viewport">
+        <div class="chambers-container">
+            <div class="chambers-header">
+                <h1 class="page-title">the committees</h1>
+            </div>
 
-            <!-- ─── PANEL 1: DISEC (Active on Load) ─── -->
-            <article class="accordion-panel active" id="panel-disec">
-                <div class="panel-bg"></div>
-                <div class="panel-pattern"></div>
-                <div class="panel-border-glow"></div>
+            <!-- Grid Layout showing all committees equally -->
+            <div class="chambers-grid">
                 
-                <img src="../images/logo.avif" alt="Bosco MUN Logo" class="panel-watermark" />
-                
-                <div class="panel-content">
-                    <!-- Collapsed View -->
-                    <div class="collapsed-view">
-                        <img src="./images/committee-logos/disec.avif" alt="DISEC" class="collapsed-logo" />
-                        <h2 class="collapsed-title">UNGA-DISEC</h2>
+                <!-- CARD 1: DISEC -->
+                <a href="disec.html" class="committee-card" id="card-disec">
+                    <div class="card-glow"></div>
+                    <div class="card-pattern"></div>
+                    <div class="card-inner">
+                        <div class="logo-container">
+                            <div class="logo-glow-ring"></div>
+                            <img src="./images/committee-logos/disec.avif" alt="DISEC Logo" class="committee-logo">
+                        </div>
+                        
+                        <h2 class="committee-title">UNGA-DISEC</h2>
+                        <h3 class="committee-subtitle">United Nations General Assembly - Disarmament and International Security Committee</h3>
                     </div>
+                </a>
 
-                    <!-- Expanded View -->
-                    <div class="expanded-view">
-                        <div class="expanded-header">
-                            <img src="./images/committee-logos/disec.avif" alt="DISEC" class="expanded-logo" />
-                            <div class="expanded-titles">
-                                <span class="panel-tag">11TH EDITION</span>
-                                <h2 class="expanded-title">UNGA-DISEC</h2>
-                                <h3 class="expanded-subtitle">Disarmament and International Security Committee</h3>
-                            </div>
+                <!-- CARD 2: UNSC -->
+                <a href="unsc.html" class="committee-card" id="card-unsc">
+                    <div class="card-glow"></div>
+                    <div class="card-pattern"></div>
+                    <div class="card-inner">
+                        <div class="logo-container">
+                            <div class="logo-glow-ring"></div>
+                            <img src="./images/committee-logos/unsc.avif" alt="UNSC Logo" class="committee-logo">
                         </div>
-
-                        <div class="agenda-card">
-                            <span class="agenda-label">GA FIRST COMMITTEE</span>
-                            <p class="agenda-text">Deliberation Upon the Ogaden Crisis with Special Emphasis on Territorial Sovereignty</p>
-                        </div>
-
-                        <div class="meta-grid">
-                            <div class="meta-item">
-                                <span class="meta-label">FREEZE DATE</span>
-                                <span class="meta-val">29th October, 1977</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-label">CHAIRPERSON</span>
-                                <span class="meta-val">Rajveer Kumar Pruthi</span>
-                            </div>
-                        </div>
-
-                        <a href="disec.html" class="chambers-btn">
-                            <span>ENTER COMMITTEE</span>
-                            <span class="arrow">→</span>
-                        </a>
+                        
+                        <h2 class="committee-title">UNSC</h2>
+                        <h3 class="committee-subtitle">United Nations Security Council</h3>
                     </div>
-                </div>
-            </article>
+                </a>
 
-            <!-- ─── PANEL 2: UNSC ─── -->
-            <article class="accordion-panel" id="panel-unsc">
-                <div class="panel-bg"></div>
-                <div class="panel-pattern"></div>
-                <div class="panel-border-glow"></div>
-                
-                <img src="../images/logo.avif" alt="Bosco MUN Logo" class="panel-watermark" />
-                
-                <div class="panel-content">
-                    <!-- Collapsed View -->
-                    <div class="collapsed-view">
-                        <img src="./images/committee-logos/unsc.avif" alt="UNSC" class="collapsed-logo" />
-                        <h2 class="collapsed-title">UNSC</h2>
+                <!-- CARD 3: LON -->
+                <a href="lon.html" class="committee-card" id="card-lon">
+                    <div class="card-glow"></div>
+                    <div class="card-pattern"></div>
+                    <div class="card-inner">
+                        <div class="logo-container">
+                            <div class="logo-glow-ring"></div>
+                            <img src="./images/committee-logos/lon.avif" alt="LON Logo" class="committee-logo">
+                        </div>
+                        
+                        <h2 class="committee-title">LON</h2>
+                        <h3 class="committee-subtitle">League of Nations</h3>
                     </div>
+                </a>
 
-                    <!-- Expanded View -->
-                    <div class="expanded-view">
-                        <div class="expanded-header">
-                            <img src="./images/committee-logos/unsc.avif" alt="UNSC" class="expanded-logo" />
-                            <div class="expanded-titles">
-                                <span class="panel-tag">11TH EDITION</span>
-                                <h2 class="expanded-title">UNSC</h2>
-                                <h3 class="expanded-subtitle">United Nations Security Council</h3>
-                            </div>
+                <!-- CARD 4: WWC -->
+                <a href="wwc.html" class="committee-card" id="card-wwc">
+                    <div class="card-glow"></div>
+                    <div class="card-pattern"></div>
+                    <div class="card-inner">
+                        <div class="logo-container">
+                            <div class="logo-glow-ring"></div>
+                            <img src="./images/committee-logos/wwc.avif" alt="WWC Logo" class="committee-logo">
                         </div>
-
-                        <div class="agenda-card">
-                            <span class="agenda-label">CRISIS AGENDA</span>
-                            <p class="agenda-text">The Situation in Kosovo, 24 March 1999</p>
-                        </div>
-
-                        <div class="meta-grid">
-                            <div class="meta-item">
-                                <span class="meta-label">FREEZE DATE</span>
-                                <span class="meta-val">24th March, 1999, 9:00 a.m.</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-label">CHAIRPERSON</span>
-                                <span class="meta-val">Harshvardhan Saraf</span>
-                            </div>
-                        </div>
-
-                        <a href="unsc.html" class="chambers-btn">
-                            <span>ENTER COMMITTEE</span>
-                            <span class="arrow">→</span>
-                        </a>
+                        
+                        <h2 class="committee-title">WWC</h2>
+                        <h3 class="committee-subtitle">Wilhelm's War Cabinet</h3>
                     </div>
-                </div>
-            </article>
+                </a>
 
-            <!-- ─── PANEL 3: LON ─── -->
-            <article class="accordion-panel" id="panel-lon">
-                <div class="panel-bg"></div>
-                <div class="panel-pattern"></div>
-                <div class="panel-border-glow"></div>
-                
-                <img src="../images/logo.avif" alt="Bosco MUN Logo" class="panel-watermark" />
-                
-                <div class="panel-content">
-                    <!-- Collapsed View -->
-                    <div class="collapsed-view">
-                        <img src="./images/committee-logos/lon.avif" alt="LON" class="collapsed-logo" />
-                        <h2 class="collapsed-title">LON</h2>
+                <!-- CARD 5: OIC -->
+                <a href="oic.html" class="committee-card" id="card-oic">
+                    <div class="card-glow"></div>
+                    <div class="card-pattern"></div>
+                    <div class="card-inner">
+                        <div class="logo-container">
+                            <div class="logo-glow-ring"></div>
+                            <img src="./images/committee-logos/oic.avif" alt="OIC Logo" class="committee-logo">
+                        </div>
+                        
+                        <h2 class="committee-title">OIC</h2>
+                        <h3 class="committee-subtitle">Organization of Islamic Conference</h3>
                     </div>
+                </a>
 
-                    <!-- Expanded View -->
-                    <div class="expanded-view">
-                        <div class="expanded-header">
-                            <img src="./images/committee-logos/lon.avif" alt="LON" class="expanded-logo" />
-                            <div class="expanded-titles">
-                                <span class="panel-tag">11TH EDITION</span>
-                                <h2 class="expanded-title">LON</h2>
-                                <h3 class="expanded-subtitle">League of Nations</h3>
-                            </div>
-                        </div>
-
-                        <div class="agenda-card">
-                            <span class="agenda-label">HISTORICAL AGENDA</span>
-                            <p class="agenda-text">Special Session on the Future of the Near East, Imperial Mandates, and Regional Sovereignty</p>
-                        </div>
-
-                        <div class="meta-grid">
-                            <div class="meta-item">
-                                <span class="meta-label">FREEZE DATE</span>
-                                <span class="meta-val">6th September, 1925</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-label">CO-CHAIRPERSONS</span>
-                                <span class="meta-val">Aryaveer Agarwal &amp; Shadan Husham</span>
-                            </div>
-                        </div>
-
-                        <a href="lon.html" class="chambers-btn">
-                            <span>ENTER COMMITTEE</span>
-                            <span class="arrow">→</span>
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- ─── PANEL 4: WWC ─── -->
-            <article class="accordion-panel" id="panel-wwc">
-                <div class="panel-bg"></div>
-                <div class="panel-pattern"></div>
-                <div class="panel-border-glow"></div>
-                
-                <img src="../images/logo.avif" alt="Bosco MUN Logo" class="panel-watermark" />
-                
-                <div class="panel-content">
-                    <!-- Collapsed View -->
-                    <div class="collapsed-view">
-                        <img src="./images/committee-logos/wwc.avif" alt="WWC" class="collapsed-logo" />
-                        <h2 class="collapsed-title">WWC</h2>
-                    </div>
-
-                    <!-- Expanded View -->
-                    <div class="expanded-view">
-                        <div class="expanded-header">
-                            <img src="./images/committee-logos/wwc.avif" alt="WWC" class="expanded-logo" />
-                            <div class="expanded-titles">
-                                <span class="panel-tag">11TH EDITION</span>
-                                <h2 class="expanded-title">WWC</h2>
-                                <h3 class="expanded-subtitle">Wilhelm's War Cabinet</h3>
-                            </div>
-                        </div>
-
-                        <div class="agenda-card">
-                            <span class="agenda-label">HISTORICAL CABINET</span>
-                            <p class="agenda-text">Deliberation on the Ems Dispatch crisis and the situation in Alsace-Lorraine</p>
-                        </div>
-
-                        <div class="meta-grid">
-                            <div class="meta-item">
-                                <span class="meta-label">FREEZE DATE</span>
-                                <span class="meta-val">30th July, 1870</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-label">CO-CHAIRPERSONS</span>
-                                <span class="meta-val">Nikunj Somprakash Agarwal &amp; Rahil Hussan Khan</span>
-                            </div>
-                        </div>
-
-                        <a href="wwc.html" class="chambers-btn">
-                            <span>ENTER COMMITTEE</span>
-                            <span class="arrow">→</span>
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- ─── PANEL 5: OIC ─── -->
-            <article class="accordion-panel" id="panel-oic">
-                <div class="panel-bg"></div>
-                <div class="panel-pattern"></div>
-                <div class="panel-border-glow"></div>
-                
-                <img src="../images/logo.avif" alt="Bosco MUN Logo" class="panel-watermark" />
-                
-                <div class="panel-content">
-                    <!-- Collapsed View -->
-                    <div class="collapsed-view">
-                        <img src="./images/committee-logos/oic.avif" alt="OIC" class="collapsed-logo" />
-                        <h2 class="collapsed-title">OIC</h2>
-                    </div>
-
-                    <!-- Expanded View -->
-                    <div class="expanded-view">
-                        <div class="expanded-header">
-                            <img src="./images/committee-logos/oic.avif" alt="OIC" class="expanded-logo" />
-                            <div class="expanded-titles">
-                                <span class="panel-tag">11TH EDITION</span>
-                                <h2 class="expanded-title">OIC</h2>
-                                <h3 class="expanded-subtitle">Organization of Islamic Conference</h3>
-                            </div>
-                        </div>
-
-                        <div class="agenda-card">
-                            <span class="agenda-label">REGIONAL CONFLICT</span>
-                            <p class="agenda-text">Militarisation of Lebanese Territory by the State of Israel amidst their Civil War</p>
-                        </div>
-
-                        <div class="meta-grid">
-                            <div class="meta-item">
-                                <span class="meta-label">FREEZE DATE</span>
-                                <span class="meta-val">6th June, 1982, 2:00 p.m.</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-label">CO-CHAIRPERSONS</span>
-                                <span class="meta-val">Ritankar Mondal &amp; Devesh Bazaz</span>
-                            </div>
-                        </div>
-
-                        <a href="oic.html" class="chambers-btn">
-                            <span>ENTER COMMITTEE</span>
-                            <span class="arrow">→</span>
-                        </a>
-                    </div>
-                </div>
-            </article>
-
+            </div>
         </div>
     </main>
 
     <script src="../js/loadnavbar.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const panels = document.querySelectorAll('.accordion-panel');
-            let hoverTimeout;
-
-            panels.forEach(panel => {
-                panel.addEventListener('mouseenter', () => {
-                    clearTimeout(hoverTimeout);
-                    
-                    // Debounce delay (120ms) to ignore rapid mouse sweeps
-                    hoverTimeout = setTimeout(() => {
-                        panels.forEach(p => p.classList.remove('active'));
-                        panel.classList.add('active');
-                    }, 120);
-                });
-
-                panel.addEventListener('mouseleave', () => {
-                    clearTimeout(hoverTimeout);
-                });
-                
-                panel.addEventListener('click', () => {
-                    clearTimeout(hoverTimeout);
-                    panels.forEach(p => p.classList.remove('active'));
-                    panel.classList.add('active');
-                });
-            });
-        });
-    </script>
 </body>
 </html>
