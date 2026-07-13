@@ -37,7 +37,7 @@ body::before {
     content: '';
     position: fixed;
     inset: -20px;
-    background: url("../Home/css/bg.avif") no-repeat center center;
+    background: url("./bg.avif") no-repeat center center;
     background-size: cover;
     filter: blur(5px) brightness(0.65);
     z-index: -1;
