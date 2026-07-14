@@ -41,7 +41,7 @@ html, body {
     height: 100%;
     overflow: hidden; /* STRICTLY NO SCROLLING ON DESKTOP */
     font-family: "Inter", sans-serif;
-    background: url("./bg.avif") no-repeat center center fixed;
+    background: url("../../css/bg.avif") no-repeat center center fixed;
     background-size: cover;
     color: var(--text);
     -webkit-font-smoothing: antialiased;
