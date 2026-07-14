@@ -1,13 +1,3 @@
-// Clean .html extension from address bar
-try {
-    if (window.location.pathname.toLowerCase().endsWith('.html')) {
-        const cleanPath = window.location.pathname.substring(0, window.location.pathname.length - 5);
-        window.history.replaceState(null, document.title, cleanPath + window.location.search + window.location.hash);
-    }
-} catch (e) {
-    console.warn("Failed to clean URL extension:", e);
-}
-
 // Determine resource path prefix based on whether page is in a subdirectory
 const path = window.location.pathname.toLowerCase();
 const isInSubdir = path.includes('/about/') || 
@@ -272,4 +262,61 @@ document.addEventListener("DOMContentLoaded", function() {
             return false;
         }
     });
+
+    // Custom Gavel Cursor Implementation (using gold gavel.avif)
+    if (window.matchMedia("(pointer: fine)").matches) {
+        const cursor = document.createElement("div");
+        cursor.className = "custom-cursor";
+        document.body.appendChild(cursor);
+
+        const style = document.createElement("style");
+        style.textContent = `
+            .custom-cursor {
+                position: fixed;
+                width: 32px;
+                height: 32px;
+                background: url('${prefix}images/gold%20gavel.png') no-repeat center center;
+                background-size: contain;
+                pointer-events: none;
+                transform: translate(-50%, -50%);
+                z-index: 99999;
+                transition: transform 0.03s ease-out;
+                will-change: transform;
+                display: none;
+            }
+            .custom-cursor.clicking {
+                transform: translate(-50%, -50%) scale(1.2) rotate(-20deg);
+            }
+            @media (pointer: fine) {
+                html, body, a, button, select, textarea, input, [role="button"], .register-item, .committee-emblem-card, .file-card {
+                    cursor: none !important;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        let cursorVisible = false;
+
+        document.addEventListener("mousemove", (e) => {
+            if (!cursorVisible) {
+                cursor.style.display = "block";
+                cursorVisible = true;
+            }
+            cursor.style.left = e.clientX + "px";
+            cursor.style.top = e.clientY + "px";
+        });
+
+        document.addEventListener("mouseleave", () => {
+            cursor.style.display = "none";
+            cursorVisible = false;
+        });
+
+        document.addEventListener("mousedown", () => {
+            cursor.classList.add("clicking");
+        });
+
+        document.addEventListener("mouseup", () => {
+            cursor.classList.remove("clicking");
+        });
+    }
 });

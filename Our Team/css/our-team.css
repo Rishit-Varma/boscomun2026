@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 /* Fluid typography for identical scaling across laptop screens */
 @media (min-width: 1024px) {
@@ -9,7 +11,7 @@
 }
 
 /* Scale down globally for mobile to prevent oversized elements */
-@media (max-width: 768px) {
+@media (max-width: 850px) {
     html {
         font-size: 13.5px !important;
     }
@@ -52,10 +54,6 @@ body > header {
     top: 0; left: 0;
     width: 100%;
     height: var(--navbar-h);
-    background-color: rgba(9, 10, 11, 0.45);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
     z-index: 999;
 }
 
@@ -102,11 +100,12 @@ body > header {
 }
 
 .main-title {
-    font-family: "Playfair Display", serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
     font-size: clamp(1rem, 3.1vw, 4rem);
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    color: var(--text);
+    font-weight: 900;
+    letter-spacing: 0.125rem;
+    color: rgba(242, 193, 86, 0.95);
+    text-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.9);
     text-transform: uppercase;
     line-height: 1.1;
     margin-top: 0.2rem;
@@ -211,11 +210,13 @@ body > header {
 }
 
 .team-heading {
-    font-family: "Playfair Display", serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--gold);
-    letter-spacing: 0.02em;
+    font-weight: 900;
+    color: rgba(242, 193, 86, 0.95);
+    text-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.9);
+    letter-spacing: 0.125rem;
+    text-transform: uppercase;
 }
 
 .team-subheading {
@@ -434,14 +435,15 @@ body > header {
 }
 
 .h3element {
-    font-family: "Playfair Display", serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--gold);
+    font-weight: 900;
+    color: rgba(242, 193, 86, 0.95);
+    text-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.9);
     border-bottom: 2px solid var(--border-gold);
     padding-bottom: 0.4rem;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.125rem;
     max-width: fit-content;
 }
 
@@ -531,4 +533,4 @@ body > header {
     .map iframe {
         height: 200px;
     }
-}
+}

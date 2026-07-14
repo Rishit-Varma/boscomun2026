@@ -43,12 +43,12 @@ if (hamburgerIcon && navbar) {
 
     // Close mobile navbar on window resize if it's open
     window.addEventListener("resize", () => {
-        if (window.innerWidth > 768 && isNavbarActive) {
+        if (window.innerWidth > 850 && isNavbarActive) {
             navbar.classList.remove("active");
             navbar.classList.add("closing");
             hamburgerIcon.classList.remove("active");
             isNavbarActive = false;
-
+ 
             setTimeout(() => {
                 navbar.classList.remove("closing");
             }, 450);

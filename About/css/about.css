@@ -9,7 +9,7 @@
 }
 
 /* Scale down globally for mobile to prevent oversized elements */
-@media (max-width: 768px) {
+@media (max-width: 850px) {
     html {
         font-size: 13.5px !important;
     }
@@ -54,10 +54,6 @@ header {
     left: 0;
     width: 100%;
     height: var(--navbar-h);
-    background-color: rgba(9, 10, 11, 0.4);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
     z-index: 999; /* Just below floating navbar which is z-index 1000 */
 }
 
@@ -81,13 +77,13 @@ header {
 /* ───────────────────────── SPLITSCREEN CONTAINER ───────────────────────── */
 .about-splitscreen {
     position: fixed;
-    top: var(--navbar-h);
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     display: grid;
     grid-template-columns: 35fr 65fr;
-    height: calc(100vh - var(--navbar-h));
+    height: 100vh;
     overflow: hidden;
     animation: fadeIn 0.8s ease-out;
 }
@@ -97,12 +93,14 @@ header {
     position: relative;
     background: rgba(9, 10, 11, 0.72);
     border-right: 1px solid var(--border);
-    padding: 3.5rem 2.5rem;
+    padding: calc(var(--navbar-h) + 1.5rem) 2.5rem 3.5rem 2.5rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
     overflow: hidden;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 /* Bring all panel contents above the overlay */
@@ -255,7 +253,7 @@ header {
 .editorial-panel {
     position: relative;
     background: transparent;
-    padding: 4.5rem;
+    padding: calc(var(--navbar-h) + 2rem) 4.5rem 4.5rem 4.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -407,4 +405,4 @@ header {
     .lead-quote {
         margin-bottom: 2rem;
     }
-}
+}

@@ -9,7 +9,7 @@
 }
 
 /* Scale down globally for mobile to prevent oversized elements */
-@media (max-width: 768px) {
+@media (max-width: 850px) {
     html {
         font-size: 13.5px !important;
     }
@@ -173,7 +173,7 @@ body {
     font-weight: normal;
     letter-spacing: clamp(0.1rem, 0.4vw, 0.3125rem);
     margin-top: 0.3rem;
-    background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+    background: var(--gold-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -372,7 +372,7 @@ body {
     }
 }
 
-@media (max-width: 50em) {
+@media (max-width: 53.125em) {
     body {
         height: auto !important;
         overflow-y: auto !important;
@@ -402,9 +402,23 @@ body {
         justify-content: center !important;
         order: 3;
     }
+
+    .theme-title {
+        font-size: clamp(2.2rem, 8vw, 3.2rem) !important;
+        text-align: center !important;
+        display: block !important;
+        line-height: 1.0 !important;
+    }
+    
+    .theme-subtitle {
+        font-size: clamp(1.1rem, 4vw, 1.5rem) !important;
+        text-align: center !important;
+        display: block !important;
+        margin-top: 0.6rem !important;
+    }
 }
 
-@media (max-width: 48em) {
+@media (max-width: 53.125em) {
     :root {
         --logo-size: min(32.5rem, 55vh);
     }
@@ -429,29 +443,30 @@ body {
 
     .timer-column {
         width: 100%;
-        max-width: 95vw;
+        max-width: 100% !important;
+        padding: 1.5rem 1rem !important;
     }
 
     .countdown-container {
         flex-wrap: nowrap !important;
-        gap: 0.25rem !important;
+        gap: 0.4rem !important;
         justify-content: center;
     }
 
     .countdown-box {
         flex: 1 1 0% !important;
-        min-width: 55px !important;
-        padding: 0.5rem 0.25rem !important;
+        min-width: 0 !important;
+        padding: 0.8rem 0.3rem !important;
         border-radius: 0.5rem;
     }
 
     .countdown-num {
-        font-size: clamp(1rem, 4vw, 1.3rem) !important;
+        font-size: 1.6rem !important;
     }
 
     .countdown-label {
-        font-size: clamp(0.55rem, 2vw, 0.65rem) !important;
-        letter-spacing: normal !important;
+        font-size: 0.625rem !important;
+        letter-spacing: 0.05em !important;
         margin-top: 0.2rem !important;
     }
 
@@ -459,6 +474,24 @@ body {
         grid-template-columns: repeat(2, 1fr);
         gap: 1.2rem;
         max-width: 95vw;
+    }
+
+    .emblem-circle {
+        width: 8.25rem !important;
+        height: 8.25rem !important;
+    }
+
+    .emblem-label {
+        font-size: 0.9rem !important;
+    }
+
+    .committee-emblem-card {
+        width: auto !important;
+    }
+
+    .committee-emblem-card:last-child {
+        grid-column: span 2;
+        justify-self: center;
     }
 }
 
@@ -526,7 +559,7 @@ body {
     font-family: 'Freshman', sans-serif;
     font-size: clamp(1.4rem, 3.5vw, 2.2rem);
     color: transparent;
-    background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+    background: var(--gold-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -550,3 +583,4 @@ body {
         filter: drop-shadow(0 0 3.125rem rgba(212, 175, 55, 0.6));
     }
 }
+

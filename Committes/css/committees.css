@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 /* ──────────────────────── RESET & SYSTEM TOKENS ──────────────────────── */
 *, *::before, *::after {
@@ -27,7 +29,7 @@ html, body {
     overflow-x: hidden;
     overflow-y: auto;
     font-family: "Inter", sans-serif;
-    background-color: var(--black);
+    background: transparent;
     color: var(--text);
     -webkit-font-smoothing: antialiased;
 }
@@ -36,7 +38,7 @@ html, body {
 body::before {
     content: '';
     position: fixed;
-    inset: -20px;
+    inset: -20px; /* Expanded past edges to hide blur margin bleeding */
     background: url("./bg.avif") no-repeat center center;
     background-size: cover;
     filter: blur(5px) brightness(0.65);
@@ -50,10 +52,6 @@ header {
     top: 0; left: 0;
     width: 100%;
     height: var(--navbar-h);
-    background-color: rgba(9, 10, 11, 0.5);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border);
     z-index: 999;
 }
 
@@ -82,11 +80,12 @@ header {
 }
 
 .page-title {
-    font-family: "Playfair Display", serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
     font-size: clamp(2.2rem, 5vw, 4rem);
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: var(--text);
+    font-weight: 900;
+    letter-spacing: 0.125rem;
+    color: rgba(242, 193, 86, 0.95);
+    text-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.9);
     text-transform: uppercase;
     margin-bottom: 0.8rem;
 }
@@ -113,11 +112,11 @@ header {
     flex: 1 1 0;
     min-width: 0;
     max-width: 250px;
-    background: rgba(14, 15, 17, 0.65);
+    background: rgba(14, 15, 17, 0.4);
     border: 1.5px solid var(--border-gold);
     border-radius: 14px;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
     overflow: hidden;
     transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -384,12 +383,12 @@ body.detail-page {
     margin: calc(var(--navbar-h) + 4rem) auto 4rem auto;
     padding: 5rem 3rem;
     min-height: 78vh;
-    background: rgba(14, 15, 17, 0.75);
+    background: rgba(14, 15, 17, 0.5);
     border: 1px solid var(--border-gold);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
     border-radius: 8px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -419,26 +418,27 @@ body.detail-page {
 
 .detail-logo,
 .detail-logo-page {
-    width: 8rem;
-    height: 8rem;
+    width: 11.4rem;
+    height: 11.4rem;
     border-radius: 50%;
     border: 1px solid var(--border-gold);
     background-color: rgba(9, 10, 11, 0.75);
-    padding: 3px;
+    padding: 0;
     box-shadow: 0 0 15px rgba(242, 193, 86, 0.12);
     object-fit: contain;
     flex-shrink: 0;
 }
 
 .detail-title {
-    font-family: "Playfair Display", serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
     font-size: clamp(1.5rem, 3.5vw, 2.2rem);
-    font-weight: 700;
+    font-weight: 900;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 0.125rem;
     text-align: left;
     line-height: 1.2;
-    color: var(--text);
+    color: rgba(242, 193, 86, 0.95);
+    text-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.9);
 }
 
 .detail-meta-box {
@@ -490,13 +490,14 @@ body.detail-page {
 .eb-section { margin: 2.2rem 0; text-align: center; }
 
 .eb-title {
-    font-family: "Playfair Display", serif;
-    color: var(--gold);
+    font-family: 'Be Vietnam Pro', sans-serif;
+    color: rgba(242, 193, 86, 0.95);
     font-size: 1.6rem;
     margin-bottom: 1.2rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 700;
+    letter-spacing: 0.125rem;
+    font-weight: 900;
+    text-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.9);
 }
 
 .eb-grid {
@@ -539,16 +540,17 @@ body.detail-page {
 }
 
 .detail-section-title {
-    font-family: "Playfair Display", serif;
-    color: var(--gold);
+    font-family: 'Be Vietnam Pro', sans-serif;
+    color: rgba(242, 193, 86, 0.95);
     font-size: 1.6rem;
     margin: 2.5rem 0 1.2rem 0;
     text-transform: uppercase;
     text-align: left;
     border-bottom: 1px solid var(--border-gold);
     padding-bottom: 0.5rem;
-    letter-spacing: 0.8px;
-    font-weight: 700;
+    letter-spacing: 0.125rem;
+    font-weight: 900;
+    text-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.9);
 }
 
 .detail-desc-card {
@@ -576,7 +578,7 @@ body.detail-page {
 .detail-desc-card p {
     margin: 0 0 1.2rem 0;
     font-size: 1.05rem;
-    color: var(--text-muted);
+    color: var(--text);
     position: relative;
     z-index: 1;
 }
