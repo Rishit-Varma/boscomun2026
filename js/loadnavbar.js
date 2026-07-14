@@ -273,8 +273,8 @@ document.addEventListener("DOMContentLoaded", function() {
         style.textContent = `
             .custom-cursor {
                 position: fixed;
-                width: 32px;
-                height: 32px;
+                width: 36px;
+                height: 36px;
                 background: url('${prefix}images/gold%20gavel.png') no-repeat center center;
                 background-size: contain;
                 pointer-events: none;

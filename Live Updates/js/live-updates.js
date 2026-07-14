@@ -75,7 +75,8 @@ function listenToRealtimeDatabase() {
         body: data.body || data.content || '',
         type: data.type || 'announcement', // announcement, crisis, schedule
         timestamp: parseTimestamp(data.timestamp),
-        mediaUrl: data.mediaUrl || data.image || ''
+        mediaUrl: data.mediaUrl || data.image || '',
+        committee: data.committee ? data.committee.toLowerCase() : 'general'
       });
     });
 
@@ -101,27 +102,38 @@ function listenToRealtimeDatabase() {
       }
     });
 
+    // Determine if feed is active
+    const countdownTarget = new Date("August 3, 2026 09:00:00").getTime();
+    const countdownHitZero = Date.now() >= countdownTarget;
+    const now = new Date();
+    const visibleUpdates = allUpdates.filter(item => item.timestamp <= now);
+    const isFeedActive = visibleUpdates.length > 0 || countdownHitZero;
+
     // Update Connection Status in UI
-    if (connectionStatus) connectionStatus.textContent = "LIVE";
+    if (connectionStatus) {
+      connectionStatus.textContent = isFeedActive ? "LIVE" : "Offline";
+    }
     if (statusDot) {
-      statusDot.className = "pulse-dot live";
+      statusDot.className = isFeedActive ? "pulse-dot live" : "pulse-dot offline";
     }
     if (firebaseInfoText) {
-      firebaseInfoText.innerHTML = "Successfully connected to Firebase Realtime Database! Receiving live updates.";
+      firebaseInfoText.innerHTML = isFeedActive
+        ? "Successfully connected to Firebase Realtime Database! Receiving live updates."
+        : "Successfully connected to Firebase Realtime Database! Updates are offline until conference starts.";
     }
     if (setupInstructionsBox) {
       setupInstructionsBox.style.display = "none";
     }
 
-    // If database is empty, show a guidance card
-    if (allUpdates.length === 0) {
+    // If database is empty and feed is active, show the instructions
+    if (allUpdates.length === 0 && isFeedActive) {
       if (updatesTimeline) {
         updatesTimeline.innerHTML = `
           <div class="empty-state">
             <p>Connected to Realtime Database, but no updates found under the <code>updates</code> node.</p>
             <p style="margin-top: 15px; font-size: 0.9rem; color: rgba(245, 240, 225, 0.6); line-height: 1.6;">
               <strong>Next Steps:</strong> Create a node named <strong>updates</strong> in your Realtime Database console, then add a child with these keys:<br>
-              <code>title</code> (String), <code>body</code> (String), <code>type</code> (String: 'announcement', 'crisis', or 'schedule'), <code>timestamp</code> (Number - epoch milliseconds, or ISO Date string), and optional <code>mediaUrl</code> (String).
+              <code>title</code> (String), <code>body</code> (String), <code>type</code> (String: 'announcement', 'crisis', or 'schedule'), <code>timestamp</code> (Number - epoch milliseconds, or ISO Date string), <code>committee</code> (String: 'general', 'unsc', 'disec', 'lon', 'wwc', 'oic'), and optional <code>mediaUrl</code> (String).
             </p>
           </div>
         `;
@@ -143,22 +155,12 @@ function clearSchedulers() {
 }
 
 // Fallback to demo mode with local mock data
+// Fallback to demo mode with local mock data
 function loadDemoMode(reason) {
   const connectionStatus = document.getElementById('connection-status');
   const statusDot = document.getElementById('status-dot');
   const firebaseInfoText = document.getElementById('firebase-info-text');
   const setupInstructionsBox = document.getElementById('setup-instructions-box');
-
-  if (connectionStatus) connectionStatus.textContent = "Demo Mode";
-  if (statusDot) {
-    statusDot.className = "pulse-dot offline";
-  }
-  if (firebaseInfoText) {
-    firebaseInfoText.innerHTML = `This page is currently running in <strong>Demo Mode</strong> with mock updates. (${reason})`;
-  }
-  if (setupInstructionsBox) {
-    setupInstructionsBox.style.display = "block";
-  }
 
   // Populate mock data
   allUpdates = [
@@ -168,7 +170,8 @@ function loadDemoMode(reason) {
       body: "The UN Security Council has been called to an emergency closed-door meeting to address the sudden geopolitical developments in the Mediterranean. All delegates must report to the Council Room immediately.",
       type: "crisis",
       timestamp: new Date(Date.now() - 5 * 60 * 1000), // 5 mins ago
-      mediaUrl: ""
+      mediaUrl: "",
+      committee: "unsc"
     },
     {
       id: "mock-2",
@@ -176,7 +179,8 @@ function loadDemoMode(reason) {
       body: "Lunch will be served from 1:00 PM to 2:15 PM in the Main Assembly Hall. Please show your delegate badges at the counter. Committee Session III will resume promptly at 2:30 PM.",
       type: "announcement",
       timestamp: new Date(Date.now() - 45 * 60 * 1000), // 45 mins ago
-      mediaUrl: ""
+      mediaUrl: "",
+      committee: "general"
     },
     {
       id: "mock-3",
@@ -184,9 +188,66 @@ function loadDemoMode(reason) {
       body: "Please note the slight adjustment in session timings. Committee Session II has been extended by 15 minutes to allow for draft resolution discussions. Check the revised timetable in the Resources section.",
       type: "schedule",
       timestamp: new Date(Date.now() - 120 * 60 * 1000), // 2 hours ago
-      mediaUrl: ""
+      mediaUrl: "",
+      committee: "general"
+    },
+    {
+      id: "mock-4",
+      title: "DISEC Draft Resolution Deadline",
+      body: "All draft resolutions for DISEC must be submitted to the dais by 4:00 PM today. Late submissions will not be entertained.",
+      type: "announcement",
+      timestamp: new Date(Date.now() - 150 * 60 * 1000),
+      mediaUrl: "",
+      committee: "disec"
+    },
+    {
+      id: "mock-5",
+      title: "League of Nations Territory Disputes",
+      body: "A sudden border dispute has erupted in the Rhineland, requiring immediate League intervention. Delegates, prepare your arguments.",
+      type: "crisis",
+      timestamp: new Date(Date.now() - 180 * 60 * 1000),
+      mediaUrl: "",
+      committee: "lon"
+    },
+    {
+      id: "mock-6",
+      title: "WWC Strategic Directives",
+      body: "Wilhelm's War Cabinet is reviewing diplomatic messages from foreign allies. A response must be finalized by the end of this session.",
+      type: "announcement",
+      timestamp: new Date(Date.now() - 210 * 60 * 1000),
+      mediaUrl: "",
+      committee: "wwc"
+    },
+    {
+      id: "mock-7",
+      title: "OIC Resolving Regional Crisis",
+      body: "The Organisation of Islamic Conference has initiated a debate on humanitarian support in conflict zones.",
+      type: "announcement",
+      timestamp: new Date(Date.now() - 240 * 60 * 1000),
+      mediaUrl: "",
+      committee: "oic"
     }
   ];
+
+  // Calculate if active based on mock data & target date countdown
+  const countdownTarget = new Date("August 3, 2026 09:00:00").getTime();
+  const countdownHitZero = Date.now() >= countdownTarget;
+  const now = new Date();
+  const visibleUpdates = allUpdates.filter(item => item.timestamp <= now);
+  const isFeedActive = visibleUpdates.length > 0 || countdownHitZero;
+
+  if (connectionStatus) {
+    connectionStatus.textContent = isFeedActive ? "Demo Mode" : "Offline";
+  }
+  if (statusDot) {
+    statusDot.className = isFeedActive ? "pulse-dot live" : "pulse-dot offline";
+  }
+  if (firebaseInfoText) {
+    firebaseInfoText.innerHTML = `This page is currently running in <strong>Demo Mode</strong> with mock updates. (${reason})`;
+  }
+  if (setupInstructionsBox) {
+    setupInstructionsBox.style.display = "block";
+  }
 
   renderUpdates();
   updateCrisisTicker();
@@ -264,17 +325,52 @@ function renderUpdates() {
 
   // Filter updates (only show updates that are not in the future)
   const now = new Date();
-  const filtered = allUpdates.filter(item => {
-    if (item.timestamp > now) return false; // Hide future/scheduled updates
-    if (filterType === 'all') return true;
-    return item.type === filterType;
-  });
+  const visibleUpdates = allUpdates.filter(item => item.timestamp <= now);
+
+  // Check if countdown hits zero (August 3, 2026 09:00:00)
+  const countdownTarget = new Date("August 3, 2026 09:00:00").getTime();
+  const countdownHitZero = Date.now() >= countdownTarget;
+
+  // Active if at least one update is published OR countdown hit zero
+  const isFeedActive = visibleUpdates.length > 0 || countdownHitZero;
+
+  // Update Status Indicator in UI
+  const connectionStatus = document.getElementById('connection-status');
+  const statusDot = document.getElementById('status-dot');
+  if (connectionStatus && statusDot) {
+    if (isFeedActive) {
+      if (connectionStatus.textContent === "Offline" || connectionStatus.textContent === "Connecting..." || connectionStatus.textContent === "Initializing...") {
+        connectionStatus.textContent = "LIVE";
+      }
+      statusDot.className = "pulse-dot live";
+    } else {
+      connectionStatus.textContent = "Offline";
+      statusDot.className = "pulse-dot offline";
+    }
+  }
 
   updatesTimeline.innerHTML = '';
 
+  // If feed is not active, show 'Coming Soon'
+  if (!isFeedActive) {
+    updatesTimeline.innerHTML = `
+      <div class="empty-state coming-soon" style="text-align: center; padding: 3rem 1.5rem; background: rgba(26, 26, 26, 0.5); border: 1px dashed rgba(242, 193, 86, 0.25); border-radius: 12px; margin-top: 1rem;">
+        <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 2.2rem; color: rgba(242, 193, 86, 0.95); margin-bottom: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Coming Soon</h2>
+        <p style="color: rgba(245, 240, 225, 0.7); font-size: 1.1rem; max-width: 500px; margin: 0 auto; line-height: 1.6;">Live coverage, announcements, and crisis updates for BoscoMUN 2026 will start here once the conference begins.</p>
+      </div>
+    `;
+    return;
+  }
+
+  // Filter the visible updates based on selected committee button
+  const filtered = visibleUpdates.filter(item => {
+    if (filterType === 'all') return true;
+    return (item.committee || 'general').toLowerCase() === filterType;
+  });
+
   if (filtered.length === 0) {
     updatesTimeline.innerHTML = `
-      <div class="empty-state">
+      <div class="empty-state" style="text-align: center; padding: 2rem;">
         <p>No updates found for this category.</p>
       </div>
     `;
@@ -305,6 +401,30 @@ function renderUpdates() {
       tagLabel = 'Schedule';
     }
 
+    // Committee tag classes and labels
+    let committeeTagClass = 'tag committee-tag';
+    let committeeTagLabel = 'General';
+    const comm = (item.committee || 'general').toLowerCase();
+    if (comm === 'unsc') {
+      committeeTagClass += ' unsc';
+      committeeTagLabel = 'UNSC';
+    } else if (comm === 'disec') {
+      committeeTagClass += ' disec';
+      committeeTagLabel = 'DISEC';
+    } else if (comm === 'lon') {
+      committeeTagClass += ' lon';
+      committeeTagLabel = 'LON';
+    } else if (comm === 'wwc') {
+      committeeTagClass += ' wwc';
+      committeeTagLabel = 'WWC';
+    } else if (comm === 'oic') {
+      committeeTagClass += ' oic';
+      committeeTagLabel = 'OIC';
+    } else {
+      committeeTagClass += ' general';
+      committeeTagLabel = 'General';
+    }
+
     // Media HTML if present
     const mediaHtml = item.mediaUrl ? `
       <div class="update-media">
@@ -318,7 +438,10 @@ function renderUpdates() {
         <div class="timeline-header">
           <span class="update-title">${item.title}</span>
           <span class="update-time">${formatTime(item.timestamp)}</span>
-          <span class="${tagClass}">${tagLabel}</span>
+          <div class="tag-group" style="display: flex; gap: 6px;">
+            <span class="${tagClass}">${tagLabel}</span>
+            <span class="${committeeTagClass}">${committeeTagLabel}</span>
+          </div>
         </div>
         <div class="update-body">
           <p>${item.body}</p>

@@ -381,7 +381,7 @@ body.detail-page {
 .detail-container {
     max-width: 960px;
     margin: calc(var(--navbar-h) + 4rem) auto 4rem auto;
-    padding: 5rem 3rem;
+    padding: 2.5rem 3rem 5rem 3rem;
     min-height: 78vh;
     background: rgba(14, 15, 17, 0.5);
     border: 1px solid var(--border-gold);
@@ -435,7 +435,7 @@ body.detail-page {
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.125rem;
-    text-align: left;
+    text-align: center;
     line-height: 1.2;
     color: rgba(242, 193, 86, 0.95);
     text-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.9);
