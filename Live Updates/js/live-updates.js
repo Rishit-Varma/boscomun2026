@@ -166,8 +166,8 @@ function loadDemoMode(reason) {
   allUpdates = [
     {
       id: "mock-1",
-      title: "International Security Committee Crisis Escalates",
-      body: "The UN International Security Committee has been called to an emergency closed-door meeting to address the sudden geopolitical developments in the Mediterranean. All delegates must report to the Committee Room immediately.",
+      title: "Security Council Crisis Escalates",
+      body: "The UN Security Council has been called to an emergency closed-door meeting to address the sudden geopolitical developments in the Mediterranean. All delegates must report to the Council Room immediately.",
       type: "crisis",
       timestamp: new Date(Date.now() - 5 * 60 * 1000), // 5 mins ago
       mediaUrl: "",

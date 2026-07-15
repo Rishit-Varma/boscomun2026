@@ -25,11 +25,11 @@
 
 :root {
     --dark-charcoal: #0b0d10;
-    --gold-primary: #d4af37;
-    --gold-light: #f3e5ab;
+    --gold-primary: #d7a234;
+    --gold-light: #d7a234;
     --gold-dark: #aa7c11;
-    --gold-gradient: linear-gradient(135deg, #aa7c11 0%, #d4af37 50%, #f3e5ab 100%);
-    --gold-glow: rgba(212, 175, 55, 0.3);
+    --gold-gradient: linear-gradient(135deg, #aa7c11 0%, #d7a234 50%, #f5e8c7 100%);
+    --gold-glow: rgba(215, 162, 52, 0.3);
     --logo-size: clamp(15rem, min(42vw, 62vh), 46rem);
 }
 
@@ -157,7 +157,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-size: clamp(1.2rem, 3.8vw, 4.2rem);
     font-weight: 900;
-    color: rgba(242, 193, 86, 0.95);
+    color: rgba(215, 162, 52, 0.95);
     text-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.9);
     letter-spacing: 0.125rem;
     text-transform: uppercase;
@@ -173,11 +173,7 @@ body {
     font-weight: normal;
     letter-spacing: clamp(0.1rem, 0.4vw, 0.3125rem);
     margin-top: 0.3rem;
-    background: var(--gold-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
+    color: rgba(215, 162, 52, 0.95);
     filter: drop-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.9));
     text-transform: uppercase;
     line-height: 1.15;
@@ -192,7 +188,7 @@ body {
 .countdown-heading {
     font-family: 'Montserrat', sans-serif;
     color: var(--gold-primary);
-    font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+    font-size: clamp(0.9rem, 1.6vw, 1.25rem);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: clamp(0.15rem, 0.3vw, 0.25rem);
@@ -213,9 +209,10 @@ body {
     background: rgba(11, 13, 16, 0.85);
     border: 0.09375rem solid rgba(212, 175, 55, 0.25);
     border-radius: 0.75rem;
-    padding: clamp(0.6rem, 1.5vw, 1.2rem) clamp(0.4rem, 1vw, 1rem);
-    min-width: 70px;
-    flex: 1 1 auto;
+    padding: clamp(0.6rem, 1.5vw, 1.2rem) 0.5rem;
+    flex: 1 1 0px;
+    min-width: 0;
+    max-width: 6.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
