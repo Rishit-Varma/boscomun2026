@@ -130,9 +130,12 @@ body {
 
 .layout-grid {
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 1fr;
     gap: 2rem;
     margin-top: 2rem;
+    max-width: 950px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Crisis Ticker Styling */

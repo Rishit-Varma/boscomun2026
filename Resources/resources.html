@@ -18,6 +18,8 @@
     <meta name="twitter:description" content="Join Bosco MUN 2026, the 11th edition at Don Bosco Park Circus, Kolkata." />
     <meta name="twitter:image" content="https://www.boscomun.donboscoparkcircus.org/images/logo.png" />
     <link rel="icon" href="../images/logo.avif" type="image/avif" />
+    <!-- PDF.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 </head>
 <body>
     <header>
@@ -45,7 +47,7 @@
                         <div class="file-card" data-id="unsc">
                             <div class="card-glow"></div>
                             <img src="../images/committee-logos/unsc.avif" alt="UNSC Logo" class="card-icon">
-                            <h3 class="card-title">United Nations Security Council</h3>
+                            <h3 class="card-title">United Nations International Security Committee</h3>
                             <span class="card-action-hint">View Committees →</span>
                         </div>
                         <div class="file-card" data-id="lon">
@@ -125,7 +127,7 @@
                             <span class="reg-arrow">→</span>
                         </button>
 
-                        <button class="register-item" data-id="unsc" data-title="United Nations Security Council Study Guide" data-sub="United Nations Security Council" data-pdf="../pdfs/unsc-study-guide.pdf" data-logo="../images/committee-logos/unsc.avif" data-desc="The crisis brief for the Security Council. Navigate the fragmented frontlines of the Kosovo War on the freeze date of 24 March 1999. Analyze NATO interventions, diplomatic maneuvers, and draft resolutions under critical time pressure.">
+                        <button class="register-item" data-id="unsc" data-title="United Nations International Security Committee Study Guide" data-sub="United Nations International Security Committee" data-pdf="../pdfs/unsc-study-guide.pdf" data-logo="../images/committee-logos/unsc.avif" data-desc="The crisis brief for the International Security Committee. Navigate the fragmented frontlines of the Kosovo War on the freeze date of 24 March 1999. Analyze NATO interventions, diplomatic maneuvers, and draft resolutions under critical time pressure.">
                             <span class="reg-name">UNSC Guide</span>
                             <span class="reg-arrow">→</span>
                         </button>
@@ -194,7 +196,7 @@
                                     <span>CLOSE READER</span> <i>×</i>
                                 </button>
                             </div>
-                            <iframe class="reader-frame" id="reader-frame" src=""></iframe>
+                            <div class="reader-canvas-container" id="reader-canvas-container"></div>
                         </div>
                     </div>
                 </section>
@@ -216,11 +218,66 @@
             const btnReadInline = document.getElementById("btn-read-inline");
             const btnCloseReader = document.getElementById("btn-close-reader");
             const inlineReaderContainer = document.getElementById("inline-reader-container");
-            const readerFrame = document.getElementById("reader-frame");
+            const readerCanvasContainer = document.getElementById("reader-canvas-container");
             const readerDocTitle = document.getElementById("reader-doc-title");
+
+            // Configure PDF.js worker
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+            let currentLoadingTask = null;
 
             let currentPdfUrl = "../pdfs/disec-study-guide.pdf";
             let currentTitle = "United Nations General Assembly - Disarmament and International Security Committee Study Guide";
+
+            async function renderPDF(url) {
+                // Cancel any ongoing loading/rendering to prevent races when switching guides
+                if (currentLoadingTask) {
+                    try {
+                        currentLoadingTask.destroy();
+                    } catch (e) {}
+                }
+                
+                readerCanvasContainer.innerHTML = `
+                    <div class="pdf-loading-state" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--gold); font-family: 'Space Grotesk', sans-serif; gap: 1rem; padding: 2rem;">
+                        <div style="width: 45px; height: 45px; border: 3px solid rgba(242, 193, 86, 0.1); border-top: 3px solid rgba(242, 193, 86, 1); border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                        <p style="font-size: 1.1rem; letter-spacing: 0.05em; font-weight: 500;">RENDERING STUDY GUIDE...</p>
+                    </div>
+                `;
+                
+                try {
+                    currentLoadingTask = pdfjsLib.getDocument(url);
+                    const pdf = await currentLoadingTask.promise;
+                    readerCanvasContainer.innerHTML = ""; // Clear loading state
+                    
+                    for (let i = 1; i <= pdf.numPages; i++) {
+                        const page = await pdf.getPage(i);
+                        const canvas = document.createElement("canvas");
+                        canvas.className = "pdf-page-canvas";
+                        canvas.style.maxWidth = "100%";
+                        canvas.style.boxShadow = "0 8px 32px rgba(0, 0, 0, 0.5)";
+                        canvas.style.borderRadius = "8px";
+                        canvas.style.border = "1px solid rgba(242, 193, 86, 0.15)";
+                        canvas.style.marginBottom = "1.5rem";
+                        canvas.style.backgroundColor = "#ffffff";
+                        readerCanvasContainer.appendChild(canvas);
+
+                        const viewport = page.getViewport({ scale: 1.5 });
+                        canvas.height = viewport.height;
+                        canvas.width = viewport.width;
+
+                        const renderContext = {
+                            canvasContext: canvas.getContext("2d"),
+                            viewport: viewport
+                        };
+                        await page.render(renderContext).promise;
+                    }
+                } catch (err) {
+                    if (err.name === 'RenderingCancelledException' || err.name === 'WorkerMissingError') {
+                        return; // Ignore cancelled tasks
+                    }
+                    console.error("PDF.js render error:", err);
+                    readerCanvasContainer.innerHTML = `<div style="color: #ff3b30; font-family: 'Space Grotesk', sans-serif; text-align: center; padding: 2rem;">Error rendering PDF: ${err.message}</div>`;
+                }
+            }
 
             registerItems.forEach(item => {
                 item.addEventListener("click", function () {
@@ -263,7 +320,6 @@
 
             // Inline Reader Toggle Logic with smooth display block/flex transitions
             btnReadInline.addEventListener("click", function () {
-                readerFrame.src = currentPdfUrl;
                 readerDocTitle.textContent = currentTitle;
                 
                 inlineReaderContainer.style.display = "flex";
@@ -273,17 +329,27 @@
                 inlineReaderContainer.classList.add("active");
                 ledgerGrid.classList.add("reader-active");
                 document.body.classList.add("reader-active");
+
+                renderPDF(currentPdfUrl);
             });
 
             function closeReader() {
                 inlineReaderContainer.classList.remove("active");
                 ledgerGrid.classList.remove("reader-active");
                 document.body.classList.remove("reader-active");
+                
+                if (currentLoadingTask) {
+                    try {
+                        currentLoadingTask.destroy();
+                    } catch (e) {}
+                    currentLoadingTask = null;
+                }
+
                 // Wait for the transition to finish before hiding the container
                 setTimeout(() => {
                     if (!inlineReaderContainer.classList.contains("active")) {
                         inlineReaderContainer.style.display = "none";
-                        readerFrame.src = "";
+                        readerCanvasContainer.innerHTML = "";
                     }
                 }, 400);
             }
