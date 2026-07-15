@@ -98,7 +98,7 @@ header {
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    overflow: hidden;
+    overflow-y: auto;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
@@ -258,6 +258,7 @@ header {
     flex-direction: column;
     justify-content: center;
     height: 100%;
+    overflow-y: auto;
 }
 
 /* Radial light glow in the top right corner */
@@ -378,17 +379,16 @@ header {
 }
 
 /* ───────────────────────── RESPONSIVE FALLBACK ───────────────────────── */
-@media (max-width: 1024px), (max-height: 820px) {
+@media (max-width: 900px) {
     html, body {
         height: auto;
-        overflow: auto; /* ALLOW SCROLL ON MOBILE / SMALLER SCREENS */
+        overflow: auto; /* ALLOW SCROLL ON MOBILE */
     }
     
     .about-splitscreen {
         position: static;
         grid-template-columns: 1fr;
         height: auto;
-        overflow: visible;
     }
     
     .brand-panel {
@@ -396,18 +396,36 @@ header {
         border-bottom: 1px solid var(--border);
         padding: 3rem 1.5rem;
         gap: 3rem;
-        height: auto !important;
-        overflow: visible !important;
     }
     
     .editorial-panel {
         padding: 3.5rem 1.5rem;
         justify-content: flex-start;
-        height: auto !important;
-        overflow: visible !important;
     }
     
     .lead-quote {
         margin-bottom: 2rem;
     }
+}
+
+/* Custom Scrollbars for Panels */
+.brand-panel::-webkit-scrollbar,
+.editorial-panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.brand-panel::-webkit-scrollbar-track,
+.editorial-panel::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.brand-panel::-webkit-scrollbar-thumb,
+.editorial-panel::-webkit-scrollbar-thumb {
+    background: rgba(242, 193, 86, 0.35);
+    border-radius: 3px;
+}
+
+.brand-panel::-webkit-scrollbar-thumb:hover,
+.editorial-panel::-webkit-scrollbar-thumb:hover {
+    background: rgba(242, 193, 86, 0.6);
 }

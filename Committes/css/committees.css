@@ -656,6 +656,8 @@ body.detail-page {
     .page-title {
         font-size: 2.2rem;
     }
+.profile-image-container img {
+    width: 100%;
 }
 
 @media (max-width: 900px) {

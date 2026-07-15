@@ -580,11 +580,49 @@ body::before {
     font-size: 0.8rem;
 }
 
+/* Reader Zoom Controls */
+.reader-zoom-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    border: 1px solid rgba(242, 193, 86, 0.15);
+}
+
+.btn-zoom {
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1;
+    transition: color 0.25s ease;
+}
+
+.btn-zoom:hover {
+    color: var(--gold);
+}
+
+.zoom-level {
+    color: var(--gold);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    min-width: 3rem;
+    text-align: center;
+}
+
 .reader-canvas-container {
     flex: 1;
     width: 100%;
     height: 100%;
-    overflow-y: auto;
+    overflow: auto;
     background: #111111;
     display: flex;
     flex-direction: column;

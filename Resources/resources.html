@@ -123,7 +123,7 @@
                         <span class="register-group-label">STUDY GUIDES</span>
                         
                         <button class="register-item active" data-id="disec" data-title="United Nations General Assembly - Disarmament and International Security Committee Study Guide" data-sub="General Assembly First Committee" data-pdf="../pdfs/disec-study-guide.pdf" data-logo="../images/committee-logos/disec.avif" data-desc="The official briefing for DISEC delegates. Deliberate upon the Ogaden War (1977–1978), a major interstate conflict between Ethiopia and Somalia. Review territorial sovereignty, superpower proxy intervention, and regional militarization.">
-                            <span class="reg-name">DISEC Guide</span>
+                            <span class="reg-name">UNGA-DISEC Guide</span>
                             <span class="reg-arrow">→</span>
                         </button>
 
@@ -192,6 +192,11 @@
                         <div class="inline-reader-container" id="inline-reader-container">
                             <div class="reader-header">
                                 <span class="reader-doc-title" id="reader-doc-title">DISEC Study Guide</span>
+                                <div class="reader-zoom-controls">
+                                    <button class="btn-zoom" id="btn-zoom-out" title="Zoom Out">−</button>
+                                    <span class="zoom-level" id="zoom-level">100%</span>
+                                    <button class="btn-zoom" id="btn-zoom-in" title="Zoom In">+</button>
+                                </div>
                                 <button class="btn-close-reader" id="btn-close-reader">
                                     <span>CLOSE READER</span> <i>×</i>
                                 </button>
@@ -221,6 +226,12 @@
             const readerCanvasContainer = document.getElementById("reader-canvas-container");
             const readerDocTitle = document.getElementById("reader-doc-title");
 
+            // Zoom controls
+            const btnZoomIn = document.getElementById("btn-zoom-in");
+            const btnZoomOut = document.getElementById("btn-zoom-out");
+            const zoomLevelIndicator = document.getElementById("zoom-level");
+            let zoomPercent = 100;
+
             // Configure PDF.js worker
             pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
             let currentLoadingTask = null;
@@ -229,6 +240,10 @@
             let currentTitle = "United Nations General Assembly - Disarmament and International Security Committee Study Guide";
 
             async function renderPDF(url) {
+                // Reset zoom to 100% on loading new PDF
+                zoomPercent = 100;
+                zoomLevelIndicator.textContent = "100%";
+
                 // Cancel any ongoing loading/rendering to prevent races when switching guides
                 if (currentLoadingTask) {
                     try {
@@ -252,7 +267,16 @@
                         const page = await pdf.getPage(i);
                         const canvas = document.createElement("canvas");
                         canvas.className = "pdf-page-canvas";
-                        canvas.style.maxWidth = "100%";
+                        
+                        // Apply current zoom settings
+                        if (zoomPercent === 100) {
+                            canvas.style.width = "";
+                            canvas.style.maxWidth = "100%";
+                        } else {
+                            canvas.style.width = zoomPercent + "%";
+                            canvas.style.maxWidth = "none";
+                        }
+
                         canvas.style.boxShadow = "0 8px 32px rgba(0, 0, 0, 0.5)";
                         canvas.style.borderRadius = "8px";
                         canvas.style.border = "1px solid rgba(242, 193, 86, 0.15)";
@@ -278,6 +302,34 @@
                     readerCanvasContainer.innerHTML = `<div style="color: #ff3b30; font-family: 'Space Grotesk', sans-serif; text-align: center; padding: 2rem;">Error rendering PDF: ${err.message}</div>`;
                 }
             }
+
+            function applyZoom() {
+                const canvases = document.querySelectorAll(".pdf-page-canvas");
+                canvases.forEach(canvas => {
+                    if (zoomPercent === 100) {
+                        canvas.style.width = "";
+                        canvas.style.maxWidth = "100%";
+                    } else {
+                        canvas.style.width = zoomPercent + "%";
+                        canvas.style.maxWidth = "none";
+                    }
+                });
+                zoomLevelIndicator.textContent = zoomPercent + "%";
+            }
+
+            btnZoomIn.addEventListener("click", () => {
+                if (zoomPercent < 150) {
+                    zoomPercent += 10;
+                    applyZoom();
+                }
+            });
+
+            btnZoomOut.addEventListener("click", () => {
+                if (zoomPercent > 50) {
+                    zoomPercent -= 10;
+                    applyZoom();
+                }
+            });
 
             registerItems.forEach(item => {
                 item.addEventListener("click", function () {

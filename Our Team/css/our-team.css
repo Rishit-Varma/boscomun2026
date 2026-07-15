@@ -256,6 +256,10 @@ body > header {
     gap: 1.1rem;
 }
 
+.member-avatar:not(.vacant-avatar) {
+    display: none !important;
+}
+
 .member-avatar {
     width: 44px;
     height: 44px;
