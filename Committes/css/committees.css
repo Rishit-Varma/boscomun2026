@@ -314,7 +314,7 @@ header {
 
 .meta-row {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: 0.938rem;
     font-size: 0.78rem;
     line-height: 1.4;
@@ -457,7 +457,7 @@ body.detail-page {
 .meta-row,
 .meta-row-page {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     border-bottom: 0.063rem solid var(--border);
     padding-bottom: 0.6rem;
