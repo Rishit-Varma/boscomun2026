@@ -11,16 +11,16 @@
 }
 
 :root {
-    --gold:        #f2c156;
-    --gold-light:  #ffd966;
-    --gold-dark:   #c9952a;
+    --gold:        #d7a234;
+    --gold-light:  #ebb950;
+    --gold-dark:   #aa7c11;
     --black:       #08090a;
     --panel-bg:    rgba(14, 15, 17, 0.65);
     --card-bg:     #1b1c1e;
     --text:        #f5f4f0;
     --text-muted:  #a6a5a0;
     --border:      rgba(255, 255, 255, 0.08);
-    --border-gold: rgba(242, 193, 86, 0.15);
+    --border-gold: rgba(215, 162, 52, 0.15);
     --navbar-h:    70px;
 }
 
@@ -412,10 +412,10 @@ body.detail-page {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 1.8rem;
+    gap: 0.8rem;
     margin-bottom: 2.5rem;
 }
-
+ 
 .detail-logo,
 .detail-logo-page {
     width: 9.5rem;
@@ -427,7 +427,7 @@ body.detail-page {
     box-shadow: 0 0 15px rgba(242, 193, 86, 0.12);
     object-fit: contain;
     flex-shrink: 0;
-    transform: translateX(-0.8rem);
+    transform: none;
 }
 
 .detail-title {

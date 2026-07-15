@@ -355,8 +355,7 @@ function renderUpdates() {
   if (!isFeedActive) {
     updatesTimeline.innerHTML = `
       <div class="empty-state coming-soon" style="text-align: center; padding: 3rem 1.5rem; background: rgba(26, 26, 26, 0.5); border: 1px dashed rgba(242, 193, 86, 0.25); border-radius: 12px; margin-top: 1rem;">
-        <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 2.2rem; color: rgba(242, 193, 86, 0.95); margin-bottom: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Coming Soon</h2>
-        <p style="color: rgba(245, 240, 225, 0.7); font-size: 1.1rem; max-width: 500px; margin: 0 auto; line-height: 1.6;">Live coverage, announcements, and crisis updates for BoscoMUN 2026 will start here once the conference begins.</p>
+        <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 2.2rem; color: rgba(242, 193, 86, 0.95); margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Coming Soon</h2>
       </div>
     `;
     return;

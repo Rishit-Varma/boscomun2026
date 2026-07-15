@@ -25,27 +25,39 @@
 }
 
 :root {
-    --gold:        #f2c156;
-    --gold-light:  #ffd966;
-    --gold-dark:   #c9952a;
+    --gold:        #d7a234;
+    --gold-light:  #ebb950;
+    --gold-dark:   #aa7c11;
     --black:       #090a0b;
     --panel-bg:    #121315;
-    --card-bg:     #1b1c1e;
+    --card-bg:     rgba(27, 28, 30, 0.45);
     --text:        #f5f4f0;
     --text-muted:  #a6a5a0;
     --border:      rgba(255, 255, 255, 0.08);
-    --border-gold: rgba(242, 193, 86, 0.2);
+    --border-gold: rgba(215, 162, 52, 0.2);
     --navbar-h:    70px;
 }
 
 body {
     font-family: "Inter", sans-serif;
-    background: url("../../css/bg.avif") no-repeat center center fixed;
-    background-size: cover;
+    background: transparent;
     color: var(--text);
     min-height: 100vh;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("../../css/bg.avif") no-repeat center center;
+    background-size: cover;
+    z-index: -1;
+    will-change: transform;
 }
 
 /* ──────────────────────── HEADER NAVBAR BLUR ──────────────────────── */
@@ -141,62 +153,42 @@ body > header {
 /* ──────────────────────── DOSSIER CARD BASE ──────────────────────── */
 .team-card {
     position: relative;
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-gold);
-    border-radius: 8px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    background-color: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
     overflow: hidden;
-    transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+    transition: border-color 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
 }
 
-/* Inner certificate dashed border */
+/* Inner certificate dashed border (removed) */
 .team-card::before {
-    content: "";
-    position: absolute;
-    inset: 6px;
-    border: 1px dashed rgba(242, 193, 86, 0.12);
-    border-radius: 6px;
-    pointer-events: none;
-    z-index: 1;
+    display: none;
 }
 
-/* Overlapping circle graphic pattern background */
+/* Overlapping circle graphic pattern background (removed) */
 .card-pattern {
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='none' stroke='%23f2c156' stroke-width='0.5' stroke-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='28'/%3E%3Ccircle cx='0' cy='0' r='28'/%3E%3Ccircle cx='60' cy='0' r='28'/%3E%3Ccircle cx='0' cy='60' r='28'/%3E%3Ccircle cx='60' cy='60' r='28'/%3E%3C/g%3E%3C/svg%3E");
-    opacity: 0.9;
-    z-index: 0;
-    pointer-events: none;
+    display: none;
 }
-
-
 
 .team-card:hover {
-    border-color: var(--gold);
-    box-shadow: 0 20px 45px rgba(242, 193, 86, 0.12), 0 5px 15px rgba(0, 0, 0, 0.5);
-    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+    transform: translateY(-4px);
 }
 
-/* Department Background Watermark */
+/* Department Background Watermark (removed) */
 .card-watermark {
-    position: absolute;
-    bottom: -15px;
-    right: 15px;
-    font-family: "Playfair Display", serif;
-    font-size: 6.5rem;
-    font-weight: 700;
-    font-style: italic;
-    color: rgba(242, 193, 86, 0.015);
-    pointer-events: none;
-    z-index: 0;
-    line-height: 0.8;
-    user-select: none;
-    transition: color 0.4s ease;
+    display: none;
 }
 
 .team-card:hover .card-watermark {
-    color: rgba(242, 193, 86, 0.03);
+    display: none;
 }
 
 /* Card content padding & positioning */
@@ -313,17 +305,13 @@ body > header {
 }
 
 .member-role {
-    font-size: 0.58rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: var(--gold);
-    text-transform: uppercase;
+    display: none;
 }
 
 .member-name {
     font-family: "Inter", sans-serif;
-    font-size: 1.05rem;
-    font-weight: 600;
+    font-size: 1.35rem;
+    font-weight: 700;
     color: var(--text);
 }
 
@@ -537,4 +525,42 @@ body > header {
     .map iframe {
         height: 200px;
     }
+}
+ 
+/* ──────────────────────── GRID TITLE STYLING ──────────────────────── */
+.team-section-title {
+    grid-column: span 2;
+    text-align: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.2rem;
+    color: var(--gold);
+    margin-top: 3.5rem;
+    margin-bottom: 1.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.team-subsection-title {
+    grid-column: span 2;
+    text-align: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    color: var(--gold-light);
+    margin-top: 2.2rem;
+    margin-bottom: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+}
+
+.member-phone-text {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    color: var(--gold);
+    margin-top: 0.4rem;
+    display: block;
+    letter-spacing: 0.03em;
+    user-select: text; /* Ensures text is selectable and copyable */
 }

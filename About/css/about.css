@@ -25,15 +25,15 @@
 }
 
 :root {
-    --gold:        #f2c156; /* Vibrant premium gold */
-    --gold-light:  #ffd966;
-    --gold-dark:   #c9952a;
+    --gold:        #d7a234; /* Balanced premium gold */
+    --gold-light:  #ebb950;
+    --gold-dark:   #aa7c11;
     --black:       #090a0b; /* Sleeker, dark mode black */
     --panel-bg:    #121315; /* Slate dark charcoal */
     --text:        #f5f4f0; /* Crisp off-white */
     --text-muted:  #a6a5a0;
     --border:      rgba(255, 255, 255, 0.08);
-    --border-gold: rgba(242, 193, 86, 0.2);
+    --border-gold: rgba(215, 162, 52, 0.2);
     --navbar-h:    70px;
 }
 
@@ -41,10 +41,22 @@ html, body {
     height: 100%;
     overflow: hidden; /* STRICTLY NO SCROLLING ON DESKTOP */
     font-family: "Inter", sans-serif;
-    background: url("../../css/bg.avif") no-repeat center center fixed;
-    background-size: cover;
+    background: transparent;
     color: var(--text);
     -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("../../css/bg.avif") no-repeat center center;
+    background-size: cover;
+    z-index: -1;
+    will-change: transform;
 }
 
 /* ───────────────────────── HEADER NAVBAR BLUR ───────────────────────── */
@@ -125,14 +137,7 @@ header {
     padding: 6px;
     background: rgba(9, 10, 11, 0.6);
     box-shadow: 0 0 25px rgba(242, 193, 86, 0.15);
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     align-self: center; /* Center horizontally in flex column */
-}
-
-.brand-logo:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 35px rgba(242, 193, 86, 0.3);
-    border-color: var(--gold);
 }
 
 .brand-titles {

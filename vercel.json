@@ -1,3 +1,15 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/OurTeam", "destination": "/Our Team/our-team.html" },
+    { "source": "/ourteam", "destination": "/Our Team/our-team.html" },
+    { "source": "/About", "destination": "/About/about.html" },
+    { "source": "/about", "destination": "/About/about.html" },
+    { "source": "/Committees", "destination": "/Committes/committees.html" },
+    { "source": "/committees", "destination": "/Committes/committees.html" },
+    { "source": "/Resources", "destination": "/Resources/resources.html" },
+    { "source": "/resources", "destination": "/Resources/resources.html" },
+    { "source": "/LiveUpdates", "destination": "/Live Updates/live-updates.html" },
+    { "source": "/liveupdates", "destination": "/Live Updates/live-updates.html" }
+  ]
 }

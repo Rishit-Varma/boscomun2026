@@ -2,6 +2,7 @@
 const path = window.location.pathname.toLowerCase();
 const isInSubdir = path.includes('/about/') || 
                    path.includes('/committes/') || 
+                   path.includes('/committees/') || 
                    path.includes('/our team/') || 
                    path.includes('/our%20team/') || 
                    path.includes('/resources/') ||
@@ -273,19 +274,23 @@ document.addEventListener("DOMContentLoaded", function() {
         style.textContent = `
             .custom-cursor {
                 position: fixed;
+                top: 0;
+                left: 0;
                 width: 36px;
                 height: 36px;
                 background: url('${prefix}images/gold%20gavel.png') no-repeat center center;
                 background-size: contain;
                 pointer-events: none;
-                transform: translate(-50%, -50%);
                 z-index: 99999;
-                transition: transform 0.03s ease-out;
+                transform: translate3d(var(--x, -100px), var(--y, -100px), 0) translate(-25%, -25%) scale(var(--scale, 1)) rotate(var(--rotate, 0deg));
+                transform-origin: 25% 25%;
+                transition: transform 0.08s cubic-bezier(0.25, 1, 0.5, 1);
                 will-change: transform;
                 display: none;
             }
             .custom-cursor.clicking {
-                transform: translate(-50%, -50%) scale(1.2) rotate(-20deg);
+                --scale: 1.2;
+                --rotate: -20deg;
             }
             @media (pointer: fine) {
                 html, body, a, button, select, textarea, input, [role="button"], .register-item, .committee-emblem-card, .file-card {
@@ -296,14 +301,27 @@ document.addEventListener("DOMContentLoaded", function() {
         document.head.appendChild(style);
 
         let cursorVisible = false;
+        let mouseX = 0;
+        let mouseY = 0;
+        let ticking = false;
 
         document.addEventListener("mousemove", (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
             if (!cursorVisible) {
                 cursor.style.display = "block";
                 cursorVisible = true;
             }
-            cursor.style.left = e.clientX + "px";
-            cursor.style.top = e.clientY + "px";
+
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    cursor.style.setProperty('--x', `${mouseX}px`);
+                    cursor.style.setProperty('--y', `${mouseY}px`);
+                    ticking = false;
+                });
+                ticking = true;
+            }
         });
 
         document.addEventListener("mouseleave", () => {
