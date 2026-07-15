@@ -100,7 +100,7 @@ body {
 .timer-wrapper {
     justify-self: end;
     width: 100%;
-    transform: translateY(20%);
+    transform: translateY(35%);
 }
 
 /* Timer Box */
@@ -109,21 +109,8 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.02);
-    border: 0.0625rem solid rgba(212, 175, 55, 0.15);
-    border-radius: 1.25rem;
-    padding: calc(clamp(1.2rem, 2.5vw, 2.5rem) + 2vh) clamp(0.8rem, 2vw, 2rem);
     width: 100%;
     max-width: 35rem;
-    backdrop-filter: blur(0.9375rem);
-    box-shadow: 0 0.9375rem 2.1875rem rgba(0, 0, 0, 0.6), inset 0 0 0.9375rem rgba(212, 175, 55, 0.05);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-.timer-column:hover {
-    border-color: rgba(212, 175, 55, 0.35);
-    box-shadow: 0 0.9375rem 2.5rem rgba(212, 175, 55, 0.15), inset 0 0 1.25rem rgba(212, 175, 55, 0.1);
-    transform: translateY(-0.1875rem);
 }
 
 /* ===== 1. HERO SEAL / LOGO EMBLEM ===== */

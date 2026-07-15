@@ -378,16 +378,17 @@ header {
 }
 
 /* ───────────────────────── RESPONSIVE FALLBACK ───────────────────────── */
-@media (max-width: 900px) {
+@media (max-width: 1024px), (max-height: 820px) {
     html, body {
         height: auto;
-        overflow: auto; /* ALLOW SCROLL ON MOBILE */
+        overflow: auto; /* ALLOW SCROLL ON MOBILE / SMALLER SCREENS */
     }
     
     .about-splitscreen {
         position: static;
         grid-template-columns: 1fr;
         height: auto;
+        overflow: visible;
     }
     
     .brand-panel {
@@ -395,11 +396,15 @@ header {
         border-bottom: 1px solid var(--border);
         padding: 3rem 1.5rem;
         gap: 3rem;
+        height: auto !important;
+        overflow: visible !important;
     }
     
     .editorial-panel {
         padding: 3.5rem 1.5rem;
         justify-content: flex-start;
+        height: auto !important;
+        overflow: visible !important;
     }
     
     .lead-quote {
