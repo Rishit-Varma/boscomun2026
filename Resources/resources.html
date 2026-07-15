@@ -18,6 +18,7 @@
     <meta name="twitter:description" content="Join Bosco MUN 2026, the 11th edition at Don Bosco Park Circus, Kolkata." />
     <meta name="twitter:image" content="https://www.boscomun.donboscoparkcircus.org/images/logo.png" />
     <link rel="icon" href="../images/logo.avif" type="image/avif" />
+    <link rel="icon" href="../favicon.ico" type="image/x-icon" />
     <!-- PDF.js library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 </head>
@@ -156,7 +157,7 @@
  
                         <span class="register-group-label mt-label">CONFERENCE LOGISTICS</span>
  
-                        <button class="register-item" data-id="handbook" data-title="Conference Handbook" data-sub="Rules of Procedure and Conduct" data-pdf="../pdfs/conference-handbook.pdf" data-logo="../images/logo.avif" data-desc="The complete BoscoMUN 2026 handbook. Includes formal rules of procedure, points and motions guidelines, resolution formatting templates, and dress codes.">
+                        <button class="register-item" data-id="handbook" data-title="Conference Handbook" data-sub="Rules of Procedure and Conduct" data-pdf="18FrZXWgxXogrSFjAN307IVH-lVSCUdQo" data-logo="../images/logo.avif" data-desc="The complete BoscoMUN 2026 handbook. Includes formal rules of procedure, points and motions guidelines, resolution formatting templates, and dress codes.">
                             <span class="reg-name">Conference Handbook</span>
                             <span class="reg-arrow">→</span>
                         </button>
@@ -240,12 +241,15 @@
                 // If it is a Google Drive File ID (does not start with "../")
                 if (!url.startsWith("../")) {
                     readerCanvasContainer.innerHTML = `
-                        <iframe src="https://drive.google.com/file/d/${url}/preview" 
-                                width="100%" 
-                                height="100%" 
-                                style="border: none; background: white; min-height: 70vh;"
-                                allow="autoplay">
-                        </iframe>
+                        <div class="iframe-wrapper" style="position: relative; width: 100%; height: 100%; display: flex; flex-direction: column;">
+                            <iframe src="https://drive.google.com/file/d/${url}/preview" 
+                                    width="100%" 
+                                    height="100%" 
+                                    style="border: none; background: white; min-height: 70vh;"
+                                    allow="autoplay">
+                            </iframe>
+                            <div class="iframe-popout-blocker" style="position: absolute; top: 0; right: 0; width: 80px; height: 50px; background: transparent; z-index: 999; cursor: none !important;"></div>
+                        </div>
                     `;
                     
                     const iframe = readerCanvasContainer.querySelector("iframe");
@@ -257,6 +261,18 @@
                         iframe.addEventListener("mouseleave", () => {
                             const customCursor = document.querySelector(".custom-cursor");
                             if (customCursor) customCursor.style.opacity = "1";
+                        });
+                    }
+
+                    const blocker = readerCanvasContainer.querySelector(".iframe-popout-blocker");
+                    if (blocker) {
+                        blocker.addEventListener("mouseenter", () => {
+                            const customCursor = document.querySelector(".custom-cursor");
+                            if (customCursor) customCursor.style.opacity = "1";
+                        });
+                        blocker.addEventListener("mouseleave", () => {
+                            const customCursor = document.querySelector(".custom-cursor");
+                            if (customCursor) customCursor.style.opacity = "0";
                         });
                     }
                     return;

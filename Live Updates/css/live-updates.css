@@ -5,16 +5,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 /* Fluid typography for identical scaling across laptop screens */
-@media (min-width: 1024px) {
+@media (min-width: 64em) {
     html {
-        font-size: clamp(10.6px, 1.0416vw, 16px) !important;
+        font-size: clamp(0.6625rem, 1.0416vw, 1rem) !important;
     }
 }
 
 /* Scale down globally for mobile to prevent oversized elements */
-@media (max-width: 850px) {
+@media (max-width: 53.125em) {
     html {
-        font-size: 13.5px !important;
+        font-size: 0.844rem !important;
     }
 }
 
@@ -47,7 +47,7 @@ body::before {
 
 .header-wrapper {
     text-align: center;
-    margin-top: calc(70px + 5rem);
+    margin-top: calc(4.375rem + 5rem);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -60,7 +60,7 @@ body::before {
     display: inline-block;
     text-transform: uppercase;
     font-weight: 900;
-    font-size: 64px;
+    font-size: 4rem;
     font-family: 'Be Vietnam Pro', sans-serif;
     color: rgba(242, 193, 86, 0.95);
     text-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.9);
@@ -70,11 +70,11 @@ body::before {
 .live-status-container {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.5rem;
     background: rgba(0, 0, 0, 0.4);
-    padding: 6px 16px;
-    border-radius: 20px;
-    border: 1px solid rgba(242, 193, 86, 0.3);
+    padding: 0.375rem 1rem;
+    border-radius: 1.25rem;
+    border: 0.063rem solid rgba(242, 193, 86, 0.3);
     font-size: 0.9rem;
     font-weight: 600;
     letter-spacing: 0.05em;
@@ -82,8 +82,8 @@ body::before {
 }
 
 .pulse-dot {
-    width: 8px;
-    height: 8px;
+    width: 0.5rem;
+    height: 0.5rem;
     background-color: #ff3b30;
     border-radius: 50%;
     display: inline-block;
@@ -109,7 +109,7 @@ body::before {
     }
     70% {
         transform: scale(1);
-        box-shadow: 0 0 0 8px rgba(46, 213, 115, 0);
+        box-shadow: 0 0 0 0.5rem rgba(46, 213, 115, 0);
     }
     100% {
         transform: scale(0.95);
@@ -124,7 +124,7 @@ body::before {
     }
     70% {
         transform: scale(1);
-        box-shadow: 0 0 0 8px rgba(255, 59, 48, 0);
+        box-shadow: 0 0 0 0.5rem rgba(255, 59, 48, 0);
     }
     100% {
         transform: scale(0.95);
@@ -134,7 +134,7 @@ body::before {
 
 /* Layout Grid */
 .container {
-    max-width: 1400px;
+    max-width: 87.5rem;
     margin: auto;
     padding: 2rem;
 }
@@ -144,7 +144,7 @@ body::before {
     grid-template-columns: 1fr;
     gap: 2rem;
     margin-top: 2rem;
-    max-width: 950px;
+    max-width: 59.375rem;
     margin-left: auto;
     margin-right: auto;
 }
@@ -153,11 +153,11 @@ body::before {
 .ticker-wrap {
     width: 100%;
     background: rgba(26, 5, 5, 0.85);
-    border: 2px solid #ff3b30;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(255, 59, 48, 0.3);
+    border: 0.125rem solid #ff3b30;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.938rem rgba(255, 59, 48, 0.3);
     overflow: hidden;
-    height: 48px;
+    height: 3rem;
     display: flex;
     align-items: center;
     margin-bottom: 2rem;
@@ -169,7 +169,7 @@ body::before {
     color: #fff;
     font-weight: 800;
     font-size: 0.85rem;
-    padding: 0 16px;
+    padding: 0 1rem;
     height: 100%;
     display: flex;
     align-items: center;
@@ -217,17 +217,17 @@ body::before {
 /* Filter Buttons */
 .filter-bar {
     display: flex;
-    gap: 10px;
+    gap: 0.625rem;
     margin-bottom: 2rem;
     flex-wrap: wrap;
 }
 
 .filter-btn {
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(242, 193, 86, 0.3);
+    border: 0.063rem solid rgba(242, 193, 86, 0.3);
     color: #f5f0e1;
-    padding: 8px 18px;
-    border-radius: 30px;
+    padding: 0.5rem 1.125rem;
+    border-radius: 1.875rem;
     cursor: pointer;
     font-family: "Space Grotesk", sans-serif;
     font-weight: 600;
@@ -245,22 +245,22 @@ body::before {
     background: rgba(242, 193, 86, 1);
     border-color: rgba(242, 193, 86, 1);
     color: #000;
-    box-shadow: 0 4px 12px rgba(242, 193, 86, 0.3);
+    box-shadow: 0 0.25rem 0.75rem rgba(242, 193, 86, 0.3);
 }
 
 /* Timeline Feed */
 .timeline {
     position: relative;
-    padding-left: 36px;
+    padding-left: 2.25rem;
 }
 
 .timeline::before {
     content: '';
     position: absolute;
-    left: 12px;
-    top: 8px;
-    bottom: 8px;
-    width: 2px;
+    left: 0.75rem;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 0.125rem;
     background: linear-gradient(to bottom, rgba(242, 193, 86, 0.6) 0%, rgba(242, 193, 86, 0.1) 100%);
 }
 
@@ -268,7 +268,7 @@ body::before {
     position: relative;
     margin-bottom: 2.5rem;
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(1.25rem);
     animation: fadeInUp 0.5s forwards cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -281,55 +281,55 @@ body::before {
 
 .timeline-dot {
     position: absolute;
-    left: -30px;
-    top: 8px;
-    width: 10px;
-    height: 10px;
+    left: -1.875rem;
+    top: 0.5rem;
+    width: 0.625rem;
+    height: 0.625rem;
     border-radius: 50%;
     background: rgba(242, 193, 86, 1);
-    border: 2px solid #000;
+    border: 0.125rem solid #000;
     z-index: 2;
-    box-shadow: 0 0 8px rgba(242, 193, 86, 0.8);
+    box-shadow: 0 0 0.5rem rgba(242, 193, 86, 0.8);
 }
 
 .timeline-dot.crisis {
     background: #ff3b30;
-    box-shadow: 0 0 8px rgba(255, 59, 48, 0.8);
+    box-shadow: 0 0 0.5rem rgba(255, 59, 48, 0.8);
 }
 
 .timeline-dot.announcement {
     background: #007aff;
-    box-shadow: 0 0 8px rgba(0, 122, 255, 0.8);
+    box-shadow: 0 0 0.5rem rgba(0, 122, 255, 0.8);
 }
 
 .timeline-dot.schedule {
     background: #ffd200;
-    box-shadow: 0 0 8px rgba(255, 210, 0, 0.8);
+    box-shadow: 0 0 0.5rem rgba(255, 210, 0, 0.8);
 }
 
 .timeline-card {
     background: rgba(26, 26, 26, 0.7);
-    border: 1px solid rgba(242, 193, 86, 0.35);
-    border-radius: 12px;
+    border: 0.063rem solid rgba(242, 193, 86, 0.35);
+    border-radius: 0.75rem;
     padding: 1.5rem;
     backdrop-filter: blur(12px);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.2);
 }
 
 .timeline-card:hover {
     border-color: rgba(242, 193, 86, 0.8);
-    transform: translateY(-4px) scale(1.01);
-    box-shadow: 0 12px 40px rgba(242, 193, 86, 0.15);
+    transform: translateY(-0.25rem) scale(1.01);
+    box-shadow: 0 0.75rem 2.5rem rgba(242, 193, 86, 0.15);
 }
 
 .timeline-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 0.5rem;
 }
 
 .update-title {
@@ -349,69 +349,69 @@ body::before {
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: 4px;
+    padding: 0.25rem 0.625rem;
+    border-radius: 0.25rem;
     letter-spacing: 0.05em;
 }
 
 .tag.crisis {
     background: rgba(255, 59, 48, 0.15);
     color: #ff453a;
-    border: 1px solid rgba(255, 59, 48, 0.3);
+    border: 0.063rem solid rgba(255, 59, 48, 0.3);
 }
 
 .tag.announcement {
     background: rgba(0, 122, 255, 0.15);
     color: #0a84ff;
-    border: 1px solid rgba(0, 122, 255, 0.3);
+    border: 0.063rem solid rgba(0, 122, 255, 0.3);
 }
 
 .tag.schedule {
     background: rgba(255, 210, 0, 0.15);
     color: #ffd200;
-    border: 1px solid rgba(255, 210, 0, 0.3);
+    border: 0.063rem solid rgba(255, 210, 0, 0.3);
 }
 
 .tag.committee-tag {
     background: rgba(242, 193, 86, 0.1);
     color: #f2c156;
-    border: 1px solid rgba(242, 193, 86, 0.35);
+    border: 0.063rem solid rgba(242, 193, 86, 0.35);
 }
 
 .tag.committee-tag.unsc {
     background: rgba(255, 69, 58, 0.12);
     color: #ff453a;
-    border: 1px solid rgba(255, 69, 58, 0.35);
+    border: 0.063rem solid rgba(255, 69, 58, 0.35);
 }
 
 .tag.committee-tag.disec {
     background: rgba(50, 215, 75, 0.12);
     color: #32d74b;
-    border: 1px solid rgba(50, 215, 75, 0.35);
+    border: 0.063rem solid rgba(50, 215, 75, 0.35);
 }
 
 .tag.committee-tag.lon {
     background: rgba(100, 210, 255, 0.12);
     color: #64d2ff;
-    border: 1px solid rgba(100, 210, 255, 0.35);
+    border: 0.063rem solid rgba(100, 210, 255, 0.35);
 }
 
 .tag.committee-tag.wwc {
     background: rgba(191, 90, 242, 0.12);
     color: #bf5af2;
-    border: 1px solid rgba(191, 90, 242, 0.35);
+    border: 0.063rem solid rgba(191, 90, 242, 0.35);
 }
 
 .tag.committee-tag.oic {
     background: rgba(255, 159, 10, 0.12);
     color: #ff9f0a;
-    border: 1px solid rgba(255, 159, 10, 0.35);
+    border: 0.063rem solid rgba(255, 159, 10, 0.35);
 }
 
 .tag.committee-tag.general {
     background: rgba(142, 142, 147, 0.12);
     color: #aeaeae;
-    border: 1px solid rgba(142, 142, 147, 0.35);
+    border: 0.063rem solid rgba(142, 142, 147, 0.35);
 }
 
 .update-body {
@@ -422,10 +422,10 @@ body::before {
 
 .update-media {
     margin-top: 1rem;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     overflow: hidden;
-    border: 1px solid rgba(242, 193, 86, 0.2);
-    max-height: 350px;
+    border: 0.063rem solid rgba(242, 193, 86, 0.2);
+    max-height: 21.875rem;
 }
 
 .update-media img {
@@ -437,57 +437,57 @@ body::before {
 /* Sidebar Styling */
 .glass-card {
     background: rgba(26, 26, 26, 0.65);
-    border: 1px solid rgba(242, 193, 86, 0.25);
-    border-radius: 12px;
+    border: 0.063rem solid rgba(242, 193, 86, 0.25);
+    border-radius: 0.75rem;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
     backdrop-filter: blur(12px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.25);
 }
 
 .card-subtitle {
     font-family: "Space Grotesk", sans-serif;
     color: rgba(242, 193, 86, 1);
     font-size: 1.25rem;
-    margin-bottom: 15px;
-    border-bottom: 1px solid rgba(242, 193, 86, 0.2);
-    padding-bottom: 8px;
+    margin-bottom: 0.938rem;
+    border-bottom: 0.063rem solid rgba(242, 193, 86, 0.2);
+    padding-bottom: 0.5rem;
 }
 
 .firebase-status-details p {
     font-size: 0.95rem;
     color: rgba(245, 240, 225, 0.8);
-    margin-bottom: 12px;
+    margin-bottom: 0.75rem;
 }
 
 .setup-instructions {
     background: rgba(0, 0, 0, 0.3);
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px dashed rgba(242, 193, 86, 0.3);
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    border: 0.063rem dashed rgba(242, 193, 86, 0.3);
 }
 
 .setup-instructions p {
     font-weight: 600;
-    margin-bottom: 6px;
+    margin-bottom: 0.375rem;
     font-size: 0.9rem;
     color: rgba(242, 193, 86, 0.9);
 }
 
 .setup-instructions ol {
-    padding-left: 20px;
+    padding-left: 1.25rem;
     font-size: 0.85rem;
     color: rgba(245, 240, 225, 0.7);
 }
 
 .setup-instructions li {
-    margin-bottom: 6px;
+    margin-bottom: 0.375rem;
 }
 
 .setup-instructions code {
     background: rgba(255, 255, 255, 0.1);
-    padding: 2px 4px;
-    border-radius: 4px;
+    padding: 0.125rem 0.25rem;
+    border-radius: 0.25rem;
     color: #ffed4e;
     font-family: monospace;
 }
@@ -499,8 +499,8 @@ body::before {
 .quick-info-list li {
     display: flex;
     justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 0.5rem 0;
+    border-bottom: 0.063rem solid rgba(255, 255, 255, 0.05);
     font-size: 0.95rem;
 }
 
@@ -522,17 +522,17 @@ body::before {
     text-align: center;
     padding: 3rem;
     background: rgba(26, 26, 26, 0.4);
-    border-radius: 12px;
-    border: 1px dashed rgba(242, 193, 86, 0.2);
+    border-radius: 0.75rem;
+    border: 0.063rem dashed rgba(242, 193, 86, 0.2);
 }
 
 .spinner {
-    width: 40px;
-    height: 40px;
-    border: 3px solid rgba(242, 193, 86, 0.1);
-    border-top: 3px solid rgba(242, 193, 86, 1);
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 0.188rem solid rgba(242, 193, 86, 0.1);
+    border-top: 0.188rem solid rgba(242, 193, 86, 1);
     border-radius: 50%;
-    margin: 0 auto 15px;
+    margin: 0 auto 0.938rem;
     animation: spin 1s linear infinite;
 }
 
@@ -542,7 +542,7 @@ body::before {
 }
 
 /* Responsive Queries */
-@media (max-width: 1024px) {
+@media (max-width: 64em) {
     .layout-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
@@ -553,7 +553,7 @@ body::before {
     }
 }
 
-@media (max-width: 850px) {
+@media (max-width: 53.125em) {
     .header-title {
         font-size: 2.3rem;
         padding-top: 2rem;

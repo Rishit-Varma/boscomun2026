@@ -5,16 +5,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 /* Fluid typography for identical scaling across laptop screens */
-@media (min-width: 1024px) {
+@media (min-width: 64em) {
     html {
-        font-size: clamp(10.6px, 1.0416vw, 16px) !important;
+        font-size: clamp(0.6625rem, 1.0416vw, 1rem) !important;
     }
 }
 
 /* Scale down globally for mobile to prevent oversized elements */
-@media (max-width: 850px) {
+@media (max-width: 53.125em) {
     html {
-        font-size: 13.5px !important;
+        font-size: 0.844rem !important;
     }
 }
 
@@ -36,7 +36,7 @@
     --text-muted:  #a6a5a0;
     --border:      rgba(255, 255, 255, 0.08);
     --border-gold: rgba(215, 162, 52, 0.15);
-    --navbar-h:    70px;
+    --navbar-h:    4.375rem;
 }
 
 html {
@@ -69,16 +69,16 @@ body::before {
 .decor-corner {
     position: fixed;
     font-family: monospace;
-    font-size: 14px;
+    font-size: 0.875rem;
     color: rgba(242, 193, 86, 0.35);
     pointer-events: none;
     z-index: 10;
     user-select: none;
 }
-.decor-tl { top: calc(var(--navbar-h) + 15px); left: 20px; }
-.decor-tr { top: calc(var(--navbar-h) + 15px); right: 20px; }
-.decor-bl { bottom: 20px; left: 20px; }
-.decor-br { bottom: 20px; right: 20px; }
+.decor-tl { top: calc(var(--navbar-h) + 0.938rem); left: 1.25rem; }
+.decor-tr { top: calc(var(--navbar-h) + 0.938rem); right: 1.25rem; }
+.decor-bl { bottom: 1.25rem; left: 1.25rem; }
+.decor-br { bottom: 1.25rem; right: 1.25rem; }
 
 /* ──────────────────────── VIEWPORT MAIN CONTAINER ──────────────────────── */
 .ledger-viewport {
@@ -94,7 +94,7 @@ body::before {
 
 .ledger-grid {
     display: grid;
-    grid-template-columns: 310px 1fr;
+    grid-template-columns: 19.375rem 1fr;
     gap: 2.5vw;
     width: 100%;
     max-width: 82vw;
@@ -111,10 +111,10 @@ body::before {
     max-width: 95vw;
     height: 100%;
     max-height: 100%;
-    grid-template-columns: 280px 1fr;
+    grid-template-columns: 17.5rem 1fr;
 }
 
-@media (min-width: 901px) {
+@media (min-width: 56.313em) {
     body.reader-active, body.reader-active html {
         height: 100vh;
         overflow: hidden;
@@ -190,14 +190,14 @@ body::before {
 
 /* Custom scrollbar for catalog list */
 .document-register::-webkit-scrollbar {
-    width: 4px;
+    width: 0.25rem;
 }
 .document-register::-webkit-scrollbar-track {
     background: transparent;
 }
 .document-register::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 2px;
+    border-radius: 0.125rem;
 }
 .document-register::-webkit-scrollbar-thumb:hover {
     background: rgba(242, 193, 86, 0.2);
@@ -220,8 +220,8 @@ body::before {
 /* Register Button Item */
 .register-item {
     background: rgba(14, 15, 17, 0.4);
-    border: 1px solid var(--border);
-    border-radius: 6px;
+    border: 0.063rem solid var(--border);
+    border-radius: 0.375rem;
     padding: 0.75rem 1rem;
     display: flex;
     align-items: center;
@@ -239,7 +239,7 @@ body::before {
     content: "";
     position: absolute;
     left: 0; top: 0; bottom: 0;
-    width: 3px;
+    width: 0.188rem;
     background: var(--gold);
     transform: scaleY(0);
     transition: transform 0.25s ease;
@@ -309,7 +309,7 @@ body::before {
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    width: 300px; height: 300px;
+    width: 18.75rem; height: 18.75rem;
     background: radial-gradient(circle, rgba(242, 193, 86, 0.04) 0%, transparent 70%);
     filter: blur(20px);
     pointer-events: none;
@@ -319,11 +319,11 @@ body::before {
 .dossier-card {
     position: relative;
     background: var(--panel-bg);
-    border: 1.5px solid var(--border-gold);
-    border-radius: 12px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    border: 0.094rem solid var(--border-gold);
+    border-radius: 0.75rem;
+    box-shadow: 0 1.25rem 3.75rem rgba(0, 0, 0, 0.5);
     width: 100%;
-    max-width: 850px;
+    max-width: 53.125rem;
     height: auto;
     overflow: hidden;
     backdrop-filter: blur(15px);
@@ -339,9 +339,9 @@ body::before {
 
 .ledger-grid.reader-active .dossier-card {
     border-color: transparent;
-    border-radius: 8px;
-    height: calc(100% - 40px);
-    margin-top: 40px;
+    border-radius: 0.5rem;
+    height: calc(100% - 2.5rem);
+    margin-top: 2.5rem;
     max-width: 100%;
 }
 .ledger-grid.reader-active .card-inner {
@@ -352,9 +352,9 @@ body::before {
 .dossier-card::before {
     content: "";
     position: absolute;
-    inset: 6px;
-    border: 1px dashed rgba(242, 193, 86, 0.15);
-    border-radius: 9px;
+    inset: 0.375rem;
+    border: 0.063rem dashed rgba(242, 193, 86, 0.15);
+    border-radius: 0.563rem;
     pointer-events: none;
     z-index: 1;
     transition: border-color 0.45s cubic-bezier(0.25, 0.46, 0.45, 1),
@@ -395,11 +395,11 @@ body::before {
 }
 
 .dossier-logo {
-    width: 270px;
-    height: 270px;
+    width: 16.875rem;
+    height: 16.875rem;
     object-fit: cover;
     border-radius: 50%;
-    border: 1.5px solid var(--border-gold);
+    border: 0.094rem solid var(--border-gold);
     padding: 0;
     background: transparent;
     box-shadow: 0 0 25px rgba(242, 193, 86, 0.15);
@@ -432,8 +432,8 @@ body::before {
 
 .dossier-body {
     background: rgba(255, 255, 255, 0.015);
-    border: 1px dashed rgba(242, 193, 86, 0.25);
-    border-radius: 6px;
+    border: 0.063rem dashed rgba(242, 193, 86, 0.25);
+    border-radius: 0.375rem;
     padding: 1.5rem 1.8rem;
     margin: 1.5rem 0;
 }
@@ -474,7 +474,7 @@ body::before {
     letter-spacing: 0.12em;
     text-decoration: none;
     padding: 0.75rem 1.2rem;
-    border-radius: 4px;
+    border-radius: 0.25rem;
     cursor: pointer;
     transition: all 0.3s ease;
     outline: none;
@@ -483,20 +483,20 @@ body::before {
 /* Live inline reader open button */
 .btn-read-inline {
     color: var(--gold);
-    border: 1px solid var(--gold);
+    border: 0.063rem solid var(--gold);
     background: transparent;
 }
 
 .btn-read-inline:hover {
     background: rgba(242, 193, 86, 0.08);
-    box-shadow: 0 4px 15px rgba(242, 193, 86, 0.15);
-    transform: translateY(-2px);
+    box-shadow: 0 0.25rem 0.938rem rgba(242, 193, 86, 0.15);
+    transform: translateY(-0.125rem);
 }
 
 /* Direct download anchor link */
 .btn-download-direct {
     color: var(--text);
-    border: 1px solid var(--border);
+    border: 0.063rem solid var(--border);
     background: rgba(255, 255, 255, 0.02);
 }
 
@@ -504,8 +504,8 @@ body::before {
     color: var(--gold-light);
     border-color: var(--gold);
     background: rgba(242, 193, 86, 0.04);
-    box-shadow: 0 4px 15px rgba(242, 193, 86, 0.08);
-    transform: translateY(-2px);
+    box-shadow: 0 0.25rem 0.938rem rgba(242, 193, 86, 0.08);
+    transform: translateY(-0.125rem);
 }
 
 /* ══════════════════════════════════════════════════════
@@ -528,6 +528,14 @@ body::before {
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
 }
 
+@media (pointer: fine) {
+    .inline-reader-container,
+    .inline-reader-container *,
+    .pdf-page-canvas {
+        cursor: none !important;
+    }
+}
+
 .inline-reader-container.active {
     display: flex;
     transform: scale(1);
@@ -539,7 +547,7 @@ body::before {
     justify-content: space-between;
     align-items: center;
     background-color: #1a1a1a;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 0.063rem solid rgba(255, 255, 255, 0.08);
     padding: 0.7rem 1.5rem;
     z-index: 11;
 }
@@ -587,8 +595,8 @@ body::before {
     gap: 0.8rem;
     background: rgba(0, 0, 0, 0.4);
     padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    border: 1px solid rgba(242, 193, 86, 0.15);
+    border-radius: 1.25rem;
+    border: 0.063rem solid rgba(242, 193, 86, 0.15);
 }
 
 .btn-zoom {
@@ -638,7 +646,7 @@ body::before {
 }
 
 /* ──────────────────────── RESPONSIVE DESIGN ──────────────────────── */
-@media (max-width: 900px) {
+@media (max-width: 56.25em) {
     html, body {
         height: auto;
         overflow: auto;
@@ -708,8 +716,8 @@ body::before {
     }
 
     .dossier-logo {
-        width: 200px;
-        height: 200px;
+        width: 12.5rem;
+        height: 12.5rem;
     }
 
     .dossier-name {
@@ -727,7 +735,7 @@ body::before {
 
     /* Embedded mobile reader adjustments */
     .inline-reader-container {
-        height: 600px;
+        height: 37.5rem;
         position: relative;
     }
 }
@@ -747,7 +755,7 @@ body::before {
 
 #grid-view-container.hidden {
     opacity: 0;
-    transform: translateX(-60px) scale(0.97);
+    transform: translateX(-3.75rem) scale(0.97);
     pointer-events: none;
     visibility: hidden;
     position: absolute;
@@ -761,7 +769,7 @@ body::before {
 
 #ledger-view-container.hidden {
     opacity: 0;
-    transform: translateX(60px) scale(0.97);
+    transform: translateX(3.75rem) scale(0.97);
     pointer-events: none;
     visibility: hidden;
     position: absolute;
@@ -811,7 +819,7 @@ body::before {
 
 #grid-view-container hr {
     border: none;
-    height: 1px;
+    height: 0.063rem;
     background: rgba(255, 215, 0, 0.2);
     margin-bottom: 2rem;
 }
@@ -827,15 +835,15 @@ body::before {
 
 /* Scrollbar styling */
 .file-grid::-webkit-scrollbar {
-    height: 6px;
+    height: 0.375rem;
 }
 .file-grid::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.02);
-    border-radius: 3px;
+    border-radius: 0.188rem;
 }
 .file-grid::-webkit-scrollbar-thumb {
     background: rgba(242, 193, 86, 0.15);
-    border-radius: 3px;
+    border-radius: 0.188rem;
 }
 .file-grid::-webkit-scrollbar-thumb:hover {
     background: rgba(242, 193, 86, 0.35);
@@ -847,12 +855,12 @@ body::before {
     background: rgba(14, 15, 17, 0.4);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
+    border: 0.063rem solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.75rem;
     flex: 1 1 0;
     min-width: 0;
     height: auto;
-    min-height: 380px;
+    min-height: 23.75rem;
     padding: 2rem 1rem;
     display: flex;
     flex-direction: column;
@@ -867,17 +875,17 @@ body::before {
 .file-card::before {
     content: "";
     position: absolute;
-    inset: 4px;
-    border: 1px dashed rgba(242, 193, 86, 0.08);
-    border-radius: 9px;
+    inset: 0.25rem;
+    border: 0.063rem dashed rgba(242, 193, 86, 0.08);
+    border-radius: 0.563rem;
     pointer-events: none;
     transition: border-color 0.3s ease;
 }
 
 .file-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-0.5rem);
     border-color: rgba(242, 193, 86, 0.4);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 
+    box-shadow: 0 0.938rem 2.188rem rgba(0, 0, 0, 0.5), 
                 0 0 20px rgba(242, 193, 86, 0.08);
 }
 
@@ -899,8 +907,8 @@ body::before {
 }
 
 .card-icon {
-    width: clamp(100px, 12vw, 210px);
-    height: clamp(100px, 12vw, 210px);
+    width: clamp(6.25rem, 12vw, 13.125rem);
+    height: clamp(6.25rem, 12vw, 13.125rem);
     object-fit: contain;
     margin-bottom: 1.2rem;
     transition: transform 0.3s ease;
@@ -942,10 +950,10 @@ body::before {
 /* Back Button in Ledger View */
 .btn-back-to-grid {
     background: transparent;
-    border: 1px solid rgba(242, 193, 86, 0.25);
+    border: 0.063rem solid rgba(242, 193, 86, 0.25);
     color: var(--gold);
     padding: 0.5rem 1rem;
-    border-radius: 4px;
+    border-radius: 0.25rem;
     font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.1em;
@@ -960,11 +968,11 @@ body::before {
 .btn-back-to-grid:hover {
     background: rgba(242, 193, 86, 0.05);
     border-color: var(--gold);
-    transform: translateX(-4px);
-    box-shadow: 0 4px 15px rgba(242, 193, 86, 0.1);
+    transform: translateX(-0.25rem);
+    box-shadow: 0 0.25rem 0.938rem rgba(242, 193, 86, 0.1);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 56.25em) {
     #grid-view-container .container {
         padding: 1.5rem;
     }
@@ -990,8 +998,8 @@ body::before {
     }
     
     .card-icon {
-        width: clamp(130px, 35vw, 180px);
-        height: clamp(130px, 35vw, 180px);
+        width: clamp(8.125rem, 35vw, 11.25rem);
+        height: clamp(8.125rem, 35vw, 11.25rem);
         margin-bottom: 2rem;
     }
     
@@ -1008,8 +1016,8 @@ body::before {
         content: "Download";
         font-size: 0.95rem;
         padding: 0.8rem 1.5rem;
-        border: 1px solid rgba(242, 193, 86, 0.4);
-        border-radius: 6px;
+        border: 0.063rem solid rgba(242, 193, 86, 0.4);
+        border-radius: 0.375rem;
         display: inline-block;
         background: rgba(242, 193, 86, 0.05);
     }

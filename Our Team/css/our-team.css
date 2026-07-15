@@ -4,16 +4,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 /* Fluid typography for identical scaling across laptop screens */
-@media (min-width: 1024px) {
+@media (min-width: 64em) {
     html {
-        font-size: clamp(10.6px, 1.0416vw, 16px) !important;
+        font-size: clamp(0.6625rem, 1.0416vw, 1rem) !important;
     }
 }
 
 /* Scale down globally for mobile to prevent oversized elements */
-@media (max-width: 850px) {
+@media (max-width: 53.125em) {
     html {
-        font-size: 13.5px !important;
+        font-size: 0.844rem !important;
     }
 }
 
@@ -35,7 +35,7 @@
     --text-muted:  #a6a5a0;
     --border:      rgba(255, 255, 255, 0.08);
     --border-gold: rgba(215, 162, 52, 0.2);
-    --navbar-h:    70px;
+    --navbar-h:    4.375rem;
 }
 
 body {
@@ -45,6 +45,8 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
 }
 
 body::before {
@@ -57,7 +59,7 @@ body::before {
     background: url("../../css/bg.avif") no-repeat center center;
     background-size: cover;
     z-index: -1;
-    will-change: transform;
+    pointer-events: none;
 }
 
 /* ──────────────────────── HEADER NAVBAR BLUR ──────────────────────── */
@@ -73,24 +75,25 @@ body > header {
 .decor-corner {
     position: fixed;
     font-family: monospace;
-    font-size: 14px;
+    font-size: 0.875rem;
     color: rgba(242, 193, 86, 0.35);
     pointer-events: none;
     z-index: 10;
     user-select: none;
 }
-.decor-tl { top: calc(var(--navbar-h) + 15px); left: 20px; }
-.decor-tr { top: calc(var(--navbar-h) + 15px); right: 20px; }
-.decor-bl { bottom: 20px; left: 20px; }
-.decor-br { bottom: 20px; right: 20px; }
+.decor-tl { top: calc(var(--navbar-h) + 0.938rem); left: 1.25rem; }
+.decor-tr { top: calc(var(--navbar-h) + 0.938rem); right: 1.25rem; }
+.decor-bl { bottom: 1.25rem; left: 1.25rem; }
+.decor-br { bottom: 1.25rem; right: 1.25rem; }
 
 /* ──────────────────────── TEAM VIEWPORT ──────────────────────── */
 .team-viewport {
-    max-width: 1100px;
+    max-width: 100%;
     margin: 0 auto;
-    padding: calc(var(--navbar-h) + 3rem) 2rem 4rem 2rem;
+    padding: calc(var(--navbar-h) + 3rem) 4vw 6rem 4vw;
     position: relative;
     z-index: 2;
+    flex: 1;
 }
 
 /* Page Header */
@@ -126,14 +129,14 @@ body > header {
 .header-desc {
     font-size: 0.95rem;
     color: var(--text-muted);
-    max-width: 480px;
+    max-width: 30rem;
     line-height: 1.5;
     margin-top: 0.5rem;
 }
 
 .header-rule {
-    width: 80px;
-    height: 1.5px;
+    width: 5rem;
+    height: 0.094rem;
     background: linear-gradient(90deg, transparent, var(--gold), transparent);
     margin-top: 1.2rem;
 }
@@ -142,7 +145,9 @@ body > header {
 .team-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.8rem;
+    gap: 2.5rem;
+    max-width: 56.25rem;
+    margin: 0 auto;
 }
 
 /* Symmetrical layouts for wide cards */
@@ -153,16 +158,18 @@ body > header {
 /* ──────────────────────── DOSSIER CARD BASE ──────────────────────── */
 .team-card {
     position: relative;
-    background-color: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    background: linear-gradient(
+        135deg,
+        rgba(20, 21, 23, 0.7),
+        rgba(30, 31, 34, 0.5)
+    );
+    border: 0.063rem solid rgba(215, 162, 52, 0.12);
+    border-top: 0.094rem solid rgba(215, 162, 52, 0.3);
+    border-radius: 0.75rem;
+    box-shadow:
+        0 0.625rem 2.5rem rgba(0, 0, 0, 0.4),
+        inset 0 0.063rem 0 rgba(255, 255, 255, 0.04);
     overflow: hidden;
-    transition: border-color 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    max-width: 500px;
-    margin: 0 auto;
     width: 100%;
 }
 
@@ -177,9 +184,7 @@ body > header {
 }
 
 .team-card:hover {
-    border-color: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
-    transform: translateY(-4px);
+    /* unreacting - no animation or glow change */
 }
 
 /* Department Background Watermark (removed) */
@@ -195,20 +200,21 @@ body > header {
 .card-inner {
     position: relative;
     z-index: 2;
-    padding: 2.2rem 2rem;
+    padding: 2rem 1.8rem;
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
+    gap: 1rem;
 }
 
 .team-heading {
     font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 1.6rem;
+    font-size: 2.2rem;
     font-weight: 900;
     color: rgba(242, 193, 86, 0.95);
     text-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.9);
     letter-spacing: 0.125rem;
     text-transform: uppercase;
+    text-align: center;
 }
 
 .team-subheading {
@@ -217,7 +223,7 @@ body > header {
     text-transform: uppercase;
     letter-spacing: 0.15em;
     color: var(--text-muted);
-    border-bottom: 1px solid var(--border);
+    border-bottom: 0.063rem solid var(--border);
     padding-bottom: 0.5rem;
     margin-top: -0.8rem;
 }
@@ -226,7 +232,8 @@ body > header {
 .member-list {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.6rem;
+    align-items: center;
 }
 
 .grid-cols-2 {
@@ -243,9 +250,22 @@ body > header {
 
 .member-item {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    gap: 1.1rem;
+    gap: 0.3rem;
+    padding: 0.7rem 1.4rem;
+    border: 0.063rem solid rgba(215, 162, 52, 0.15);
+    border-radius: 3.125rem;
+    background: rgba(255, 255, 255, 0.03);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.member-item:hover {
+    border-color: rgba(215, 162, 52, 0.35);
+    background: rgba(215, 162, 52, 0.06);
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.25rem 0.938rem rgba(215, 162, 52, 0.1);
 }
 
 .member-avatar:not(.vacant-avatar) {
@@ -253,10 +273,10 @@ body > header {
 }
 
 .member-avatar {
-    width: 44px;
-    height: 44px;
+    width: 2.75rem;
+    height: 2.75rem;
     border-radius: 50%;
-    border: 1px solid var(--border-gold);
+    border: 0.063rem solid var(--border-gold);
     background: rgba(242, 193, 86, 0.04);
     color: var(--gold);
     display: flex;
@@ -265,8 +285,8 @@ body > header {
     font-family: "Space Grotesk", sans-serif;
     font-weight: 700;
     font-size: 0.88rem;
-    letter-spacing: 0.5px;
-    box-shadow: 0 0 10px rgba(242, 193, 86, 0.08);
+    letter-spacing: 0.031rem;
+    box-shadow: 0 0 0.625rem rgba(242, 193, 86, 0.08);
     transition: all 0.3s ease;
     flex-shrink: 0;
     overflow: hidden;
@@ -283,7 +303,7 @@ body > header {
 .member-item:hover .member-avatar {
     border-color: var(--gold);
     background: rgba(242, 193, 86, 0.12);
-    box-shadow: 0 0 15px rgba(242, 193, 86, 0.2);
+    box-shadow: 0 0 0.938rem rgba(242, 193, 86, 0.2);
     transform: scale(1.05);
 }
 
@@ -305,14 +325,56 @@ body > header {
 }
 
 .member-role {
-    display: none;
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    opacity: 0.75;
 }
 
 .member-name {
     font-family: "Inter", sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+}
+
+/* ── Upper section: no pills, no roles ── */
+.team-grid .member-item {
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    padding: 0.3rem 0;
+}
+
+.team-grid .member-item:hover {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    transform: none;
+}
+
+.team-grid .member-role {
+    display: none;
+}
+
+.team-grid .member-name {
     font-size: 1.35rem;
     font-weight: 700;
-    color: var(--text);
+}
+
+/* ── EB section: equal-width pills, bigger font ── */
+.eb-grid .member-item {
+    min-width: 13.75rem;
+    justify-content: center;
+}
+
+.eb-grid .member-name {
+    font-size: 1.15rem;
+    font-weight: 600;
 }
 
 /* Highlighted executive roles with contact links */
@@ -328,9 +390,9 @@ body > header {
     font-size: 0.75rem;
     color: var(--text-muted);
     text-decoration: none;
-    border: 1px solid var(--border);
+    border: 0.063rem solid var(--border);
     padding: 0.4rem 0.8rem;
-    border-radius: 4px;
+    border-radius: 0.25rem;
     background: rgba(255, 255, 255, 0.02);
     transition: all 0.3s ease;
 }
@@ -344,14 +406,14 @@ body > header {
     color: var(--gold-light);
     border-color: var(--gold);
     background: rgba(242, 193, 86, 0.05);
-    box-shadow: 0 4px 12px rgba(242, 193, 86, 0.08);
+    box-shadow: 0 0.25rem 0.75rem rgba(242, 193, 86, 0.08);
 }
 
 /* Open/Vacant Positions styled as structured placeholders */
 .member-item.vacant {
-    border: 1px dashed rgba(255, 255, 255, 0.06);
+    border: 0.063rem dashed rgba(255, 255, 255, 0.06);
     background: rgba(255, 255, 255, 0.01);
-    border-radius: 4px;
+    border-radius: 0.25rem;
     padding: 0.6rem 0.8rem;
     position: relative;
 }
@@ -374,14 +436,14 @@ body > header {
 
 /* ──────────────────────── EXECUTIVE BOARDS GRID ──────────────────────── */
 .section-break {
-    margin-top: 5.5rem;
+    margin-top: 4.5rem;
     margin-bottom: 2.5rem;
 }
 
 .eb-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 1.8rem;
+    gap: 2.5rem;
 }
 
 /* Symmetrical alignment for 5 cards: 3 on top, 2 centered below */
@@ -401,18 +463,17 @@ body > header {
 
 /* ──────────────────────── FOOTER STYLING ──────────────────────── */
 .footerislast {
-    background: rgba(9, 10, 11, 0.75);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-top: 1px solid var(--border);
+    background: rgba(9, 10, 11, 0.85);
+    border-top: 0.063rem solid var(--border);
     color: var(--text);
-    padding: 3rem 2rem;
+    padding: 3rem 5vw;
+    margin-top: auto;
     z-index: 3;
     position: relative;
 }
 
 .row.primary {
-    max-width: 1100px;
+    max-width: 100%;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -432,7 +493,7 @@ body > header {
     font-weight: 900;
     color: rgba(242, 193, 86, 0.95);
     text-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.9);
-    border-bottom: 2px solid var(--border-gold);
+    border-bottom: 0.125rem solid var(--border-gold);
     padding-bottom: 0.4rem;
     text-transform: uppercase;
     letter-spacing: 0.125rem;
@@ -453,7 +514,7 @@ body > header {
 }
 
 .lielement i {
-    width: 16px;
+    width: 1rem;
     text-align: center;
     color: var(--gold);
     font-size: 0.9rem;
@@ -481,22 +542,30 @@ body > header {
     color: var(--text);
 }
 
-.map iframe {
-    border-radius: 8px;
-    border: 1px solid var(--border-gold) !important;
+.map {
+    max-width: 28.125rem;
     width: 100%;
-    height: 240px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    margin-left: auto;
+}
+
+.map iframe {
+    border-radius: 0.5rem;
+    border: 0.063rem solid var(--border-gold) !important;
+    width: 100%;
+    height: 12.5rem;
+    box-shadow: 0 0.625rem 1.563rem rgba(0, 0, 0, 0.4);
 }
 
 /* ──────────────────────── RESPONSIVE DESIGN ──────────────────────── */
-@media (max-width: 900px) {
+@media (max-width: 56.25em) {
     .decor-corner {
         display: none;
     }
 
     .team-viewport {
         padding-top: calc(var(--navbar-h) + 2rem);
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
     }
 
     .team-grid,
@@ -522,24 +591,32 @@ body > header {
         gap: 2rem;
     }
 
+    .map {
+        margin: 0 auto;
+    }
+
     .map iframe {
-        height: 200px;
+        height: 11.25rem;
     }
 }
  
 /* ──────────────────────── GRID TITLE STYLING ──────────────────────── */
 .team-section-title {
-    grid-column: span 2;
     text-align: center;
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 2.2rem;
+    font-size: 1.9rem;
     color: var(--gold);
-    margin-top: 3.5rem;
-    margin-bottom: 1.8rem;
+    margin: 0 0 0.8rem 0;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    text-shadow: 0 0.25rem 0.938rem rgba(0, 0, 0, 0.4);
+    border-bottom: 0.063rem solid rgba(215, 162, 52, 0.2);
+    padding-bottom: 0.6rem;
+}
+
+.team-section-title::after {
+    display: none;
 }
 
 .team-subsection-title {

@@ -2,16 +2,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&family=Montserrat:wght@300;400;600;700;900&family=Alumni+Sans+Collegiate+One:ital@0;1&family=Graduate&display=swap');
 
 /* Fluid typography for identical scaling across laptop screens */
-@media (min-width: 1024px) {
+@media (min-width: 64em) {
     html {
-        font-size: clamp(10.6px, 1.0416vw, 16px) !important;
+        font-size: clamp(0.6625rem, 1.0416vw, 1rem) !important;
     }
 }
 
 /* Scale down globally for mobile to prevent oversized elements */
-@media (max-width: 850px) {
+@media (max-width: 53.125em) {
     html {
-        font-size: 13.5px !important;
+        font-size: 0.844rem !important;
     }
 }
 

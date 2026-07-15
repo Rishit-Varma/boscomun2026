@@ -21,7 +21,7 @@
     --text-muted:  #a6a5a0;
     --border:      rgba(255, 255, 255, 0.08);
     --border-gold: rgba(215, 162, 52, 0.15);
-    --navbar-h:    70px;
+    --navbar-h:    4.375rem;
 }
 
 html, body {
@@ -69,7 +69,7 @@ header {
 
 .chambers-container {
     width: 100%;
-    max-width: 1550px;
+    max-width: 96.875rem;
     display: flex;
     flex-direction: column;
     gap: 4rem;
@@ -111,13 +111,13 @@ header {
     position: relative;
     flex: 1 1 0;
     min-width: 0;
-    max-width: 250px;
+    max-width: 15.625rem;
     background: rgba(14, 15, 17, 0.4);
-    border: 1.5px solid var(--border-gold);
-    border-radius: 14px;
+    border: 0.094rem solid var(--border-gold);
+    border-radius: 0.875rem;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0.938rem 2.5rem rgba(0, 0, 0, 0.4);
     overflow: hidden;
     transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
     display: flex;
@@ -129,18 +129,18 @@ header {
 .committee-card::before {
     content: "";
     position: absolute;
-    inset: 6px;
-    border: 1px dashed rgba(242, 193, 86, 0.12);
-    border-radius: 8px;
+    inset: 0.375rem;
+    border: 0.063rem dashed rgba(242, 193, 86, 0.12);
+    border-radius: 0.5rem;
     pointer-events: none;
     z-index: 1;
     transition: border-color 0.4s;
 }
 
 .committee-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-0.5rem);
     border-color: var(--gold);
-    box-shadow: 0 20px 45px rgba(242, 193, 86, 0.15), 0 5px 15px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 1.25rem 2.813rem rgba(242, 193, 86, 0.15), 0 0.313rem 0.938rem rgba(0, 0, 0, 0.6);
 }
 
 .committee-card:hover::before {
@@ -149,7 +149,7 @@ header {
 
 .card-glow {
     position: absolute;
-    top: 0; left: 0; right: 0; height: 180px;
+    top: 0; left: 0; right: 0; height: 11.25rem;
     background: radial-gradient(circle at top, rgba(242, 193, 86, 0.04) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
@@ -188,9 +188,9 @@ header {
     letter-spacing: 0.15em;
     color: var(--gold);
     text-transform: uppercase;
-    border: 1px solid rgba(242, 193, 86, 0.25);
-    padding: 4px 10px;
-    border-radius: 50px;
+    border: 0.063rem solid rgba(242, 193, 86, 0.25);
+    padding: 0.25rem 0.625rem;
+    border-radius: 3.125rem;
     background: rgba(242, 193, 86, 0.03);
     margin-bottom: 1.8rem;
     transition: background 0.3s, border-color 0.3s;
@@ -203,8 +203,8 @@ header {
 
 .logo-container {
     position: relative;
-    width: 210px;
-    height: 210px;
+    width: 13.125rem;
+    height: 13.125rem;
     margin-bottom: 0.6rem;
 }
 
@@ -219,12 +219,12 @@ header {
 
 .committee-card:hover .committee-logo {
     transform: scale(1.08);
-    filter: drop-shadow(0 0 15px rgba(242, 193, 86, 0.35));
+    filter: drop-shadow(0 0 0.938rem rgba(242, 193, 86, 0.35));
 }
 
 .logo-glow-ring {
     position: absolute;
-    inset: -8px;
+    inset: -0.5rem;
     border-radius: 50%;
     background: radial-gradient(circle, rgba(242, 193, 86, 0.15) 0%, transparent 70%);
     opacity: 0;
@@ -266,7 +266,7 @@ header {
 
 .card-divider {
     width: 100%;
-    height: 1px;
+    height: 0.063rem;
     background: linear-gradient(to right, transparent, rgba(242, 193, 86, 0.25), transparent);
     margin-bottom: 1.5rem;
 }
@@ -274,8 +274,8 @@ header {
 .agenda-block {
     width: 100%;
     background: rgba(255, 255, 255, 0.012);
-    border: 1px dashed rgba(242, 193, 86, 0.15);
-    border-radius: 6px;
+    border: 0.063rem solid rgba(242, 193, 86, 0.15);
+    border-radius: 0.375rem;
     padding: 1rem 1.2rem;
     margin-bottom: 1.5rem;
     text-align: left;
@@ -308,14 +308,14 @@ header {
     flex-direction: column;
     gap: 0.6rem;
     margin-bottom: 1.8rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 0.063rem solid rgba(255, 255, 255, 0.05);
     padding-top: 1.2rem;
 }
 
 .meta-row {
     display: flex;
     justify-content: space-between;
-    gap: 15px;
+    gap: 0.938rem;
     font-size: 0.78rem;
     line-height: 1.4;
 }
@@ -348,8 +348,8 @@ header {
     letter-spacing: 0.15em;
     color: var(--text);
     text-decoration: none;
-    border-bottom: 1.5px solid var(--gold);
-    padding-bottom: 5px;
+    border-bottom: 0.094rem solid var(--gold);
+    padding-bottom: 0.313rem;
     transition: all 0.3s ease;
     cursor: pointer;
     position: relative;
@@ -379,14 +379,14 @@ body.detail-page {
 }
 
 .detail-container {
-    max-width: 960px;
+    max-width: 60rem;
     margin: calc(var(--navbar-h) + 4rem) auto 4rem auto;
     padding: 2.125rem 2.55rem 4.25rem 2.55rem;
     min-height: 78vh;
     background: rgba(14, 15, 17, 0.5);
-    border: 1px solid var(--border-gold);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-    border-radius: 8px;
+    border: 0.063rem solid var(--border-gold);
+    box-shadow: 0 1.25rem 3.125rem rgba(0, 0, 0, 0.6);
+    border-radius: 0.5rem;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     text-align: center;
@@ -401,10 +401,10 @@ body.detail-page {
 .detail-container::before {
     content: "";
     position: absolute;
-    inset: 6px;
-    border: 1px dashed rgba(242, 193, 86, 0.12);
+    inset: 0.375rem;
+    border: 0.063rem dashed rgba(242, 193, 86, 0.12);
     pointer-events: none;
-    border-radius: 6px;
+    border-radius: 0.375rem;
 }
 
 .detail-header-block {
@@ -421,10 +421,10 @@ body.detail-page {
     width: 9.5rem;
     height: 9.5rem;
     border-radius: 50%;
-    border: 1px solid var(--border-gold);
+    border: 0.063rem solid var(--border-gold);
     background-color: rgba(9, 10, 11, 0.75);
     padding: 0;
-    box-shadow: 0 0 15px rgba(242, 193, 86, 0.12);
+    box-shadow: 0 0 0.938rem rgba(242, 193, 86, 0.12);
     object-fit: contain;
     flex-shrink: 0;
     transform: none;
@@ -444,8 +444,8 @@ body.detail-page {
 
 .detail-meta-box {
     background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--border-gold);
-    border-radius: 8px;
+    border: 0.063rem solid var(--border-gold);
+    border-radius: 0.5rem;
     padding: 1.2rem 1.8rem;
     margin: 1.5rem 0 2rem 0;
     display: flex;
@@ -459,9 +459,9 @@ body.detail-page {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 0.063rem solid var(--border);
     padding-bottom: 0.6rem;
-    gap: 20px;
+    gap: 1.25rem;
 }
 
 .meta-row:last-child,
@@ -476,7 +476,7 @@ body.detail-page {
     font-weight: 700;
     font-size: 0.95rem;
     text-transform: uppercase;
-    letter-spacing: 0.8px;
+    letter-spacing: 0.05rem;
     white-space: nowrap;
 }
 
@@ -510,8 +510,8 @@ body.detail-page {
 
 .eb-card {
     background: rgba(255, 255, 255, 0.02);
-    border: 1px solid var(--border);
-    border-radius: 6px;
+    border: 0.063rem solid var(--border);
+    border-radius: 0.375rem;
     padding: 1.1rem;
     transition: transform 0.3s ease, border-color 0.3s ease;
     text-align: center;
@@ -530,7 +530,7 @@ body.detail-page {
     text-transform: uppercase;
     font-weight: 700;
     margin-bottom: 0.4rem;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.031rem;
 }
 
 .eb-name {
@@ -547,7 +547,7 @@ body.detail-page {
     margin: 2.5rem 0 1.2rem 0;
     text-transform: uppercase;
     text-align: left;
-    border-bottom: 1px solid var(--border-gold);
+    border-bottom: 0.063rem solid var(--border-gold);
     padding-bottom: 0.5rem;
     letter-spacing: 0.125rem;
     font-weight: 900;
@@ -558,8 +558,8 @@ body.detail-page {
     position: relative;
     background: var(--card-bg);
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='none' stroke='%23f2c156' stroke-width='0.5' stroke-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='28'/%3E%3Ccircle cx='0' cy='0' r='28'/%3E%3Ccircle cx='60' cy='0' r='28'/%3E%3Ccircle cx='0' cy='60' r='28'/%3E%3Ccircle cx='60' cy='60' r='28'/%3E%3C/g%3E%3C/svg%3E");
-    border: 1px solid var(--border-gold);
-    border-radius: 8px;
+    border: 0.063rem solid var(--border-gold);
+    border-radius: 0.5rem;
     padding: 2rem;
     margin-bottom: 2rem;
     text-align: left;
@@ -570,10 +570,10 @@ body.detail-page {
 .detail-desc-card::before {
     content: "";
     position: absolute;
-    inset: 6px;
-    border: 1px dashed rgba(242, 193, 86, 0.12);
+    inset: 0.375rem;
+    border: 0.063rem dashed rgba(242, 193, 86, 0.12);
     pointer-events: none;
-    border-radius: 6px;
+    border-radius: 0.375rem;
 }
 
 .detail-desc-card p {
@@ -586,8 +586,8 @@ body.detail-page {
 
 .detail-desc-card p strong {
     color: var(--text);
-    border-bottom: 1px dotted rgba(242, 193, 86, 0.4);
-    padding-bottom: 1px;
+    border-bottom: 0.063rem dotted rgba(242, 193, 86, 0.4);
+    padding-bottom: 0.063rem;
 }
 
 .detail-desc-card p:last-child { margin-bottom: 0; }
@@ -606,7 +606,7 @@ body.detail-page {
     padding: 0.8rem 1.8rem;
     font-weight: 600;
     text-decoration: none;
-    border-radius: 4px;
+    border-radius: 0.25rem;
     transition: all 0.3s ease;
     cursor: pointer;
     font-size: 0.85rem;
@@ -615,29 +615,29 @@ body.detail-page {
 .btn-primary {
     background: transparent;
     color: var(--gold);
-    border: 1px solid var(--gold);
+    border: 0.063rem solid var(--gold);
 }
 
 .btn-primary:hover {
     background: rgba(242, 193, 86, 0.08);
-    box-shadow: 0 4px 15px rgba(242, 193, 86, 0.15);
-    transform: translateY(-2px);
+    box-shadow: 0 0.25rem 0.938rem rgba(242, 193, 86, 0.15);
+    transform: translateY(-0.125rem);
 }
 
 .btn-secondary {
     background: transparent;
     color: var(--gold);
-    border: 1px solid var(--border);
+    border: 0.063rem solid var(--border);
 }
 
 .btn-secondary:hover {
     background: rgba(242, 193, 86, 0.05);
     border-color: var(--gold);
-    transform: translateY(-2px);
+    transform: translateY(-0.125rem);
 }
 
 /* ──────────────────────── RESPONSIVE MEDIA QUERIES ──────────────────────── */
-@media (max-width: 992px) {
+@media (max-width: 62em) {
     .chambers-grid {
         flex-direction: column;
         align-items: center;
@@ -657,15 +657,16 @@ body.detail-page {
     .page-title {
         font-size: 2.2rem;
     }
-.profile-image-container {
-    margin-bottom: 1.7rem !important;
+    .profile-image-container {
+        margin-bottom: 1.7rem !important;
+    }
+
+    .profile-image-container img {
+        width: 100%;
+    }
 }
 
-.profile-image-container img {
-    width: 100%;
-}
-
-@media (max-width: 900px) {
+@media (max-width: 56.25em) {
     .detail-logo,
     .detail-logo-page {
         transform: none;
