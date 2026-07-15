@@ -554,11 +554,8 @@ body::before {
     bottom: 12vh;
     font-family: 'Freshman', sans-serif;
     font-size: clamp(1.4rem, 3.5vw, 2.2rem);
-    color: transparent;
-    background: var(--gold-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--gold-primary);
+    -webkit-text-fill-color: var(--gold-primary);
     letter-spacing: 0.25rem;
     filter: drop-shadow(0 0.125rem 0.25rem rgba(0,0,0,0.9));
     transition: opacity 0.6s ease;

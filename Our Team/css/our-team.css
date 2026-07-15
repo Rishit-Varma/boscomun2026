@@ -366,15 +366,31 @@ body > header {
     font-weight: 700;
 }
 
-/* ── EB section: equal-width pills, bigger font ── */
+/* ── EB section: no pills, no hover ── */
 .eb-grid .member-item {
-    min-width: 13.75rem;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    padding: 0.7rem 0;
+    min-width: 0;
     justify-content: center;
 }
 
+.eb-grid .member-item:hover {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    transform: none;
+}
+
 .eb-grid .member-name {
-    font-size: 1.15rem;
+    font-size: 1.25rem;
     font-weight: 600;
+}
+
+.eb-role-text {
+    color: var(--text);
+    font-weight: 500;
 }
 
 /* Highlighted executive roles with contact links */
@@ -436,8 +452,8 @@ body > header {
 
 /* ──────────────────────── EXECUTIVE BOARDS GRID ──────────────────────── */
 .section-break {
-    margin-top: 4.5rem;
-    margin-bottom: 2.5rem;
+    margin-top: 5rem;
+    margin-bottom: 3.8rem;
 }
 
 .eb-grid {
