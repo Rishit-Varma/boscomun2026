@@ -334,7 +334,8 @@ body::before {
     width: 100%;
     max-width: 53.125rem;
     height: auto;
-    overflow: hidden;
+    max-height: 100%;
+    overflow-y: auto;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     z-index: 2;
@@ -346,12 +347,27 @@ body::before {
                 max-width 0.45s cubic-bezier(0.25, 0.46, 0.45, 1);
 }
 
+.dossier-card::-webkit-scrollbar {
+    width: 0.25rem;
+}
+.dossier-card::-webkit-scrollbar-track {
+    background: transparent;
+}
+.dossier-card::-webkit-scrollbar-thumb {
+    background: rgba(242, 193, 86, 0.2);
+    border-radius: 0.125rem;
+}
+.dossier-card::-webkit-scrollbar-thumb:hover {
+    background: rgba(242, 193, 86, 0.4);
+}
+
 .ledger-grid.reader-active .dossier-card {
     border-color: transparent;
     border-radius: 0.5rem;
     height: calc(100% - 2.5rem);
     margin-top: 2.5rem;
     max-width: 100%;
+    overflow: hidden;
 }
 .ledger-grid.reader-active .card-inner {
     height: 100%;
