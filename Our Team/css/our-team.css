@@ -614,6 +614,20 @@ body > header {
     .map iframe {
         height: 11.25rem;
     }
+
+    .member-name {
+        font-size: 1.05rem !important;
+        white-space: normal !important;
+        text-align: center;
+    }
+
+    .member-item.highlighted .member-name {
+        font-size: 1.2rem !important;
+    }
+
+    .member-phone-text {
+        font-size: 0.95rem !important;
+    }
 }
  
 /* ──────────────────────── GRID TITLE STYLING ──────────────────────── */

@@ -413,7 +413,13 @@ body.detail-page {
     align-items: center;
     justify-content: center;
     gap: 0.8rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.profile-image-container {
+    margin-bottom: 0.75rem;
+    display: flex;
+    justify-content: center;
 }
  
 .detail-logo,
@@ -658,7 +664,7 @@ body.detail-page {
         font-size: 2.2rem;
     }
     .profile-image-container {
-        margin-bottom: 1.7rem !important;
+        margin-bottom: 0.5rem;
     }
 
     .profile-image-container img {
@@ -696,5 +702,10 @@ body.detail-page {
 
     .meta-value {
         text-align: left;
+    }
+
+    .detail-desc-card p {
+        font-size: 0.9rem;
+        line-height: 1.6;
     }
 }

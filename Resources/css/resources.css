@@ -39,6 +39,11 @@
     --navbar-h:    4.375rem;
 }
 
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
 html {
     background-color: var(--black);
 }
@@ -649,7 +654,8 @@ body::before {
 @media (max-width: 56.25em) {
     html, body {
         height: auto;
-        overflow: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
     }
 
     .decor-corner {
@@ -664,11 +670,13 @@ body::before {
         justify-content: flex-start;
     }
 
-    .ledger-grid {
+    .ledger-grid,
+    .ledger-grid.reader-active {
         grid-template-columns: 1fr;
         max-height: none;
         height: auto;
         gap: 2rem;
+        max-width: 100%;
     }
 
     .catalog-panel {
@@ -725,7 +733,7 @@ body::before {
     }
 
     .dossier-desc {
-        font-size: 1rem;
+        font-size: 0.85rem;
     }
 
     .dossier-actions {

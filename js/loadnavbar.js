@@ -324,10 +324,43 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
 
-        document.addEventListener("mouseleave", () => {
+        const hideCursor = () => {
             cursor.style.display = "none";
             cursorVisible = false;
+        };
+
+        document.addEventListener("mouseleave", hideCursor);
+        document.documentElement.addEventListener("mouseleave", hideCursor);
+        
+        document.addEventListener("mouseout", (e) => {
+            // Hide if mouse leaves viewport entirely or enters an iframe
+            if (!e.relatedTarget || e.relatedTarget.nodeName === "HTML" || e.relatedTarget.nodeName === "IFRAME") {
+                hideCursor();
+            }
         });
+
+        window.addEventListener("blur", hideCursor);
+
+        // Auto-hide custom cursor when mouse enters any iframe on the page (e.g. Google Maps, Google Drive)
+        const attachIframeListeners = () => {
+            document.querySelectorAll("iframe").forEach(iframe => {
+                if (iframe.dataset.cursorListenerAttached) return;
+                iframe.dataset.cursorListenerAttached = "true";
+                iframe.addEventListener("mouseenter", hideCursor);
+            });
+        };
+
+        // Attach listeners initially and on page load completion
+        attachIframeListeners();
+        window.addEventListener("load", attachIframeListeners);
+
+        // Monitor dynamically added iframes (like the PDF preview iframe in Resources)
+        if (window.MutationObserver) {
+            const iframeObserver = new MutationObserver(() => {
+                attachIframeListeners();
+            });
+            iframeObserver.observe(document.documentElement, { childList: true, subtree: true });
+        }
 
         document.addEventListener("mousedown", () => {
             cursor.classList.add("clicking");

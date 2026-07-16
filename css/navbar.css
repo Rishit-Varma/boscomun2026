@@ -349,8 +349,15 @@ body {
 }
 
 @media (max-width: 30em) {
+    .mob-navbar-container {
+        padding-top: 0;
+    }
     .mob-navbar {
+        max-width: 100%;
         border-radius: 0;
+        border-left: none;
+        border-right: none;
+        border-top: none;
     }
     .mob-navbar-text {
         font-size: 1.125rem;

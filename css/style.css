@@ -39,13 +39,17 @@
     padding: 0;
 }
 
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
 body {
     background: transparent;
     color: var(--gold-light);
     font-family: 'Playfair Display', serif;
     height: 100vh;
-    overflow-x: hidden;
-    width: 100vw;
+    width: 100%;
 }
 
 body::before {
@@ -369,9 +373,11 @@ body::before {
 }
 
 @media (max-width: 53.125em) {
-    body {
+    html, body {
         height: auto !important;
+        overflow-x: hidden !important;
         overflow-y: auto !important;
+        width: 100% !important;
     }
     
     .content-split-layout {
@@ -416,7 +422,7 @@ body::before {
 
 @media (max-width: 53.125em) {
     :root {
-        --logo-size: min(32.5rem, 55vh);
+        --logo-size: min(32.5rem, 80vw, 55vh);
     }
     
     .main-content-layout {
@@ -434,7 +440,7 @@ body::before {
 
 @media (max-width: 30em) {
     :root {
-        --logo-size: min(26rem, 50vh);
+        --logo-size: min(22rem, 85vw, 45vh);
     }
 
     .timer-column {

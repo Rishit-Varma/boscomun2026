@@ -390,7 +390,9 @@ header {
 @media (max-width: 56.25em) {
     html, body {
         height: auto;
+        overflow-x: hidden;
         overflow-y: auto;
+        width: 100%;
     }
     
     .about-splitscreen {
@@ -424,6 +426,11 @@ header {
     
     .lead-quote {
         margin-bottom: 2rem;
+    }
+
+    .editorial-text p {
+        font-size: 0.9rem;
+        line-height: 1.6;
     }
 }
 
