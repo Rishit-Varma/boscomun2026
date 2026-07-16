@@ -108,15 +108,13 @@ header {
 .brand-panel {
     position: relative;
     height: 100%;
-    background: rgba(9, 10, 11, 0.72);
+    background: rgba(9, 10, 11, 0.9);
     border-right: 1px solid var(--border);
     padding: calc(var(--navbar-h) + 1rem) 2rem 2rem 2rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
 }
 
 /* Bring all panel contents above the overlay */

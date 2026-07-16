@@ -336,8 +336,6 @@ body::before {
     height: auto;
     max-height: 100%;
     overflow-y: auto;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
     z-index: 2;
     margin-top: 0;
     transition: border-radius 0.45s cubic-bezier(0.25, 0.46, 0.45, 1),
@@ -883,9 +881,7 @@ body::before {
 /* Card design matching rich premium theme */
 .file-card {
     position: relative;
-    background: rgba(14, 15, 17, 0.4);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    background: rgba(14, 15, 17, 0.85);
     border: 0.063rem solid rgba(255, 255, 255, 0.1);
     border-radius: 0.75rem;
     flex: 1 1 0;

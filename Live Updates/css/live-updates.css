@@ -308,11 +308,10 @@ body::before {
 }
 
 .timeline-card {
-    background: rgba(26, 26, 26, 0.7);
+    background: rgba(26, 26, 26, 0.9);
     border: 0.063rem solid rgba(242, 193, 86, 0.35);
     border-radius: 0.75rem;
     padding: 1.5rem;
-    backdrop-filter: blur(12px);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.2);
 }
@@ -436,12 +435,11 @@ body::before {
 
 /* Sidebar Styling */
 .glass-card {
-    background: rgba(26, 26, 26, 0.65);
+    background: rgba(26, 26, 26, 0.9);
     border: 0.063rem solid rgba(242, 193, 86, 0.25);
     border-radius: 0.75rem;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
-    backdrop-filter: blur(12px);
     box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.25);
 }
 

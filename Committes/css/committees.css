@@ -116,11 +116,9 @@ header {
     flex: 1 1 0;
     min-width: 0;
     max-width: 15.625rem;
-    background: rgba(14, 15, 17, 0.4);
+    background: rgba(14, 15, 17, 0.85);
     border: 0.094rem solid var(--border-gold);
     border-radius: 0.875rem;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
     box-shadow: 0 0.938rem 2.5rem rgba(0, 0, 0, 0.4);
     overflow: hidden;
     transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -395,12 +393,10 @@ body.detail-page {
     margin: calc(var(--navbar-h) + 4rem) auto 4rem auto;
     padding: 2.125rem 2.55rem 4.25rem 2.55rem;
     min-height: 78vh;
-    background: rgba(14, 15, 17, 0.5);
+    background: rgba(14, 15, 17, 0.85);
     border: 0.063rem solid var(--border-gold);
     box-shadow: 0 1.25rem 3.125rem rgba(0, 0, 0, 0.6);
     border-radius: 0.5rem;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
     text-align: center;
     display: flex;
     flex-direction: column;
