@@ -62,7 +62,7 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* Background layer without blur */
+/* Background layer */
 body::before {
     content: '';
     position: fixed;

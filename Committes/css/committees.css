@@ -38,7 +38,8 @@ html, body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* Background layer without blur */
+
+/* Background layer */
 body::before {
     content: '';
     position: fixed;
@@ -65,10 +66,10 @@ header {
     margin-top: var(--navbar-h);
     width: 100%;
     min-height: calc(100vh - var(--navbar-h));
-    padding: 5rem 4vw;
+    padding: 6rem 4vw 5rem;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .chambers-container {
