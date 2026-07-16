@@ -632,6 +632,29 @@ body > header {
     .member-phone-text {
         font-size: 0.95rem !important;
     }
+
+    /* Line appears before the title in mobile */
+    .page-header {
+        flex-direction: column;
+    }
+    .header-rule {
+        order: -1;
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Bigger "Our Team" and "The Executive Boards" headings */
+    .main-title {
+        font-size: clamp(2rem, 8vw, 3.2rem);
+    }
+    .team-section-title {
+        font-size: 1.55rem;
+    }
+
+    /* Smaller committee name headings in EB cards */
+    .team-heading {
+        font-size: 1.5rem;
+    }
 }
  
 /* ──────────────────────── GRID TITLE STYLING ──────────────────────── */

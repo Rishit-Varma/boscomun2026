@@ -135,7 +135,7 @@ header {
 
 .brand-logo {
     width: 100%;
-    max-width: 18.5rem; /* Bigger logo */
+    max-width: 19.43rem; /* Bigger logo */
     height: auto;
     aspect-ratio: 1 / 1;
     object-fit: contain;
@@ -145,6 +145,7 @@ header {
     background: rgba(9, 10, 11, 0.6);
     box-shadow: 0 0 25px rgba(242, 193, 86, 0.15);
     align-self: center; /* Center horizontally in flex column */
+    margin-top: 1.5rem;
 }
 
 .brand-titles {
