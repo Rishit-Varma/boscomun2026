@@ -267,6 +267,7 @@ body::before {
     max-width: 43.75rem;
     margin: 0 auto 0.8rem auto;
     grid-column: 1 / -1; /* Always spans full width of parent grid */
+    transform: translateY(2.5rem);
 }
 
 .divider-line {
@@ -421,6 +422,7 @@ body::before {
         grid-column: 1 / -1;
         width: 100%;
         margin: 0 auto 1rem auto;
+        transform: none;
     }
 
     .theme-title {

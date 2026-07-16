@@ -38,14 +38,14 @@ html, body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* Blurred background layer */
+/* Background layer without blur */
 body::before {
     content: '';
     position: fixed;
-    inset: -20px; /* Expanded past edges to hide blur margin bleeding */
+    inset: 0;
     background: url("../../css/bg.avif") no-repeat center center;
     background-size: cover;
-    filter: blur(5px) brightness(0.65);
+    filter: brightness(0.65);
     z-index: -1;
     pointer-events: none;
 }
@@ -261,6 +261,19 @@ header {
     line-height: 1.4;
     min-height: 2.8rem;
     margin-bottom: 1.5rem;
+}
+
+/* Shift specific committee page titles in desktop view only */
+@media (min-width: 56.25em) {
+    .lon-page .detail-title {
+        transform: translateX(6.5rem);
+    }
+    .wwc-page .detail-title {
+        transform: translateX(4.5rem);
+    }
+    .oic-page .detail-title {
+        transform: translateX(-4.5rem);
+    }
 }
 
 .card-divider {
