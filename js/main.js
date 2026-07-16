@@ -30,8 +30,10 @@ document.addEventListener("DOMContentLoaded", function() {
                     // Set CSS variables for the exact reveal starting point
                     const logoCenterX = pageRect.left + pageRect.width / 2;
                     const logoCenterY = pageRect.top + pageRect.height / 2;
+                    const logoRadius = pageRect.width / 2;
                     document.documentElement.style.setProperty('--logo-x', `${logoCenterX}px`);
                     document.documentElement.style.setProperty('--logo-y', `${logoCenterY}px`);
+                    document.documentElement.style.setProperty('--logo-r', `${logoRadius}px`);
                     
                     // Trigger smooth transition
                     loaderLogo.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${scale})`;

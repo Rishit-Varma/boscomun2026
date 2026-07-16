@@ -378,7 +378,7 @@ body.detail-page {
 }
 
 .detail-container {
-    max-width: 52rem;
+    max-width: 68rem;
     margin: calc(var(--navbar-h) + 4rem) auto 4rem auto;
     padding: 2.125rem 2.55rem 4.25rem 2.55rem;
     min-height: 78vh;

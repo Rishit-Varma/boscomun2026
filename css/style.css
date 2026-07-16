@@ -377,14 +377,12 @@ body::before {
 }
 
 @media (max-width: 53.125em) {
-    html {
-        background-color: #0b0d10 !important;
-    }
     html, body {
         height: auto !important;
         overflow-x: hidden !important;
         overflow-y: auto !important;
         width: 100% !important;
+        background-color: #0b0d10 !important;
     }
     
     .content-split-layout {
@@ -506,13 +504,15 @@ body::before {
 
 /* ===== INTRO LOADER SHAPE TRANSITION ===== */
 .loader-active .main-content-layout {
-    clip-path: circle(0% at var(--logo-x, 49.2vw) var(--logo-y, 55vh));
+    clip-path: circle(var(--logo-r, 0px) at var(--logo-x, 49.2vw) var(--logo-y, 55vh));
     transition: clip-path 1.6s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 .loader-active.reveal-content .main-content-layout {
     clip-path: circle(150% at var(--logo-x, 49.2vw) var(--logo-y, 55vh));
 }
+
+
 
 .intro-loader {
     position: fixed;
