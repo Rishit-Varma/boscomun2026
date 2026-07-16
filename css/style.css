@@ -39,6 +39,10 @@
     padding: 0;
 }
 
+html {
+    background-color: #0b0d10 !important;
+}
+
 html, body {
     overflow-x: hidden;
     width: 100%;
@@ -373,6 +377,9 @@ body::before {
 }
 
 @media (max-width: 53.125em) {
+    html {
+        background-color: #0b0d10 !important;
+    }
     html, body {
         height: auto !important;
         overflow-x: hidden !important;

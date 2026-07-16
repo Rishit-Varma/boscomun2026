@@ -24,6 +24,10 @@
     --navbar-h:    4.375rem;
 }
 
+html {
+    background-color: #0b0d10 !important;
+}
+
 html, body {
     height: 100%;
     overflow-x: hidden;
@@ -411,7 +415,7 @@ body.detail-page {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 0.8rem;
     margin-bottom: 1.5rem;
 }
@@ -520,7 +524,7 @@ body.detail-page {
     border-radius: 0.375rem;
     padding: 1.1rem;
     transition: transform 0.3s ease, border-color 0.3s ease;
-    text-align: center;
+    text-align: left;
 }
 
 .eb-card:hover {

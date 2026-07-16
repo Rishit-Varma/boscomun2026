@@ -37,6 +37,10 @@
     --navbar-h:    4.375rem;
 }
 
+html {
+    background-color: #0b0d10 !important;
+}
+
 html, body {
     height: 100%;
     overflow: hidden; /* STRICTLY NO SCROLLING ON DESKTOP */
@@ -388,6 +392,10 @@ header {
 
 /* ───────────────────────── RESPONSIVE FALLBACK ───────────────────────── */
 @media (max-width: 56.25em) {
+    html {
+        background-color: #0b0d10 !important;
+    }
+    
     html, body {
         height: auto;
         overflow-x: hidden;
