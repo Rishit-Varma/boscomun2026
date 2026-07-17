@@ -44,7 +44,7 @@ body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background: url("../../css/bg.avif") no-repeat center center;
+    background: #0b0d10 url("../../css/bg.avif") no-repeat center center;
     background-size: cover;
     z-index: -1;
     pointer-events: none;
@@ -687,6 +687,10 @@ body.detail-page {
 }
 
 @media (max-width: 56.25em) {
+    html, body {
+        background-color: transparent !important;
+    }
+
     .detail-logo,
     .detail-logo-page {
         position: static;

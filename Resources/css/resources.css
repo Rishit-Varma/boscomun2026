@@ -67,7 +67,7 @@ body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background: url("../../css/bg.avif") no-repeat center center;
+    background: #08090a url("../../css/bg.avif") no-repeat center center;
     background-size: cover;
     z-index: -1;
     pointer-events: none;
@@ -670,12 +670,13 @@ body::before {
 /* ──────────────────────── RESPONSIVE DESIGN ──────────────────────── */
 @media (max-width: 56.25em) {
     html {
-        background-color: #08090a !important;
+        background-color: transparent !important;
     }
     html, body {
         height: auto;
         overflow-x: hidden;
         overflow-y: auto;
+        background-color: transparent !important;
     }
 
     .decor-corner {
