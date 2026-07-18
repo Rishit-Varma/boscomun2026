@@ -3,6 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
+    <script>
+        try {
+            if (sessionStorage.getItem('visited')) {
+                document.documentElement.classList.add('skip-loader');
+            }
+        } catch (e) {
+            console.warn('sessionStorage not available:', e);
+        }
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bosco MUN 2026</title>
     <link rel="stylesheet" href="./css/style.css">

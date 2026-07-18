@@ -51,56 +51,6 @@ async function fetchResource(url, resourceType) {
     }
 }
 
-// Load and apply CSS
-async function loadCSS() {
-    try {
-        const cssText = await fetchResource(config.cssPath, "CSS");
-        const style = document.createElement("style");
-        style.textContent = cssText;
-        document.head.appendChild(style);
-        console.log("Navbar CSS loaded successfully");
-    } catch (error) {
-        console.warn("Proceeding without navbar styles");
-        // Non-fatal error, continue with loading HTML
-    }
-}
-
-// Load and process HTML with inline scripts
-async function loadHTML() {
-    try {
-        const container = document.getElementById(config.containerId);
-
-        if (!container) {
-            throw new Error(
-                `Navigation container #${config.containerId} not found on page`
-            );
-        }
-
-        let htmlContent = await fetchResource(config.htmlPath, "HTML");
-        if (!isInSubdir) {
-            htmlContent = htmlContent.replace(/(src|href)="\.\.\//g, '$1="./');
-        }
-        container.innerHTML = htmlContent;
-
-        // Process any inline scripts that came with the HTML
-        processInlineScripts(container);
-        console.log("Navbar HTML loaded successfully");
-    } catch (error) {
-        console.error("Failed to load navbar HTML:", error);
-
-        // Add visible error state for users
-        const container = document.getElementById(config.containerId);
-        if (container) {
-            container.innerHTML = `
-          <div style="padding: 10px; background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; border-radius: 4px;">
-            Navigation could not be loaded. Please try refreshing the page.
-          </div>
-        `;
-        }
-        throw error; // Re-throw to stop the sequence
-    }
-}
-
 // Process inline scripts from the fetched HTML
 function processInlineScripts(container) {
     const scripts = container.querySelectorAll("script");
@@ -122,40 +72,134 @@ function processInlineScripts(container) {
     });
 }
 
-// Load and execute JS
-async function loadJS() {
-    try {
-        const jsContent = await fetchResource(config.jsPath, "JavaScript");
-        const script = document.createElement("script");
-        script.textContent = jsContent;
-        document.body.appendChild(script);
-        console.log("Navbar JS loaded successfully");
-    } catch (error) {
-        console.error("Failed to load navbar JavaScript:", error);
-        // JS failure is non-fatal if HTML/CSS are already loaded
-    }
-}
-
-// Execute the complete loading sequence
+// Execute the complete loading sequence in parallel
 async function loadNavbar() {
     try {
-        // Sequential loading for proper dependencies
-        await loadCSS(); // First load styles
-        await loadHTML(); // Then load structure
-        await loadJS(); // Finally load behavior
+        // Start fetches in parallel
+        const cssPromise = fetchResource(config.cssPath, "CSS").catch(err => {
+            console.warn("Proceeding without navbar styles", err);
+            return null;
+        });
+        const htmlPromise = fetchResource(config.htmlPath, "HTML");
+        const jsPromise = fetchResource(config.jsPath, "JavaScript").catch(err => {
+            console.warn("Proceeding without navbar script behavior", err);
+            return null;
+        });
+
+        // Wait for all fetches to resolve
+        const [cssText, htmlText, jsText] = await Promise.all([cssPromise, htmlPromise, jsPromise]);
+
+        // 1. Inject CSS
+        if (cssText) {
+            const style = document.createElement("style");
+            style.textContent = cssText;
+            document.head.appendChild(style);
+        }
+
+        // 2. Inject HTML
+        const container = document.getElementById(config.containerId);
+        if (!container) {
+            throw new Error(`Navigation container #${config.containerId} not found on page`);
+        }
+        let htmlContent = htmlText;
+        if (!isInSubdir) {
+            htmlContent = htmlContent.replace(/(src|href)="\.\.\//g, '$1="./');
+        }
+        container.innerHTML = htmlContent;
+        processInlineScripts(container);
+
+        // 3. Inject JS
+        if (jsText) {
+            const script = document.createElement("script");
+            script.textContent = jsText;
+            document.body.appendChild(script);
+        }
+
         console.log("Navbar loaded completely");
     } catch (error) {
         console.error("Navbar loading sequence failed:", error);
+        const container = document.getElementById(config.containerId);
+        if (container) {
+            container.innerHTML = `
+                <div style="padding: 10px; background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; border-radius: 4px; text-align: center;">
+                    Navigation could not be loaded. Please try refreshing the page.
+                </div>
+            `;
+        }
     }
 }
 
 // Start the loading process
 loadNavbar();
-document.addEventListener("DOMContentLoaded", function() {
+function initProtectionsAndCursor() {
+    // Zoom control & prevention logic
+    const blockZoom = () => {
+        // Prevent key combinations (Ctrl + +/-, Ctrl + 0)
+        document.addEventListener('keydown', (e) => {
+            const isZoomKey = (
+                (e.ctrlKey || e.metaKey) && 
+                (e.key === '+' || e.key === '-' || e.key === '=' || e.key === '0' || e.keyCode === 187 || e.keyCode === 189 || e.keyCode === 48 || e.keyCode === 96 || e.keyCode === 107 || e.keyCode === 109)
+            );
+            if (isZoomKey) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent wheel zoom (Ctrl + mouse wheel)
+        document.addEventListener('wheel', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+    };
+
+    const checkZoomLevel = () => {
+        if (!window.matchMedia("(pointer: fine)").matches) return;
+
+        // Compare total window width to internal viewport width (excludes scrollbars roughly, so we use a margin of error)
+        const zoomFactor = window.outerWidth / window.innerWidth;
+        let warningBanner = document.getElementById('zoom-warning-banner');
+
+        // Check if browser zoom is deviated by more than 15% from 100%
+        if (zoomFactor < 0.85 || zoomFactor > 1.15) {
+            if (!warningBanner) {
+                warningBanner = document.createElement('div');
+                warningBanner.id = 'zoom-warning-banner';
+                warningBanner.innerHTML = `
+                    <div style="position: fixed; top: 0; left: 0; width: 100%; background: rgba(215, 162, 52, 0.98); color: #0b0d10; text-align: center; padding: 10px 24px; font-family: 'Space Grotesk', sans-serif; font-size: clamp(0.85rem, 2vw, 1rem); font-weight: 700; z-index: 1000000; box-shadow: 0 4px 20px rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; gap: 15px; border-bottom: 2px solid #0b0d10; backdrop-filter: blur(8px); animation: slideDown 0.3s ease-out;">
+                        <span style="letter-spacing: 0.02em;">⚠️ Browser zoom detected at ${Math.round(zoomFactor * 100)}%. For the best visual experience, please reset zoom to 100% (Press Ctrl + 0 or Cmd + 0).</span>
+                        <button onclick="this.parentElement.parentElement.remove()" style="background: #0b0d10; color: #d7a234; border: 1px solid rgba(215, 162, 52, 0.3); border-radius: 4px; padding: 4px 12px; cursor: pointer; font-weight: 700; font-family: inherit; font-size: 0.85rem; transition: background 0.2s;">Dismiss</button>
+                    </div>
+                    <style>
+                        @keyframes slideDown {
+                            from { transform: translateY(-100%); }
+                            to { transform: translateY(0); }
+                        }
+                    </style>
+                `;
+                document.body.appendChild(warningBanner);
+            } else {
+                const textSpan = warningBanner.querySelector('span');
+                if (textSpan) {
+                    textSpan.textContent = `⚠️ Browser zoom detected at ${Math.round(zoomFactor * 100)}%. For the best visual experience, please reset zoom to 100% (Press Ctrl + 0 or Cmd + 0).`;
+                }
+            }
+        } else {
+            if (warningBanner) {
+                warningBanner.remove();
+            }
+        }
+    };
+
+    blockZoom();
+    checkZoomLevel();
+    window.addEventListener('resize', checkZoomLevel);
+
     // Copy protection
     document.addEventListener("copy", (e) => {
         const target = e.target;
-        if (target.tagName === "INPUT" || target.tagName === "TEXTAREA") {
+        if (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable) {
             return true;
         }
         e.preventDefault();
@@ -165,7 +209,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Cut protection
     document.addEventListener("cut", (e) => {
         const target = e.target;
-        if (target.tagName === "INPUT" || target.tagName === "TEXTAREA") {
+        if (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable) {
             return true;
         }
         e.preventDefault();
@@ -175,7 +219,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Paste protection
     document.addEventListener("paste", (e) => {
         const target = e.target;
-        if (target.tagName === "INPUT" || target.tagName === "TEXTAREA") {
+        if (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable) {
             return true;
         }
         e.preventDefault();
@@ -185,7 +229,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Right-click protection
     document.addEventListener("contextmenu", (e) => {
         const target = e.target;
-        if (target.tagName === "INPUT" || target.tagName === "TEXTAREA") {
+        if (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable) {
             return true;
         }
         e.preventDefault();
@@ -195,7 +239,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Text selection protection
     document.addEventListener("selectstart", (e) => {
         const target = e.target;
-        if (target.tagName === "INPUT" || target.tagName === "TEXTAREA") {
+        if (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable) {
             return true;
         }
         e.preventDefault();
@@ -293,7 +337,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 --rotate: -20deg;
             }
             @media (pointer: fine) {
-                html, body, a, button, select, textarea, input, [role="button"], .register-item, .committee-emblem-card, .file-card {
+                .has-custom-cursor,
+                .has-custom-cursor a,
+                .has-custom-cursor button,
+                .has-custom-cursor select,
+                .has-custom-cursor [role="button"],
+                .has-custom-cursor .register-item,
+                .has-custom-cursor .committee-emblem-card,
+                .has-custom-cursor .file-card {
                     cursor: none !important;
                 }
             }
@@ -309,15 +360,49 @@ document.addEventListener("DOMContentLoaded", function() {
             mouseX = e.clientX;
             mouseY = e.clientY;
 
-            if (!cursorVisible) {
-                cursor.style.display = "block";
-                cursorVisible = true;
+            // Check if hovering over input, textarea, select or contenteditable
+            const target = e.target;
+            const isInputField = target && (
+                target.tagName === "INPUT" || 
+                target.tagName === "TEXTAREA" || 
+                target.tagName === "SELECT" ||
+                target.isContentEditable ||
+                target.closest("input") ||
+                target.closest("textarea") ||
+                target.closest("select")
+            );
+
+            if (isInputField) {
+                cursor.style.display = "none";
+                cursorVisible = false;
+                document.body.classList.remove('has-custom-cursor');
+            } else {
+                if (!cursorVisible) {
+                    // Set coordinates immediately before displaying to prevent top-left slide glitch
+                    cursor.style.transition = "none";
+                    cursor.style.setProperty('--x', `${mouseX}px`);
+                    cursor.style.setProperty('--y', `${mouseY}px`);
+                    cursor.style.display = "block";
+                    
+                    // Force browser reflow to apply coordinates instantly
+                    cursor.offsetHeight;
+                    
+                    // Restore transitions for subsequent moves
+                    window.requestAnimationFrame(() => {
+                        cursor.style.transition = "";
+                    });
+                    cursorVisible = true;
+                }
+                document.body.classList.add('has-custom-cursor');
             }
 
             if (!ticking) {
                 window.requestAnimationFrame(() => {
-                    cursor.style.setProperty('--x', `${mouseX}px`);
-                    cursor.style.setProperty('--y', `${mouseY}px`);
+                    // Only set properties if cursor is visible to avoid overwriting initial placement
+                    if (cursorVisible) {
+                        cursor.style.setProperty('--x', `${mouseX}px`);
+                        cursor.style.setProperty('--y', `${mouseY}px`);
+                    }
                     ticking = false;
                 });
                 ticking = true;
@@ -327,6 +412,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const hideCursor = () => {
             cursor.style.display = "none";
             cursorVisible = false;
+            document.body.classList.remove('has-custom-cursor');
         };
 
         document.addEventListener("mouseleave", hideCursor);
@@ -370,4 +456,10 @@ document.addEventListener("DOMContentLoaded", function() {
             cursor.classList.remove("clicking");
         });
     }
-});
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initProtectionsAndCursor);
+} else {
+    initProtectionsAndCursor();
+}

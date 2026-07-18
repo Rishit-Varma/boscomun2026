@@ -315,6 +315,65 @@ function formatTime(date) {
   }
 }
 
+// Helper to parse and render media (images, YouTube embeds, Google Drive previews, direct videos)
+function getMediaHtml(item) {
+  if (!item.mediaUrl) return '';
+
+  const url = item.mediaUrl.trim();
+
+  // YouTube Video detection
+  const youtubeRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+  const youtubeMatch = url.match(youtubeRegex);
+  if (youtubeMatch) {
+    const videoId = youtubeMatch[1];
+    return `
+      <div class="update-media video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; border: 1px solid rgba(242, 193, 86, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3); margin-top: 12px;">
+        <iframe src="https://www.youtube.com/embed/${videoId}" 
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+        </iframe>
+      </div>
+    `;
+  }
+
+  // Google Drive Video detection
+  const driveRegex = /drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/;
+  const driveMatch = url.match(driveRegex);
+  if (driveMatch) {
+    const fileId = driveMatch[1];
+    return `
+      <div class="update-media video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; border: 1px solid rgba(242, 193, 86, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3); margin-top: 12px;">
+        <iframe src="https://drive.google.com/file/d/${fileId}/preview" 
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" 
+                allow="autoplay">
+        </iframe>
+      </div>
+    `;
+  }
+
+  // Direct Video files (.mp4, .webm, .ogg)
+  const directVideoRegex = /\.(mp4|webm|ogg)(?:\?.*)?$/i;
+  if (directVideoRegex.test(url)) {
+    const format = url.match(directVideoRegex)[1];
+    return `
+      <div class="update-media" style="margin-top: 12px;">
+        <video controls style="width: 100%; max-height: 400px; border-radius: 8px; border: 1px solid rgba(242, 193, 86, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3); outline: none;">
+          <source src="${url}" type="video/${format}">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    `;
+  }
+
+  // Fallback to standard Image
+  return `
+    <div class="update-media" style="margin-top: 12px;">
+      <img src="${url}" alt="${item.title}" loading="lazy" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid rgba(242, 193, 86, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+    </div>
+  `;
+}
+
 // Render the timeline UI based on cached data and current filter
 function renderUpdates() {
   const updatesTimeline = document.getElementById('updates-timeline');
@@ -424,12 +483,8 @@ function renderUpdates() {
       committeeTagLabel = 'General';
     }
 
-    // Media HTML if present
-    const mediaHtml = item.mediaUrl ? `
-      <div class="update-media">
-        <img src="${item.mediaUrl}" alt="${item.title}" loading="lazy">
-      </div>
-    ` : '';
+    // Media HTML if present (supporting video iframes, direct files, or images)
+    const mediaHtml = getMediaHtml(item);
 
     itemEl.innerHTML = `
       <div class="${dotClass}"></div>

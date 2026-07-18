@@ -521,6 +521,10 @@ body::before {
 }
 
 /* ===== INTRO LOADER SHAPE TRANSITION ===== */
+.skip-loader .intro-loader {
+    display: none !important;
+}
+
 .loader-active .main-content-layout {
     clip-path: circle(var(--logo-r, 0px) at var(--logo-x, 49.2vw) var(--logo-y, 55vh));
     transition: clip-path 1.6s cubic-bezier(0.77, 0, 0.175, 1);
