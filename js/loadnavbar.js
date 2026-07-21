@@ -320,8 +320,8 @@ function initProtectionsAndCursor() {
                 position: fixed;
                 top: 0;
                 left: 0;
-                width: 36px;
-                height: 36px;
+                width: 48px;
+                height: 48px;
                 background: url('${prefix}images/gold%20gavel.png') no-repeat center center;
                 background-size: contain;
                 pointer-events: none;
