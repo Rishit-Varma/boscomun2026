@@ -132,17 +132,43 @@ async function loadNavbar() {
 // Start the loading process
 loadNavbar();
 function initProtectionsAndCursor() {
+    // Initialize native device pixel ratio baseline if not already stored
+    try {
+        let nativeDpr = parseFloat(sessionStorage.getItem('native-device-pixel-ratio'));
+        if (isNaN(nativeDpr)) {
+            const initialZoom = window.outerWidth / window.innerWidth;
+            if (Math.abs(initialZoom - 1.0) > 0.01) {
+                nativeDpr = window.devicePixelRatio / initialZoom;
+            } else {
+                nativeDpr = window.devicePixelRatio;
+            }
+            sessionStorage.setItem('native-device-pixel-ratio', nativeDpr);
+        }
+    } catch (e) {
+        console.warn('sessionStorage not available for native DPR:', e);
+    }
+
     // Zoom control & prevention logic
     const blockZoom = () => {
-        // Prevent key combinations (Ctrl + +/-, Ctrl + 0)
+        // Prevent key combinations (Ctrl + +/-), allow Ctrl + 0 to reset zoom
         document.addEventListener('keydown', (e) => {
             const isZoomKey = (
                 (e.ctrlKey || e.metaKey) && 
-                (e.key === '+' || e.key === '-' || e.key === '=' || e.key === '0' || e.keyCode === 187 || e.keyCode === 189 || e.keyCode === 48 || e.keyCode === 96 || e.keyCode === 107 || e.keyCode === 109)
+                (e.key === '+' || e.key === '-' || e.key === '=' || e.keyCode === 187 || e.keyCode === 189 || e.keyCode === 107 || e.keyCode === 109)
             );
             if (isZoomKey) {
                 e.preventDefault();
                 return false;
+            }
+
+            // Capture Ctrl+0 / Cmd+0 to update baseline zoom
+            if ((e.ctrlKey || e.metaKey) && (e.key === '0' || e.keyCode === 48 || e.keyCode === 96)) {
+                setTimeout(() => {
+                    try {
+                        sessionStorage.setItem('native-device-pixel-ratio', window.devicePixelRatio);
+                        checkZoomLevel();
+                    } catch (err) {}
+                }, 150);
             }
         });
 
@@ -157,8 +183,37 @@ function initProtectionsAndCursor() {
     const checkZoomLevel = () => {
         if (!window.matchMedia("(pointer: fine)").matches) return;
 
+        // Check if user dismissed warning in this session
+        try {
+            if (sessionStorage.getItem('zoom-warning-dismissed') === 'true') {
+                const warningBanner = document.getElementById('zoom-warning-banner');
+                if (warningBanner) {
+                    warningBanner.remove();
+                }
+                return;
+            }
+        } catch (e) {
+            console.warn('sessionStorage not available:', e);
+        }
+
+        // If devicePixelRatio is exactly 1.0, they must be at 100% zoom, so we can correct the baseline
+        if (window.devicePixelRatio === 1.0) {
+            try {
+                sessionStorage.setItem('native-device-pixel-ratio', '1.0');
+            } catch (e) {}
+        }
+
         // Compare total window width to internal viewport width (excludes scrollbars roughly, so we use a margin of error)
-        const zoomFactor = window.outerWidth / window.innerWidth;
+        let zoomFactor = window.outerWidth / window.innerWidth;
+
+        // Fallback for Brave with Shields active (where outerWidth is spoofed to equal innerWidth)
+        try {
+            const nativeDpr = parseFloat(sessionStorage.getItem('native-device-pixel-ratio'));
+            if (Math.abs(zoomFactor - 1.0) < 0.01 && nativeDpr) {
+                zoomFactor = window.devicePixelRatio / nativeDpr;
+            }
+        } catch (e) {}
+
         let warningBanner = document.getElementById('zoom-warning-banner');
 
         // Check if browser zoom is deviated by more than 15% from 100%
@@ -169,7 +224,7 @@ function initProtectionsAndCursor() {
                 warningBanner.innerHTML = `
                     <div style="position: fixed; top: 0; left: 0; width: 100%; background: rgba(215, 162, 52, 0.98); color: #0b0d10; text-align: center; padding: 10px 24px; font-family: 'Space Grotesk', sans-serif; font-size: clamp(0.85rem, 2vw, 1rem); font-weight: 700; z-index: 1000000; box-shadow: 0 4px 20px rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; gap: 15px; border-bottom: 2px solid #0b0d10; backdrop-filter: blur(8px); animation: slideDown 0.3s ease-out;">
                         <span style="letter-spacing: 0.02em;">⚠️ Browser zoom detected at ${Math.round(zoomFactor * 100)}%. For the best visual experience, please reset zoom to 100% (Press Ctrl + 0 or Cmd + 0).</span>
-                        <button onclick="this.parentElement.parentElement.remove()" style="background: #0b0d10; color: #d7a234; border: 1px solid rgba(215, 162, 52, 0.3); border-radius: 4px; padding: 4px 12px; cursor: pointer; font-weight: 700; font-family: inherit; font-size: 0.85rem; transition: background 0.2s;">Dismiss</button>
+                        <button onclick="try { sessionStorage.setItem('zoom-warning-dismissed', 'true'); } catch (e) {} this.parentElement.parentElement.remove();" style="background: #0b0d10; color: #d7a234; border: 1px solid rgba(215, 162, 52, 0.3); border-radius: 4px; padding: 4px 12px; cursor: pointer; font-weight: 700; font-family: inherit; font-size: 0.85rem; transition: background 0.2s;">Dismiss</button>
                     </div>
                     <style>
                         @keyframes slideDown {
@@ -325,7 +380,7 @@ function initProtectionsAndCursor() {
                 background: url('${prefix}images/gold%20gavel.png') no-repeat center center;
                 background-size: contain;
                 pointer-events: none;
-                z-index: 99999;
+                z-index: 10000001;
                 transform: translate3d(var(--x, -100px), var(--y, -100px), 0) translate(-25%, -25%) scale(var(--scale, 1)) rotate(var(--rotate, 0deg));
                 transform-origin: 25% 25%;
                 transition: transform 0.08s cubic-bezier(0.25, 1, 0.5, 1);
