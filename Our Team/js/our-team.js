@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     terminal.className = "dev-terminal-container";
     terminal.innerHTML = `
         <div class="dev-terminal-header">
-            <span class="dev-terminal-title">DEV_CONSOLE // RV</span>
+            <span class="dev-terminal-title">DEV_CONSOLE</span>
             <button class="dev-terminal-close">&times;</button>
         </div>
         <div class="dev-terminal-body"></div>
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Particle effect function
     function spawnParticles(x, y) {
-        const symbols = ["</>", "{}", "RV", "0", "1", "code", "wizard", "🧙‍♂️", "*"];
+        const symbols = ["</>", "{}", "0", "1", "code", "wizard", "*"];
         const particleCount = 24;
 
         for (let i = 0; i < particleCount; i++) {
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const lines = [
             { text: "Initializing Rishit Varma...", isPrompt: true },
             { text: "Role: Lead Website Developer", isPrompt: false },
-            { text: "Status: Code Wizard 🧙‍♂️", isPrompt: false },
+            { text: "Status: Code Wizard", isPrompt: false },
             { text: "Coffee Level: 98% [██████████]", isPrompt: false },
             { text: "Bugs Patched: 404 Not Found", isPrompt: false },
             { text: "Easter Egg: UNLOCKED", isPrompt: false }

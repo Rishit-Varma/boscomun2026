@@ -73,7 +73,6 @@ function listenToRealtimeDatabase() {
         id: childSnapshot.key,
         title: data.title || '',
         body: data.body || data.content || '',
-        type: data.type || 'announcement', // announcement, crisis, schedule
         timestamp: parseTimestamp(data.timestamp),
         mediaUrl: data.mediaUrl || data.image || '',
         committee: data.committee ? data.committee.toLowerCase() : 'general'
@@ -133,7 +132,7 @@ function listenToRealtimeDatabase() {
             <p>Connected to Realtime Database, but no updates found under the <code>updates</code> node.</p>
             <p style="margin-top: 15px; font-size: 0.9rem; color: rgba(245, 240, 225, 0.6); line-height: 1.6;">
               <strong>Next Steps:</strong> Create a node named <strong>updates</strong> in your Realtime Database console, then add a child with these keys:<br>
-              <code>title</code> (String), <code>body</code> (String), <code>type</code> (String: 'announcement', 'crisis', or 'schedule'), <code>timestamp</code> (Number - epoch milliseconds, or ISO Date string), <code>committee</code> (String: 'general', 'unsc', 'disec', 'lon', 'wwc', 'oic'), and optional <code>mediaUrl</code> (String).
+              <code>title</code> (String), <code>body</code> (String), <code>timestamp</code> (Number - epoch milliseconds, or ISO Date string), <code>committee</code> (String: 'general', 'unsc', 'disec', 'lon', 'wwc', 'oic'), and optional <code>mediaUrl</code> (String).
             </p>
           </div>
         `;
@@ -166,66 +165,43 @@ function loadDemoMode(reason) {
   allUpdates = [
     {
       id: "mock-1",
-      title: "Security Council Crisis Escalates",
-      body: "The UN Security Council has been called to an emergency closed-door meeting to address the sudden geopolitical developments in the Mediterranean. All delegates must report to the Council Room immediately.",
-      type: "crisis",
-      timestamp: new Date(Date.now() - 5 * 60 * 1000), // 5 mins ago
+      title: "",
+      body: "",
+      timestamp: new Date("August 5, 2026 10:00:00"),
       mediaUrl: "",
-      committee: "unsc"
+      committee: "general"
     },
     {
       id: "mock-2",
-      title: "Lunch Arrangements & Venue Details",
-      body: "Lunch will be served from 1:00 PM to 2:15 PM in the Main Assembly Hall. Please show your delegate badges at the counter. Committee Session III will resume promptly at 2:30 PM.",
-      type: "announcement",
-      timestamp: new Date(Date.now() - 45 * 60 * 1000), // 45 mins ago
+      title: "",
+      body: "",
+      timestamp: new Date("August 5, 2026 10:00:00"),
       mediaUrl: "",
       committee: "general"
     },
     {
       id: "mock-3",
-      title: "Updated Day 1 Schedule Released",
-      body: "Please note the slight adjustment in session timings. Committee Session II has been extended by 15 minutes to allow for draft resolution discussions. Check the revised timetable in the Resources section.",
-      type: "schedule",
-      timestamp: new Date(Date.now() - 120 * 60 * 1000), // 2 hours ago
+      title: "",
+      body: "",
+      timestamp: new Date("August 5, 2026 10:00:00"),
       mediaUrl: "",
       committee: "general"
     },
     {
       id: "mock-4",
-      title: "DISEC Draft Resolution Deadline",
-      body: "All draft resolutions for DISEC must be submitted to the dais by 4:00 PM today. Late submissions will not be entertained.",
-      type: "announcement",
-      timestamp: new Date(Date.now() - 150 * 60 * 1000),
+      title: "",
+      body: "",
+      timestamp: new Date("August 5, 2026 10:00:00"),
       mediaUrl: "",
-      committee: "disec"
+      committee: "general"
     },
     {
       id: "mock-5",
-      title: "League of Nations Territory Disputes",
-      body: "A sudden border dispute has erupted in the Rhineland, requiring immediate League intervention. Delegates, prepare your arguments.",
-      type: "crisis",
-      timestamp: new Date(Date.now() - 180 * 60 * 1000),
+      title: "",
+      body: "",
+      timestamp: new Date("August 5, 2026 10:00:00"),
       mediaUrl: "",
-      committee: "lon"
-    },
-    {
-      id: "mock-6",
-      title: "WWC Strategic Directives",
-      body: "Wilhelm's War Cabinet is reviewing diplomatic messages from foreign allies. A response must be finalized by the end of this session.",
-      type: "announcement",
-      timestamp: new Date(Date.now() - 210 * 60 * 1000),
-      mediaUrl: "",
-      committee: "wwc"
-    },
-    {
-      id: "mock-7",
-      title: "OIC Resolving Regional Crisis",
-      body: "The Organisation of Islamic Conference has initiated a debate on humanitarian support in conflict zones.",
-      type: "announcement",
-      timestamp: new Date(Date.now() - 240 * 60 * 1000),
-      mediaUrl: "",
-      committee: "oic"
+      committee: "general"
     }
   ];
 
@@ -441,23 +417,6 @@ function renderUpdates() {
     
     // Determine the dot class
     let dotClass = 'timeline-dot';
-    if (item.type === 'crisis') dotClass += ' crisis';
-    else if (item.type === 'announcement') dotClass += ' announcement';
-    else if (item.type === 'schedule') dotClass += ' schedule';
-
-    // Tag classes and labels
-    let tagClass = 'tag';
-    let tagLabel = 'Announcement';
-    if (item.type === 'crisis') {
-      tagClass += ' crisis';
-      tagLabel = 'Crisis Alert';
-    } else if (item.type === 'announcement') {
-      tagClass += ' announcement';
-      tagLabel = 'Announcement';
-    } else if (item.type === 'schedule') {
-      tagClass += ' schedule';
-      tagLabel = 'Schedule';
-    }
 
     // Committee tag classes and labels
     let committeeTagClass = 'tag committee-tag';
@@ -486,20 +445,23 @@ function renderUpdates() {
     // Media HTML if present (supporting video iframes, direct files, or images)
     const mediaHtml = getMediaHtml(item);
 
+    // Title HTML: only render if title is not empty
+    const titleHtml = item.title ? `<span class="update-title">${item.title}</span>` : '';
+    
+    // Body HTML: only render if body is not empty
+    const bodyHtml = item.body ? `<div class="update-body"><p>${item.body}</p></div>` : '';
+
     itemEl.innerHTML = `
       <div class="${dotClass}"></div>
       <div class="timeline-card">
         <div class="timeline-header">
-          <span class="update-title">${item.title}</span>
+          ${titleHtml}
           <span class="update-time">${formatTime(item.timestamp)}</span>
           <div class="tag-group" style="display: flex; gap: 6px;">
-            <span class="${tagClass}">${tagLabel}</span>
             <span class="${committeeTagClass}">${committeeTagLabel}</span>
           </div>
         </div>
-        <div class="update-body">
-          <p>${item.body}</p>
-        </div>
+        ${bodyHtml}
         ${mediaHtml}
       </div>
     `;
@@ -508,22 +470,10 @@ function renderUpdates() {
   });
 }
 
-// Update the horizontal scrolling marquee for active crises
+// Update the horizontal scrolling marquee for active crises (disabled since there are no specific crisis types)
 function updateCrisisTicker() {
   const criticalTickerContainer = document.getElementById('critical-ticker-container');
-  const criticalTickerText = document.getElementById('critical-ticker-text');
-  
-  if (!criticalTickerContainer || !criticalTickerText) return;
-
-  const now = new Date();
-  const crisisUpdates = allUpdates.filter(item => item.type === 'crisis' && item.timestamp <= now);
-
-  if (crisisUpdates.length > 0) {
-    criticalTickerContainer.style.display = 'flex';
-    // Join multiple crisis updates with a spacer
-    const tickerText = crisisUpdates.map(c => `ALERT: ${c.title} - ${c.body}`).join("  |  ");
-    criticalTickerText.textContent = tickerText;
-  } else {
+  if (criticalTickerContainer) {
     criticalTickerContainer.style.display = 'none';
   }
 }
